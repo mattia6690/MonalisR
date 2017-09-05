@@ -1,5 +1,5 @@
 Package: MonalisR
-Version: 0.1.0
+Version: 0.0.1
 Author: Mattia Rossi <Mattia.Rossi@eurac.edu>
 Maintainer: Mattia Rossi <Mattia.Rossi@eurac.edu>
 Title: Test
@@ -8,11 +8,14 @@ License: GPL (>= 2)
 LazyData: true
 Imports:
     jsonlite,
+    purrr,
+    tibble,
+    utils,
     ggplot2,
     magrittr,
     dplyr,
     stringr,
     lubridate,
     gridExtra,
-    shiny,
+    shiny
 RoxygenNote: 6.0.1

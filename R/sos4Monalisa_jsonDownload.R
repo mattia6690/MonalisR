@@ -7,14 +7,14 @@
 #' @param fois Aternative Input in case the FOIs for the download are already defined
 #' @param path Path for the Output. If blank the Output is returne din the R Environment
 #' @param csv Additional Save as csv?, Boolean
-#' @importFrom jsonlite fromJSON
-#' @import tidyverse
+#' @import jsonlite
 #' @import dplyr
 #' @import stringr
+#' @import magrittr
+#' @import tibble
 #' @import purrr
-#' @importFrom magrittr "%>%"
+#' @importFrom utils write.csv
 #' @export
-
 
 MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = FALSE){
 

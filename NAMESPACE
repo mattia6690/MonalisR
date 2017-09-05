@@ -2,8 +2,9 @@
 
 export(MonalisaDownload)
 import(dplyr)
+import(jsonlite)
+import(magrittr)
 import(purrr)
 import(stringr)
-import(tidyverse)
-importFrom(jsonlite,fromJSON)
-importFrom(magrittr,"%>%")
+import(tibble)
+importFrom(utils,"write.csv")
