@@ -1,11 +1,10 @@
+setwd(paste0(getwd(),"/Shiny/Shiny/"))
 source("DependingFunctions.R")
 source("global.R")
 source("server.R")
 source("ui.R")
 
-wd1<-getwd()
-setwd("Shiny/Shiny/")
+shiny<-shinyApp(ui = ui, server=server)
 
-shinyApp(ui = ui, server=server)
 
-setwd(wd1)
+setwd("~/07_Codes/MonalisR")
