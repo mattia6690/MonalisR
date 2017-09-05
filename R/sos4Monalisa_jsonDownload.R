@@ -18,7 +18,6 @@
 
 MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = FALSE){
 
-  source("R/DependingFunctions.R")
   # parse url to JSON
   xmlfile <- jsonlite::fromJSON(starturl)
 
