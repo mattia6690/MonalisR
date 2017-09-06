@@ -1,8 +1,4 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
+
 
 # MonalisR
 ## An R-package for accessing, visualizing, downloading data provided in the MONALISA Database
