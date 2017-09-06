@@ -2,13 +2,13 @@
 % Please edit documentation in R/sos4Monalisa_jsonDownload.R
 \name{convertDate}
 \alias{convertDate}
-\title{Convert Data from ... to ...}
+\title{Convert SOS Dates}
 \usage{
 convertDate(date)
 }
 \arguments{
-\item{date}{date; ... Object}
+\item{date}{date; SOS Date Object}
 }
 \description{
-Convert a Date object formatted in ... Format to a "Ymd" format POSIXct
+Convert a Date object formatted in SOS Julian Date Format to a "Ymd" format POSIXct
 }

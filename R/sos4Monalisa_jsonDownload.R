@@ -100,9 +100,9 @@ MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "",
 }
 
 
-#' @title Convert Data from ... to ...
-#' @description Convert a Date object formatted in ... Format to a "Ymd" format POSIXct
-#' @param date date; ... Object
+#' @title Convert SOS Dates
+#' @description Convert a Date object formatted in SOS Julian Date Format to a "Ymd" format POSIXct
+#' @param date date; SOS Date Object
 #' @export
 
 convertDate <- function(date){
