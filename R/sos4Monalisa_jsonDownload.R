@@ -1,10 +1,11 @@
 #' @title Download MONALISA Data
-#' @description URL, Downloads the Data from EURACs MONLISA Database
-#' @param starturl character, MONALISA URL path
-#' @param datestart date (Y-m-d H:M), Starting Date required, character 
-#' @param dateend date (Y-m-d H:M), End Date required, character 
-#' @param fois string, Aternative Input in case the FOIs for the download are already defined
-#' @param path String, Path for the Output. If blank the Output is returned as an object in the R Environment
+#' @description Core script for handling the data provided in the MONALISA Database
+#' collected and stored by EURAC Research. For more information please visit http://monalisasos.eurac.edu/sos/.
+#' @param starturl URL, Path to the  MONLISA Database. If empty the adress will automatically be pasted.
+#' @param datestart date, Starting Date required in "Y-m-d H:M" format.
+#' @param dateend date, End Date required "Y-m-d H:M" format.
+#' @param fois Character, Aternative Input in case the FOIs for the download are already defined.
+#' @param path Character, Path for the Output. If blank the Output is returned as an object in the R Environment.
 #' @param csv Boolean, Additionally Save as csv?
 #' @import dplyr
 #' @import stringr
@@ -15,10 +16,9 @@
 #' @importFrom utils write.csv
 #' @export
 
-MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = FALSE){
+MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = F){
 
-  if(starturl=="") starturl <- "http://monalisasos.eurac.edu/sos/api/v1/timeseries/"
-  xmlfile <- jsonlite::fromJSON(starturl)
+  xmlfile<-.getDataBase()
 
   if(fois==""){
     x<-select(xmlfile,contains("station")) %>%
@@ -92,7 +92,7 @@ MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "",
   # Save
   if(path != ""){
     save(DAT, file = paste0(myfile,".RData"))
-    if(csv == TRUE){
+    if(csv == T){
       write.csv(DAT, paste0(myfile,".csv"))
     }
   }
@@ -110,7 +110,38 @@ convertDate <- function(date){
   as.POSIXct(date, origin = "1970-01-01")
 }
 
+.getDataBase<-function(url=""){
+  
+  if(url=="") url <- "http://monalisasos.eurac.edu/sos/api/v1/timeseries/"
+  xmlfile <- jsonlite::fromJSON(url)
+  return(xmlfile)
+}
 
+#' @title Plot the MONALISA Stations
+#' @description Function to spatially plot the MONALISA Sations and the respective FOI
+#' to an interactive Leaflet plot. Until now only for visualization purposes
+#' @param db URL, Path to the  MONLISA Database. If empty the adress will automatically be pasted.
+#' @import leaflet
+#' @import magrittr
+#' @import tibble
+#' @import dplyr
+#' @export
+
+MonalisaPlot<- function(db=""){
+  
+  if(db=="") db<-.getDataBase() else db<-.getDataBase(db)
+  coords<-db$station$geometry$coordinates %>% do.call(rbind,.) %>% as.tibble %>% select(.,-V3)
+  name<-db$station$properties$label
+  stats<-cbind.data.frame(coords,name)
+  
+  m<-leaflet() %>% addTiles() %>% addMarkers(
+    lng=stats$V1 %>% as.character %>% as.numeric,
+    lat=stats$V2 %>% as.character %>% as.numeric,
+    popup=paste("FOI:",stats$name)
+  )
+  return(m)
+  
+}
 
 
 

@@ -5,21 +5,22 @@
 \title{Download MONALISA Data}
 \usage{
 MonalisaDownload(starturl, datestart, dateend, fois = "", path = "",
-  csv = FALSE)
+  csv = F)
 }
 \arguments{
-\item{starturl}{character, MONALISA URL path}
+\item{starturl}{URL, Path to the  MONLISA Database. If empty the adress will automatically be pasted.}
 
-\item{datestart}{date (Y-m-d H:M), Starting Date required, character}
+\item{datestart}{date, Starting Date required in "Y-m-d H:M" format.}
 
-\item{dateend}{date (Y-m-d H:M), End Date required, character}
+\item{dateend}{date, End Date required "Y-m-d H:M" format.}
 
-\item{fois}{string, Aternative Input in case the FOIs for the download are already defined}
+\item{fois}{Character, Aternative Input in case the FOIs for the download are already defined.}
 
-\item{path}{String, Path for the Output. If blank the Output is returned as an object in the R Environment}
+\item{path}{Character, Path for the Output. If blank the Output is returned as an object in the R Environment.}
 
 \item{csv}{Boolean, Additionally Save as csv?}
 }
 \description{
-URL, Downloads the Data from EURACs MONLISA Database
+Core script for handling the data provided in the MONALISA Database
+collected and stored by EURAC Research. For more information please visit http://monalisasos.eurac.edu/sos/.
 }

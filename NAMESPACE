@@ -2,8 +2,10 @@
 
 export(MonaShiny)
 export(MonalisaDownload)
+export(MonalisaPlot)
 export(convertDate)
 import(dplyr)
+import(leaflet)
 import(magrittr)
 import(stringr)
 import(tibble)
