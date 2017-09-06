@@ -8,18 +8,18 @@ MonalisaDownload(starturl, datestart, dateend, fois = "", path = "",
   csv = FALSE)
 }
 \arguments{
-\item{starturl}{MONALISA URL path, character}
+\item{starturl}{character, MONALISA URL path}
 
-\item{datestart}{Starting Date required, character (Y-m-d H:M)}
+\item{datestart}{date (Y-m-d H:M), Starting Date required, character}
 
-\item{dateend}{End Date required, character (Y-m-d H:M)}
+\item{dateend}{date (Y-m-d H:M), End Date required, character}
 
-\item{fois}{Aternative Input in case the FOIs for the download are already defined}
+\item{fois}{string, Aternative Input in case the FOIs for the download are already defined}
 
-\item{path}{Path for the Output. If blank the Output is returne din the R Environment}
+\item{path}{String, Path for the Output. If blank the Output is returned as an object in the R Environment}
 
-\item{csv}{Additional Save as csv?, Boolean}
+\item{csv}{Boolean, Additionally Save as csv?}
 }
 \description{
-Downloads the Data from EURACs MONLISA Database
+URL, Downloads the Data from EURACs MONLISA Database
 }

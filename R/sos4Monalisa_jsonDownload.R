@@ -1,28 +1,24 @@
-
 #' @title Download MONALISA Data
-#' @description Downloads the Data from EURACs MONLISA Database
-#' @param starturl MONALISA URL path, character
-#' @param datestart Starting Date required, character (Y-m-d H:M)
-#' @param dateend End Date required, character (Y-m-d H:M)
-#' @param fois Aternative Input in case the FOIs for the download are already defined
-#' @param path Path for the Output. If blank the Output is returne din the R Environment
-#' @param csv Additional Save as csv?, Boolean
-#' @import jsonlite
+#' @description URL, Downloads the Data from EURACs MONLISA Database
+#' @param starturl character, MONALISA URL path
+#' @param datestart date (Y-m-d H:M), Starting Date required, character 
+#' @param dateend date (Y-m-d H:M), End Date required, character 
+#' @param fois string, Aternative Input in case the FOIs for the download are already defined
+#' @param path String, Path for the Output. If blank the Output is returned as an object in the R Environment
+#' @param csv Boolean, Additionally Save as csv?
 #' @import dplyr
 #' @import stringr
 #' @import magrittr
 #' @import tibble
-#' @import purrr
+#' @importFrom jsonlite fromJSON
+#' @importFrom purrr map_if
 #' @importFrom utils write.csv
 #' @export
 
 MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = FALSE){
 
-  # parse url to JSON
+  if(starturl=="") starturl <- "http://monalisasos.eurac.edu/sos/api/v1/timeseries/"
   xmlfile <- jsonlite::fromJSON(starturl)
-
-  #######################################################################################################
-  # Interactive selection of FOI ########################################################################
 
   if(fois==""){
     x<-select(xmlfile,contains("station")) %>%
@@ -44,27 +40,20 @@ MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "",
     foi<-as.matrix(x)[b]
   } else {foi <- fois}
 
-  ########################################################################################################
-  ########################################################################################################
-
-  # select timeseries of the selected station
+  # Get Timeseries
   u<-xmlfile %>% select(contains("label"))
-
-  # process selection for print
+  
+  # Readline Option
   u<-xmlfile %>% do.call(cbind,.) %>% as.list %>% do.call(cbind,.) %>% as.tibble  %>% filter(station.properties.label==foi)
-
-  # print list of selectable timeseries for the station "foi"
   print(u)
-
-  # User input specifying observable properties of the feature of interest "station"
   r<-readline(prompt = "Please digit the ID of the desired Properties for your FOI:      ")
   r<- strsplit(r,",") %>% unlist
 
-  # Error catching if user input is not a number
+  # Error handling
   a<-suppressWarnings(as.numeric(r))
   if(any(is.na(a))) stop("Please Digit Numbers for the IDs")
 
-  # get timeseries id for url request
+  # Get required TS
   ID <-u[a,] %>% select(id) %>% as.matrix()
 
   # for loop building requests depending on the number of user inputs
@@ -77,39 +66,30 @@ MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "",
     datestart1 <- datestart %>% str_replace(.," ","T") %>% paste0(.,":00%2F")
     dateend1<-dateend %>%  str_replace(.," ","T") %>% paste0(.,":00")
 
-    # build request
+    # Request & Parsing
     request[i]<-paste0(url1,datestart1,dateend1)
+    SOS_data <- jsonlite::fromJSON(request[[i]]) %>% do.call(cbind,.)
+    SOS_data[,1] <- convertDate(SOS_data[,1])
 
-    # parse data
-    SOS_data_json <- jsonlite::fromJSON(request[[i]])
-
-    SOS_data <- SOS_data_json %>% do.call(cbind,.)
-
-    SOS_data[,1] <- .convert_sos_date(SOS_data[,1])
-
-    # redefine header
+    # Header definition
     property_spec <- u[a[i],] %>% select(label) %>% map_if(is.factor, as.character) %>% unlist %>%
                 strsplit(.,"-") %>% unlist
 
     property <- property_spec[1]
-
     spec <- property_spec[2] %>% str_replace(.," ", "") %>% str_split(., "[:blank:][:upper:]") %>% unlist %>% .[1]
-
-    # write header
     colnames(SOS_data) <- c("Timestamp", paste0(property,"(",spec,")"))
-
     SOS_data$FOI<-rep(foi,times=nrow(SOS_data))
 
-    # append data to list DAT
+    # Append data to List
     DAT[[i]] <- SOS_data
   }
 
+  # Output Infos
   date_s <- datestart %>% str_replace(":","") %>% str_replace(" ", "T")
   date_e <- dateend %>%  str_replace(":","") %>% str_replace(" ", "T")
-
   myfile = paste0(path, "/", "SOS4R_", foi, "_", date_s, "&", date_e)
 
-  # return or save list DAT containing timeseries of all selected observable properties
+  # Save
   if(path != ""){
     save(DAT, file = paste0(myfile,".RData"))
     if(csv == TRUE){
@@ -120,7 +100,12 @@ MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "",
 }
 
 
-.convert_sos_date <- function(date){
+#' @title Convert Data from ... to ...
+#' @description Convert a Date object formatted in ... Format to a "Ymd" format POSIXct
+#' @param date date; ... Object
+#' @export
+
+convertDate <- function(date){
   date = date/1000
   as.POSIXct(date, origin = "1970-01-01")
 }
