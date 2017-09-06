@@ -18,7 +18,7 @@
 
 MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = F){
 
-  xmlfile<-.getDataBase()
+  xmlfile<-getDataBase()
 
   if(fois==""){
     x<-select(xmlfile,contains("station")) %>%
@@ -100,48 +100,7 @@ MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "",
 }
 
 
-#' @title Convert SOS Dates
-#' @description Convert a Date object formatted in SOS Julian Date Format to a "Ymd" format POSIXct
-#' @param date date; SOS Date Object
-#' @export
 
-convertDate <- function(date){
-  date = date/1000
-  as.POSIXct(date, origin = "1970-01-01")
-}
-
-.getDataBase<-function(url=""){
-  
-  if(url=="") url <- "http://monalisasos.eurac.edu/sos/api/v1/timeseries/"
-  xmlfile <- jsonlite::fromJSON(url)
-  return(xmlfile)
-}
-
-#' @title Plot the MONALISA Stations
-#' @description Function to spatially plot the MONALISA Sations and the respective FOI
-#' to an interactive Leaflet plot. Until now only for visualization purposes
-#' @param db URL, Path to the  MONLISA Database. If empty the adress will automatically be pasted.
-#' @import leaflet
-#' @import magrittr
-#' @import tibble
-#' @import dplyr
-#' @export
-
-MonalisaPlot<- function(db=""){
-  
-  if(db=="") db<-.getDataBase() else db<-.getDataBase(db)
-  coords<-db$station$geometry$coordinates %>% do.call(rbind,.) %>% as.tibble %>% select(.,-V3)
-  name<-db$station$properties$label
-  stats<-cbind.data.frame(coords,name)
-  
-  m<-leaflet() %>% addTiles() %>% addMarkers(
-    lng=stats$V1 %>% as.character %>% as.numeric,
-    lat=stats$V2 %>% as.character %>% as.numeric,
-    popup=paste("FOI:",stats$name)
-  )
-  return(m)
-  
-}
 
 
 
