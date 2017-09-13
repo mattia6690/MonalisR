@@ -1,11 +1,20 @@
 Package: MonalisR
-Version: 0.0.1
-Author: Mattia Rossi <Mattia.Rossi@eurac.edu>
+Title: MonalisR: Handling of the MONALISA Database
+Description: This package provides several possibilities to access    
+    and handle data from the SOS Dabase MONALISA.    
+    This database has been formed as a joint cooperation of       
+    EURAC Research's institutes of Earth Observation and    
+    Alpine Environment together with the    
+    Free University of Bolzano and Research Centre Laimburg.    
+    The Database contains several ground sampling datasets for    
+    agricultural and alpine parameters and    
+    is fully accessable with the hereby provided package.
+Version: 1.0
+Author: Mattia Rossi, Daniel Frisinghelli
 Maintainer: Mattia Rossi <Mattia.Rossi@eurac.edu>
-Title: Test
-Description: Test
 License: GPL (>= 2)
 LazyData: true
+RoxygenNote: 6.0.1
 Imports:
     jsonlite,
     purrr,
@@ -17,5 +26,6 @@ Imports:
     stringr,
     lubridate,
     gridExtra,
-    shiny
-RoxygenNote: 6.0.1
+    shiny,
+    leaflet
+

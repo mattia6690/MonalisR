@@ -4,7 +4,7 @@
 
 MonaShiny<-function() {
   
-  setwd("~/07_Codes/MonalisR/Shiny/")
+  setwd("~/07_Codes/MonalisR/Shiny")
   source("DependingFunctions.R")
   source("global.R")
   source("server.R")

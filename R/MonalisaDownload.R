@@ -1,10 +1,11 @@
 #' @title Download MONALISA Data
-#' @description URL, Downloads the Data from EURACs MONLISA Database
-#' @param starturl character, MONALISA URL path
-#' @param datestart date (Y-m-d H:M), Starting Date required, character 
-#' @param dateend date (Y-m-d H:M), End Date required, character 
-#' @param fois string, Aternative Input in case the FOIs for the download are already defined
-#' @param path String, Path for the Output. If blank the Output is returned as an object in the R Environment
+#' @description Core script for handling the data provided in the MONALISA Database
+#' collected and stored by EURAC Research. For more information please visit http://monalisasos.eurac.edu/sos/.
+#' @param starturl URL, Path to the  MONLISA Database. If empty the adress will automatically be pasted.
+#' @param datestart date, Starting Date required in "Y-m-d H:M" format.
+#' @param dateend date, End Date required "Y-m-d H:M" format.
+#' @param fois Character, Aternative Input in case the FOIs for the download are already defined.
+#' @param path Character, Path for the Output. If blank the Output is returned as an object in the R Environment.
 #' @param csv Boolean, Additionally Save as csv?
 #' @import dplyr
 #' @import stringr
@@ -15,10 +16,9 @@
 #' @importFrom utils write.csv
 #' @export
 
-MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = FALSE){
+MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = F){
 
-  if(starturl=="") starturl <- "http://monalisasos.eurac.edu/sos/api/v1/timeseries/"
-  xmlfile <- jsonlite::fromJSON(starturl)
+  xmlfile<-getDataBase()
 
   if(fois==""){
     x<-select(xmlfile,contains("station")) %>%
@@ -92,23 +92,13 @@ MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "",
   # Save
   if(path != ""){
     save(DAT, file = paste0(myfile,".RData"))
-    if(csv == TRUE){
+    if(csv == T){
       write.csv(DAT, paste0(myfile,".csv"))
     }
   }
   return(DAT)
 }
 
-
-#' @title Convert Data from ... to ...
-#' @description Convert a Date object formatted in ... Format to a "Ymd" format POSIXct
-#' @param date date; ... Object
-#' @export
-
-convertDate <- function(date){
-  date = date/1000
-  as.POSIXct(date, origin = "1970-01-01")
-}
 
 
 
