@@ -1,12 +1,11 @@
 
-
 # MonalisR
-## An R-package for accessing, visualizing, downloading data provided in the MONALISA Database
+## An R-package for accessing, visualizing, downloading data provided by a 52north SOS service
    
   
-The MONALISA (MONitoring key environmental parameters in the ALpine environment Involving Science, technology and Application) project's main goal is the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. <br>
-Within this project a database has been created to store and distribute the wide variety of environmental parameters collected. Mainly based on Postgres the Database works with OGC standardized format and is distributed based on 52noths SOS impementation.<br>
-This R-package provides a possibility to access this database via R. Hereby core functionalities are implemented in this package for:
+Within the [MONALISA project](http://monalisasos.eurac.edu/sos/) a database has been created to store and distribute the wide variety of environmental parameters collected. Data are organized in a Sensor Observation Service (following OGC standards) based on 52north SOS implementation.<br>
+The SOS service provide a REST-API web service to access datasets collected.
+This R-package provides a possibility to access this REST-API via R. Hereby core functionalities are implemented in this package for:
 * Accessing and exploring the data stored
 * Plotting the locations (or stations) of interest spatially
 * Downloading and storing the desired dataset(s)
