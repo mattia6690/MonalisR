@@ -4,10 +4,12 @@
 \alias{getMeteoPlot}
 \title{Plot the Province Stations}
 \usage{
-getMeteoPlot(stations, addPoints = NULL, addBuff = F, widthBuff = 10000)
+getMeteoPlot(stations = NULL, addPoints = NULL, addBuff = F,
+  widthBuff = 10000)
 }
 \arguments{
-\item{stations}{Points; Meteorological Data Points of the province of South Tyrol}
+\item{stations}{Points; Meteorological Data Points of the province of South Tyrol,
+If this is left empty all the Stations will be plotted}
 
 \item{addPoints}{Points; Additional Points on the Leaflet Map. If left empty no Points will be added}
 

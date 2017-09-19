@@ -2,7 +2,8 @@
 #' @description Function for spatially Plotting the desired Province Stations on a leaflet
 #' template. Besides the plotting of the desired meteorological stations other information
 #' can be added such as additional points, a buffer around certain points
-#' @param stations Points; Meteorological Data Points of the province of South Tyrol
+#' @param stations Points; Meteorological Data Points of the province of South Tyrol,
+#' If this is left empty all the Stations will be plotted
 #' @param addPoints Points; Additional Points on the Leaflet Map. If left empty no Points will be added
 #' @param addBuff Boolean; add a Buffer to the additional points
 #' @param widthBuff numeric; The width of a buffer in case it is added
@@ -13,8 +14,9 @@
 #' @export
 
 # Get a map with the Spatial Location of the Stations
-getMeteoPlot<- function(stations,addPoints=NULL,addBuff=F,widthBuff=10000){
+getMeteoPlot<- function(stations=NULL,addPoints=NULL,addBuff=F,widthBuff=10000){
   
+  if(is.null(stations)) stations<-getMeteoStat(format="spatial")
   c1<-awesomeIcons(icon = 'ios-close',iconColor = 'black',library = 'ion',markerColor = "blue")
   c2<-awesomeIcons(icon = 'ios-close',iconColor = 'black',library = 'ion',markerColor = "red")
   
