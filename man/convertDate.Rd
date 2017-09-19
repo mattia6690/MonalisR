@@ -4,10 +4,12 @@
 \alias{convertDate}
 \title{Convert SOS Dates}
 \usage{
-convertDate(date)
+convertDate(date, db = "Monalisa")
 }
 \arguments{
 \item{date}{date; SOS Date Object}
+
+\item{db}{character; Digit "Monalisa" for the MONALISA Database and "Meteo" for the meteorological Stations}
 }
 \description{
 Convert a Date object formatted in SOS Julian Date Format to a "Ymd" format POSIXct
