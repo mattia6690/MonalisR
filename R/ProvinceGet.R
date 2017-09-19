@@ -39,7 +39,7 @@ getMeteoStat<- function(url=NA,format="table"){
 getMeteoSensor<-function(url=NA,SCODE){
   
   if(is.na(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/sensors"
-  url<-paste0(url1,"?station_code=",SCODE)
+  url<-paste0(url,"?station_code=",SCODE)
   js1<-fromJSON(url)
   if(nrow(js1)==0){;stop("Wrong Station Number added")}
   return(js1)
@@ -57,7 +57,7 @@ getMeteoSensor_all<-function(){
   
   for(i in 1:nrow(js1)){
     
-    props<-getMeteoSensor(js1[i,1])
+    props<-getMeteoSensor(SCODE=js1[i,1])
     jslst[[i]]<-props
     
   }
@@ -73,7 +73,7 @@ getMeteoSensor_all<-function(){
 #' and spatially examine it together with the meteorological stations of the province
 #' South Tyrol. The return can either be the nearest station or a list of the distances
 #' from he point to all station within the buffered area.
-#' @param point Spatial Point; Spatial Point Data Frame indicating the position of the Points
+#' @param point SpatialPointDataFrame; Indicates the position of the Points
 #' which are examined together with the meteorological stations
 #' @param bufferW numeric; width of the Buffer in meters
 #' @param getBufferShp Boolean; return only the buffer(s)?

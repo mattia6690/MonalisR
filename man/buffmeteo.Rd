@@ -7,7 +7,7 @@
 buffmeteo(point, bufferW = 5000, getBufferShp = F, dist = F)
 }
 \arguments{
-\item{point}{Spatial Point; Spatial Point Data Frame indicating the position of the Points
+\item{point}{SpatialPointDataFrame; Indicates the position of the Points
 which are examined together with the meteorological stations}
 
 \item{bufferW}{numeric; width of the Buffer in meters}
