@@ -1,5 +1,3 @@
-<br>![](http://www.eurac.edu/Style%20Library/logoEURAC.jpg)<br><br>
-
 # MonalisR
 ## An R-package for handling open Databases for South Tyrol
 
@@ -44,7 +42,9 @@ Since the Gitlab Repository for now is available only to registered group member
 #### Contributors
 
 * [Mattia Rossi] (https://gitlab.inf.unibz.it/Mattia.Rossi)
-* [Daniel Frisinghelli] (https://gitlab.inf.unibz.it/Daniel.Frisinghelli)
+* [Daniel Frisinghelli] (https://gitlab.inf.unibz.it/Daniel.Frisinghelli)<br>
+
+<br>![](http://www.eurac.edu/Style%20Library/logoEURAC.jpg)<br><br>
 
 #### Contact
 
