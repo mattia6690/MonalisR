@@ -9,8 +9,8 @@ This R-Package aims to access multiple open databases providing information rela
 
 ### DB01: The MONALISA Database
   
-The MONALISA (**MON**itoring key environmental parameters in the **AL**pine environment **I**nvolving **S**cience, technology and **A**pplication) project's main goal is the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. <br>
-Within this project a database has been created to store and distribute the wide variety of environmental parameters collected. Mainly based on Postgres, the Database works with OGC standardized format and it is distributed based on 52noths SOS impementation.<br>
+The [MONALISA project](http://monalisasos.eurac.edu/sos/index) (**MON**itoring key environmental parameters in the **AL**pine environment **I**nvolving **S**cience, technology and **A**pplication) aims at the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. <br>
+Within this project the [MONALISA Database](http://monalisasos.eurac.edu/sos/static/client/helgoland/index.html#/map) has been created to store and distribute the wide variety of environmental parameters collected. Mainly based on Postgres, the Database works with OGC standardized format and it is distributed based on 52noths SOS impementation.<br>
 
 ### DB02: Meteorological Data
 
@@ -20,7 +20,8 @@ A second Platform to retrieve open Data for Science applications is now openly a
 
 #### Download the Package from Gitlab
 
-For now this Package is in a develpment stage and therefore privatly hosted in a Gitlab repository. A general way to load the package in R is provided with the following code:<br>
+For now this Package is in a develpment stage and therefore privatly hosted in a Gitlab repository. It is available only to registered group members and the access has to be granted by one of the active members of the group (see [Members Section](https://gitlab.inf.unibz.it/SOS/MonalisR/project_members) or below)
+A general way to load the package in R is provided with the following code:<br>
 
 ```r
 library(devtools)
@@ -37,7 +38,6 @@ devtools::install_git("https://gitlab.inf.unibz.it/SOS/MonalisR",
 )
 
 ```
-Since the Gitlab Repository for now is available only to registered group members the access to the Gitlab repository has to be granted by one of the active members of the group (see [Members Section](https://gitlab.inf.unibz.it/SOS/MonalisR/project_members) or below)
 
 #### Contributors
 
