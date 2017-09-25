@@ -11,9 +11,9 @@
 #' MonalisaPlot()
 #' @export
 
-plotMonalisaLeflet<- function(db=NULL){
+plotMonalisaLeaflet<- function(db=NULL){
   
-  if(is.null(db)) db<-getDataBase()
+  if(is.null(db)) db<-getMonalisaDB()
   coords<-db$station$geometry$coordinates %>% do.call(rbind,.) %>% as.tibble %>% select(.,-V3)
   name<-db$station$properties$label
   stats<-cbind.data.frame(coords,name)
@@ -24,5 +24,39 @@ plotMonalisaLeflet<- function(db=NULL){
     popup=paste("FOI:",stats$name)
   )
   return(m)
+  
+}
+
+#' @title Plot MONALISA Request inn GGPlot
+#' @description Plot the MONALISA Requests either as Line or Boxplot. Both outputs
+#' are displayed as GGPlots
+#' @param x tbl, Table with the Value that should be implemented in the
+#' @import magrittr
+#' @import ggplot2
+#' @export
+
+plotMonalisaGG<-function(x,stat="line"){
+  
+  x1<-x %>% names
+  colnames(x)<-c("Timestamp","values","FOI")
+  x$Timestamp<-as.Date(x$Timestamp)
+  
+  
+  if(stat=="line"){
+    g1<-ggplot(data=x,aes(Timestamp,values))+
+    geom_line()+
+    ggtitle(paste0("Variablility of ",x1[2]),unique(x$FOI))+
+    ylab(x1[2])
+  }
+  
+  if(stat=="boxplot"){
+    x2<-x %>% group_by(Timestamp)
+    g1<-ggplot(x,aes(Timestamp,values,group=Timestamp))+ 
+    geom_boxplot()+
+    ggtitle(paste0("Variablility of ",x1[2]),unique(x$FOI))+
+    ylab(x1[2])
+  }
+  
+  return(g1)
   
 }

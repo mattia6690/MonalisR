@@ -18,7 +18,7 @@
 
 downloadMonalisa <- function(starturl, datestart, dateend, fois = "", path = "", csv = F){
 
-  xmlfile<-getDataBase()
+  xmlfile<-getMonalisaDB()
 
   if(fois==""){
     x<-select(xmlfile,contains("station")) %>%

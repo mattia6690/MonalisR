@@ -8,9 +8,34 @@
 
 convertDate <- function(date,db="Monalisa"){
   
-  if(db=="Monalisa") as.POSIXct(date = date/1000, origin = "1970-01-01") %>% return(.)
-  if(db=="Meteo") date %>% str_replace_all(.,"-","") %>% str_replace(.,":","") %>% str_replace(.," ","") %>% return(.)
+  if(db=="Monalisa") {
+    date<-date/1000
+    date<-as.POSIXct(date, origin = "1970-01-01") 
+    return(date)
+  }
+  if(db=="Meteo"){
+    
+    date<-date %>% str_replace_all(.,"-","") %>% 
+      str_replace(.,":","") %>% 
+      str_replace(.," ","") 
+    return(date)
+    
+  } 
 }
 
+#' @title Check MONALISA NA gaps
+#' @description Analysis Function for the Server response of a MONALISA Request.
+#' This function simply returns the NA gaps as a table
+#' @param x a MONALISA Server Response
+#' @import magrittr
+#' @import stringr
+#' @export
 
-
+CheckGaps <- function(x){
+  
+  gaps_date <- which(diff(x$Timestamp) > 10) %>% x$Timestamp[.]
+  gaps_date <- gaps_date + min(diff(x$Timestamp))*60
+  gaps_date <- data.frame("Missing values" = gaps_date)
+  
+  return(gaps_date)
+}
