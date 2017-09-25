@@ -1,15 +1,18 @@
 # MonalisR
 ## An R-package for handling open Databases for South Tyrol
 
-This R-Package aims to access multiple open databases providing information related to the Autonomous Province of South Tyrol. The Databases are all openly accessable via central APIs and can therefore be addressed and made accessible via R. For all the Databases core functionalities were implemented simplifying
+This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The Databases are all openly accessible via central APIs and structurized storages. This makes them addressable and accessible via R. For all the Databases core functionalities were implemented simplifying
 
 * data access and exploration
 * spatial and data plots of locations (or stations) of interest
 * download and storage of the desired dataset(s)<br>
 
+The functions are devided in these three central by their naming convention utilizing the prefixes *get*, *plot* and *download*
+
 ### DB01: The MONALISA Database
   
-The [MONALISA project](http://monalisasos.eurac.edu/sos/index) (**MON**itoring key environmental parameters in the **AL**pine environment **I**nvolving **S**cience, technology and **A**pplication) aims at the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. <br>
+The [MONALISA project](http://monalisasos.eurac.edu/sos/index) (**MON**itoring key environmental parameters in the **AL**pine environment **I**nvolving **S**cience, technology and **A**pplication)
+aims at the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. <br>
 Within this project the [MONALISA Database](http://monalisasos.eurac.edu/sos/static/client/helgoland/index.html#/map) has been created to store and distribute the wide variety of environmental parameters collected. Mainly based on Postgres, the Database works with OGC standardized format and it is distributed based on 52noths SOS impementation.<br>
 
 ### DB02: Meteorological Data
@@ -28,8 +31,7 @@ library(devtools)
 library(git2r)
 library(getPass)
 
-uname<-     "Your Gitlab Username"
-password<-  "Your Gitlab Passwort" # Manual insertion
+uname<-     "Your Gitlab Username" # Manual insertion
 password<-  getPass::getPass() # Password Popup
 
 
@@ -38,6 +40,7 @@ devtools::install_git("https://gitlab.inf.unibz.it/SOS/MonalisR",
 )
 
 ```
+
 
 #### Contributors
 
