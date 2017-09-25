@@ -14,7 +14,7 @@
 #' @importFrom jsonlite fromJSON
 #' @export
 
-MeteoDownload <- function(dburl=NULL, station_code, sensor_code, datestart, dateend, path = "", csv = FALSE){
+downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, dateend, path = "", csv = FALSE){
   
   if(is.null(dburl)) dburl<- "http://daten.buergernetz.bz.it/services/meteo/v1/timeseries"
   datestart1 <- datestart %>% convertDate(.,db="meteo")

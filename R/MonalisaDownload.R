@@ -16,7 +16,7 @@
 #' @importFrom utils write.csv
 #' @export
 
-MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "", csv = F){
+downloadMonalisa <- function(starturl, datestart, dateend, fois = "", path = "", csv = F){
 
   xmlfile<-getDataBase()
 
@@ -44,7 +44,8 @@ MonalisaDownload <- function(starturl, datestart, dateend, fois = "", path = "",
   u<-xmlfile %>% select(contains("label"))
   
   # Readline Option
-  u<-xmlfile %>% do.call(cbind,.) %>% as.list %>% do.call(cbind,.) %>% as.tibble  %>% filter(station.properties.label==foi)
+  u<-xmlfile %>% do.call(cbind,.) %>% as.list %>% do.call(cbind,.) %>% 
+    as.tibble  %>% filter(station.properties.label==foi)
   print(u)
   r<-readline(prompt = "Please digit the ID of the desired Properties for your FOI:      ")
   r<- strsplit(r,",") %>% unlist

@@ -7,11 +7,11 @@
 #' @import tibble
 #' @import dplyr
 #' @examples
-#' ## Standard Plotting wothout Database
+#' ## Standard Plotting without Database
 #' MonalisaPlot()
 #' @export
 
-MonalisaPlot<- function(db=NULL){
+plotMonalisaLeflet<- function(db=NULL){
   
   if(is.null(db)) db<-getDataBase()
   coords<-db$station$geometry$coordinates %>% do.call(rbind,.) %>% as.tibble %>% select(.,-V3)

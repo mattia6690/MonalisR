@@ -14,7 +14,7 @@
 #' @export
 
 # Get a map with the Spatial Location of the Stations
-getMeteoPlot<- function(stations=NULL,addPoints=NULL,addBuff=F,widthBuff=10000){
+plotMeteoLeaflet<- function(stations=NULL,addPoints=NULL,addBuff=F,widthBuff=10000){
   
   if(is.null(stations)) stations<-getMeteoStat(format="spatial")
   c1<-awesomeIcons(icon = 'ios-close',iconColor = 'black',library = 'ion',markerColor = "blue")
