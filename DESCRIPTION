@@ -9,7 +9,7 @@ Description: This package provides several possibilities to access
     The Database contains several ground sampling datasets for    
     agricultural and alpine parameters and    
     is fully accessable with the hereby provided package.
-Version: 1.1
+Version: 1.2
 Author: Mattia Rossi, Daniel Frisinghelli
 Maintainer: Mattia Rossi <Mattia.Rossi@eurac.edu>
 License: GPL (>= 2)
@@ -32,4 +32,14 @@ Imports:
     rgdal,
     rgeos,
     sp
-
+Collate: 
+    'MonalisaDownload.R'
+    'MonalisaGet.R'
+    'MonalisaPlot.R'
+    'ShinyServer.R'
+    'ShinyUi.R'
+    'MonalisaShiny.R'
+    'Processing.R'
+    'ProvinceDownload.R'
+    'ProvinceGet.R'
+    'ProvincePlot.R'
