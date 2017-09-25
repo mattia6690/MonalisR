@@ -4,7 +4,7 @@
 \alias{getMonalisaDB}
 \title{Overview of the Monalisa Database}
 \usage{
-getMonalisaDB(url = "")
+getMonalisaDB(url = NA)
 }
 \arguments{
 \item{url}{URL; URL of the Monalisa SOS API. If empty a default path is used}
