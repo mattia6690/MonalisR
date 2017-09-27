@@ -39,6 +39,7 @@ Collate:
     'ShinyServer.R'
     'ShinyUi.R'
     'MonalisaShiny.R'
+    'Plotall.R'
     'Processing.R'
     'ProvinceDownload.R'
     'ProvinceGet.R'

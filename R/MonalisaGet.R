@@ -1,3 +1,15 @@
+#' Set the MONALISA URL
+#' @description Set the MONALISA URL or leave as default.
+#' @param url character; Input the URL to the Timeseries of the MONALISA Database.
+#' If this parameter is left empty the standard URL will be set.
+#' @export
+
+setMonalisaURL<-function(url=NA){
+  
+  if(is.na(url)) return("http://monalisasos.eurac.edu/sos/api/v1/timeseries/")
+  else return(url)
+}
+
 #' @title Overview of the Monalisa Database
 #' @description This function accesses the Monalisa Database via the API in JSON format
 #' and returns a list of the peatured parameters.
@@ -53,14 +65,26 @@ getMonalisaDB_sub<-function(subset="station"){
   
 }
 
-#' Set the MONALISA URL
-#' @description Set the MONALISA URL or leave as default.
-#' @param url character; Input the URL to the Timeseries of the MONALISA Database.
-#' If this parameter is left empty the standard URL will be set.
-#' @export
 
-setMonalisaURL<-function(url=NA){
+#' @title Monalisa Stations
+#' @description Returns all the Stations in the MONALISA Database
+#' @import magrittr
+#' @import tibble
+#' @importFrom dplyr select
+#' @export
+ 
+getMonalisaStat<-function(){
   
-  if(is.na(url)) return("http://monalisasos.eurac.edu/sos/api/v1/timeseries/")
-  else return(url)
+  db<-getMonalisaDB()
+  coords<-db$station$geometry$coordinates %>% 
+    do.call(rbind,.) %>% 
+    as.tibble %>% 
+    select(.,-V3)
+  name<-db$station$properties$label
+  stats<-cbind.data.frame(coords,name)
+  colnames(stats)<-c("LONG","LAT","name")
+  
+  return(stats)
+  
+  
 }
