@@ -9,6 +9,7 @@
 #' @import tibble
 #' @import dplyr
 #' @importFrom purrr is_empty
+#' @importFrom gridExtra grid.arrange
 #' @include ShinyUi.R
 #' @include ShinyServer.R
 #' @export
