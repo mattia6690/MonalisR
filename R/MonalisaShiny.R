@@ -8,6 +8,7 @@
 #' @import magrittr
 #' @import tibble
 #' @import dplyr
+#' @importFrom purrr is_empty
 #' @include ShinyUi.R
 #' @include ShinyServer.R
 #' @export
