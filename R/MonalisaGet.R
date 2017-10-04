@@ -65,7 +65,6 @@ getMonalisaDB_sub<-function(subset="station"){
   
 }
 
-
 #' @title Monalisa Stations
 #' @description Returns all the Stations in the MONALISA Database
 #' @import magrittr

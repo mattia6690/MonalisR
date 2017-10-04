@@ -31,42 +31,29 @@ getMeteoStat<- function(url=NA,format="table"){
 #' @title List all the properties for one or multiple stations
 #' @description Returns a list af all the sensors and datasets available at one station.
 #' @param url URL; URL of the Province Database. If left empty the original API will be used.
-#' @param SCODE string; Station Code of one Station
+#' @param SCODE string; Station Code of one or multiple Stations. If this field is left
+#' empty all the possible combinations of SCODE and Sensors will be returned
+#' @param onlySensor logical; Sould only the available Sensors be returned?
+#' If false all the combination of SCODE and Sensor are returned as tibble
 #' @import tibble
+#' @import httr
 #' @importFrom jsonlite fromJSON
 #' @export
 
-getMeteoSensor<-function(url=NA,SCODE){
+getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
   
-  if(is.na(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/sensors"
-  url<-paste0(url,"?station_code=",SCODE)
-  js1<-fromJSON(url)
-  if(nrow(js1)==0){;stop("Wrong Station Number added")}
-  return(js1)
+  if(is.null(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/sensors"
+  
+  u<-GET(url) %>% content
+  ui<-cbind(sapply(u, "[[", 1),sapply(u, "[[", 2)) %>% as.tibble
+  colnames(ui)<-c("SCODE","Sensor")
+  
+  if(!is.null(SCODE)) ui<-is.element(ui$SCODE,SCODE) %>% which(.==T) %>% ui[.,]
+  if(onlySensor==T)   ui<-ui$Sensor %>% unique
+  
+  return(ui)
+  
 }
-
-#' @title List all the available properties at the Province API
-#' @description Returns a list af all the sensors and datasets available via the API
-#' @import magrittr
-#' @export
-
-getMeteoSensor_all<-function(){
-  
-  js1<-getMeteoStat()
-  jslst<-list()
-  
-  for(i in 1:nrow(js1)){
-    
-    props<-getMeteoSensor(SCODE=js1[i,1])
-    jslst[[i]]<-props
-    
-  }
-  
-  jslst1<-lapply(jslst, `[`, (2:5)) %>% do.call(rbind,.)
-  jslst1<-jslst1 %>% unique
-  return(jslst1)
-}
-
 
 #' @title Buffer intersect with meteorological Stations
 #' @description This function add the possibility to create a Buffer around a Spatial point
