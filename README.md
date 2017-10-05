@@ -19,7 +19,6 @@ Within this project the [MONALISA Database](http://monalisasos.eurac.edu/sos/sta
 
 A second Platform to retrieve open Data for Science applications is now openly accessible via the [Open Data Portal](http://daten.buergernetz.bz.it/de/info) of the Autonomous Province of South Tyrol. On this Platform multiple different Databases have been opened to the public. A central API handles the request for each single Database stored. For now one of these databases is addressable with this Package containing meteorological data of several fixed Stations continuously operated by the Meteorological Service of South Tyrol.<br>
 
-<br>
 
 #### Download the Package from Gitlab
 
@@ -31,12 +30,11 @@ library(devtools)
 library(git2r)
 library(getPass)
 
-uname<-     "Your Gitlab Username" # Manual insertion
-password<-  getPass::getPass() # Password Popup
+uname<-     "Your GITLAB username"
 
 
 devtools::install_git("https://gitlab.inf.unibz.it/SOS/MonalisR", 
-  credentials = git2r::cred_user_pass(uname, password)
+  credentials = git2r::cred_user_pass(uname, getPass::getPass())
 )
 
 ```
