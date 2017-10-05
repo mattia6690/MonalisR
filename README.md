@@ -7,7 +7,7 @@ This R-Package aims at accessing multiple open databases for the environmental p
 * spatial and data plots of locations (or stations) of interest
 * download and storage of the desired dataset(s)<br>
 
-The functions are devided in these three central by their naming convention utilizing the prefixes *get*, *plot* and *download*
+For earch database the respective functions are devided according to the three tasks. Following that, th naming conventions utilize the prefixes *get*, *plot* and *download*
 
 ### DB01: The MONALISA Database
   
