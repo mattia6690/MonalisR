@@ -17,8 +17,8 @@
 downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, dateend, path = "", csv = FALSE){
   
   if(is.null(dburl)) dburl<- "http://daten.buergernetz.bz.it/services/meteo/v1/timeseries"
-  datestart1 <- datestart %>% convertDate(.,db="meteo")
-  dateend1<-    dateend %>%  convertDate(.,db="meteo")
+  datestart1 <- datestart %>% convertDate(.,db="Meteo")
+  dateend1<-    dateend %>%  convertDate(.,db="Meteo")
   dates<-c(datestart %>% as.Date,dateend %>% as.Date) %>% str_replace_all(.,"-","")
   
   # Build the Request String
