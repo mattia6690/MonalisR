@@ -4,8 +4,8 @@
 \alias{downloadMonalisa}
 \title{Download MONALISA Data}
 \usage{
-downloadMonalisa(starturl, datestart, dateend, fois = "", path = "",
-  csv = F)
+downloadMonalisa(starturl = NULL, datestart, dateend, fois = "",
+  path = "", csv = F)
 }
 \arguments{
 \item{starturl}{URL, Path to the  MONLISA Database. If empty the adress will automatically be pasted.}

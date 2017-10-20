@@ -16,8 +16,9 @@
 #' @importFrom utils write.csv
 #' @export
 
-downloadMonalisa <- function(starturl, datestart, dateend, fois = "", path = "", csv = F){
+downloadMonalisa <- function(starturl=NULL, datestart, dateend, fois = "", path = "", csv = F){
 
+  if(is.null(starturl)) starturl<-setMonalisaURL()
   xmlfile<-getMonalisaDB()
 
   if(fois==""){
