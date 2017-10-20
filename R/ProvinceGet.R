@@ -69,6 +69,7 @@ getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
 #' @import magrittr
 #' @importFrom rgeos gBuffer gDistance 
 #' @importFrom sp coordinates spTransform
+#' @importFrom raster projection
 #' @export
 
 buffmeteo<-function(point,bufferW=5000,getBufferShp=F,dist=F){
@@ -77,8 +78,6 @@ buffmeteo<-function(point,bufferW=5000,getBufferShp=F,dist=F){
   shp <- spTransform(point,CRS=CRS(projection(sp))) # Transform
   
   buff1<-rgeos::gBuffer(shp,byid = T,width=bufferW) # Compute
-  
-  if(getBufferShp==T){return(buff1)}
   ov<-sp::over(sp,buff1,returnList = T)
   names(ov)<-sp$SCODE
   dc<-do.call(rbind,ov)
@@ -100,5 +99,6 @@ buffmeteo<-function(point,bufferW=5000,getBufferShp=F,dist=F){
       
     }
   }
+  if(getBufferShp==T){return(buff1)}
   return(df)
 }
