@@ -30,6 +30,8 @@ getMonalisaDB<-function(url=NA){
 #' @description This function accesses the Monalisa Database via the API in JSON format
 #' and returns a list of the peatured parameters. In respect to the *getMonalisaDB* function
 #' *getMonalisaDB_sub* returns a subset of the whole database information.
+#' @param db MonalisaDB Object; For speeding up processing time a already preset MonalisaDB File
+#' relized with the getMonalisaDB() function can be inserted.
 #' @param subset character; the name of the subset that has to be taken.
 #' Digit either "station" for a list of tha available stations or "property" for
 #' a list of the available properties in the database
@@ -38,13 +40,13 @@ getMonalisaDB<-function(url=NA){
 #' @importFrom tibble as.tibble
 #' @export
 
-getMonalisaDB_sub<-function(subset="station"){
+getMonalisaDB_sub<-function(db=NULL, subset="station"){
   
-  xmlfile<-getMonalisaDB()
+  if(is.null(db)) db<-getMonalisaDB()
   
   if(subset=="station"){
     
-    x<-xmlfile %>% 
+    x<-db %>% 
       select(.,contains("station")) %>% do.call(cbind,.) %>%
       select(.,contains("properties")) %>% do.call(cbind,.) %>%
       select(.,contains("label")) %>%  unique(.)
@@ -55,9 +57,10 @@ getMonalisaDB_sub<-function(subset="station"){
   
   if(subset=="property"){
     
-    x<-xmlfile %>% select(contains("label"))
-    x<-xmlfile %>% do.call(cbind,.) %>% as.list %>% do.call(cbind,.) %>% as.tibble
-    names(x)[2:3] <- c("Observable properties", "Units")
+    z<-db %>% select(contains("label")) 
+    y<-db %>% select(contains("uom"))
+    x<-cbind(z,y)
+    names(x)[1:2] <- c("Observable properties", "Units")
     
   }
   
@@ -67,14 +70,17 @@ getMonalisaDB_sub<-function(subset="station"){
 
 #' @title Monalisa Stations
 #' @description Returns all the Stations in the MONALISA Database
+#' @param db MonalisaDB Object; For speeding up processing time a already preset MonalisaDB File
+#' relized with the getMonalisaDB() function can be inserted.
 #' @import magrittr
 #' @import tibble
 #' @importFrom dplyr select
 #' @export
  
-getMonalisaStat<-function(){
+getMonalisaStat<-function(db=NULL){
   
-  db<-getMonalisaDB()
+  if(is.null(db)) db<-getMonalisaDB()
+  
   coords<-db$station$geometry$coordinates %>% 
     do.call(rbind,.) %>% 
     as.tibble %>% 

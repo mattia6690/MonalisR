@@ -4,9 +4,12 @@
 \alias{getMonalisaDB_sub}
 \title{Overview of the Monalisa Database}
 \usage{
-getMonalisaDB_sub(subset = "station")
+getMonalisaDB_sub(db = NULL, subset = "station")
 }
 \arguments{
+\item{db}{MonalisaDB Object; For speeding up processing time a already preset MonalisaDB File
+relized with the getMonalisaDB() function can be inserted.}
+
 \item{subset}{character; the name of the subset that has to be taken.
 Digit either "station" for a list of tha available stations or "property" for
 a list of the available properties in the database}

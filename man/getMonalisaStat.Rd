@@ -4,7 +4,11 @@
 \alias{getMonalisaStat}
 \title{Monalisa Stations}
 \usage{
-getMonalisaStat()
+getMonalisaStat(db = NULL)
+}
+\arguments{
+\item{db}{MonalisaDB Object; For speeding up processing time a already preset MonalisaDB File
+relized with the getMonalisaDB() function can be inserted.}
 }
 \description{
 Returns all the Stations in the MONALISA Database
