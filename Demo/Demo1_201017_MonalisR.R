@@ -4,7 +4,6 @@
 ####' 20. October 2017
 ####' EURAC Reseach
 
-
 ### 1. Load the Package----
 
 # Download and load directy from Gitlab
@@ -19,6 +18,8 @@ devtools::install_git("https://gitlab.inf.unibz.it/REMSEN/MonalisR",
 library(MonalisR)
 
 ### 2. MonalisR Package ----
+help(package="MonalisR")
+??Demo1_201017_MonalisR
 
 ### 3. Databases ----
 ##* 3.1 MONALISA ----
@@ -70,5 +71,10 @@ library("rgdal")
 shp<- readOGR("C:/Users/MRossi/Documents/07_Codes/03_TestData","TestPoint")
 
 buffmeteo(point=shp,bufferW=10000)
+
+# 4. Shiny ----
+# The Shiny WebApp can be called also within the package
+
+MonaShiny
 
 
