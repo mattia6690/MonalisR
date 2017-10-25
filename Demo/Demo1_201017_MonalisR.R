@@ -1,4 +1,3 @@
-
 ####' A Demo Script for the MonalisR Package
 ####' Presented by Mattia Rossi
 ####' 20. October 2017
