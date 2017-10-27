@@ -16,6 +16,8 @@ License: GPL (>= 2)
 LazyData: true
 RoxygenNote: 6.0.1
 Imports:
+    httr,
+    raster,
     jsonlite,
     purrr,
     tibble,
@@ -26,21 +28,8 @@ Imports:
     stringr,
     lubridate,
     gridExtra,
-    shiny,
     leaflet,
     geojsonio,
     rgdal,
     rgeos,
     sp
-Collate: 
-    'MonalisaDownload.R'
-    'MonalisaGet.R'
-    'MonalisaPlot.R'
-    'ShinyServer.R'
-    'ShinyUi.R'
-    'MonalisaShiny.R'
-    'Plotall.R'
-    'Processing.R'
-    'ProvinceDownload.R'
-    'ProvinceGet.R'
-    'ProvincePlot.R'
