@@ -4,7 +4,7 @@
 \alias{setMonalisaURL}
 \title{Set the MONALISA URL}
 \usage{
-setMonalisaURL(url = NA)
+setMonalisaURL(db = NA)
 }
 \arguments{
 \item{url}{character; Input the URL to the Timeseries of the MONALISA Database.

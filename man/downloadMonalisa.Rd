@@ -8,7 +8,7 @@ downloadMonalisa(starturl = NULL, datestart, dateend, fois = "",
   path = "", csv = F)
 }
 \arguments{
-\item{starturl}{URL, Path to the  MONLISA Database. If empty the adress will automatically be pasted.}
+\item{starturl}{URL, Path to the  MONLISA Database. If empty the adress of the EURAC Monalisa Database (27.11) will automatically be pasted.}
 
 \item{datestart}{date, Starting Date required in "Y-m-d H:M" format.}
 
@@ -23,4 +23,15 @@ downloadMonalisa(starturl = NULL, datestart, dateend, fois = "",
 \description{
 Core script for handling the data provided in the MONALISA Database
 collected and stored by EURAC Research. For more information please visit http://monalisasos.eurac.edu/sos/.
+}
+\examples{
+
+s <- "2016-01-01 00:00"
+e <- "2016-12-31 00:00"
+mnls_down<-downloadMonalisa(datestart = s,dateend = e)
+
+downloadMonalisa(datestart = s,dateend = e,path= "Tempdir",csv=T)
+
+#END
+
 }

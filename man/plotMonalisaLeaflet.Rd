@@ -14,6 +14,11 @@ Function to spatially plot the MONALISA Stations and the respective FOI
 to a Leaflet plot for better visualization.
 }
 \examples{
+
+plotMonalisaLeaflet() # Calls the Already Preconfuigured MONALISA Leaflet
+
+# END
+
 ## Standard Plotting without Database
 MonalisaPlot()
 }

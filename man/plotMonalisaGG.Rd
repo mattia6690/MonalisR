@@ -13,3 +13,10 @@ plotMonalisaGG(x, stat = "line")
 Plot the MONALISA Requests either as Line or Boxplot. Both outputs
 are displayed as GGPlots
 }
+\examples{
+
+plotMonalisaGG(mnls_down[[1]],stat="boxplot")
+
+# END
+
+}
