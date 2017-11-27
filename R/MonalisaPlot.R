@@ -2,13 +2,16 @@
 #' @description Function to spatially plot the MONALISA Stations and the respective FOI
 #' to a Leaflet plot for better visualization.
 #' @param db optional DB table; If empty the standard db file fill be generated
+#' @examples 
+#' 
+#' plotMonalisaLeaflet() # Calls the Already Preconfuigured MONALISA Leaflet
+#' 
+#' # END
+#' 
 #' @import leaflet
 #' @import magrittr
 #' @import tibble
 #' @import dplyr
-#' @examples
-#' ## Standard Plotting without Database
-#' MonalisaPlot()
 #' @export
 
 plotMonalisaLeaflet<- function(db=NULL){
@@ -31,6 +34,12 @@ plotMonalisaLeaflet<- function(db=NULL){
 #' @description Plot the MONALISA Requests either as Line or Boxplot. Both outputs
 #' are displayed as GGPlots
 #' @param x tbl, Table with the Value that should be implemented in the
+#' @examples
+#' 
+#' plotMonalisaGG(mnls_down[[1]],stat="boxplot")
+#' 
+#' # END
+#' 
 #' @import magrittr
 #' @import ggplot2
 #' @export

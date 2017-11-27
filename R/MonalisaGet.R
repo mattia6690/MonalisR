@@ -4,9 +4,9 @@
 #' If this parameter is left empty the standard URL will be set.
 #' @export
 
-setMonalisaURL<-function(url=NA){
+setMonalisaURL<-function(db=NA){
   
-  if(is.na(url)) return("http://monalisasos.eurac.edu/sos/api/v1/timeseries/")
+  if(is.na(db)) return("http://monalisasos.eurac.edu/sos/api/v1/timeseries/")
   else return(url)
 }
 
@@ -14,82 +14,63 @@ setMonalisaURL<-function(url=NA){
 #' @description This function accesses the Monalisa Database via the API in JSON format
 #' and returns a list of the peatured parameters.
 #' @param url URL; URL of the Monalisa SOS API. If empty a default path is used
+#' @param subset character; The subset of interest. If left empty the whole Data frame will be returned. 
+#' Possible Subsets are "foi","procedure","property"
+#' @examples 
+#' 
+#' # Get the Information hosted in the MONALISA Database
+#' mnls<-getMonalisaDB()
+#' mnls2<-getMonalisaDB(subset="property")
+#' mnls3<-getMonalisaDB(subset="station")
+#' 
+#' # END
+#' 
+#' @import magrittr
 #' @importFrom jsonlite fromJSON
+#' @importFrom stringr str_split
 #' @importFrom dplyr select
 #' @export
 
-getMonalisaDB<-function(url=NA){
+getMonalisaDB<-function(url=NA,subset=""){
   
-  if(is.na(url)) url <- setMonalisaURL()
-  xmlfile <- jsonlite::fromJSON(url)
+  if(is.na(url)){
+    url <- setMonalisaURL()
+    xmlfile <- jsonlite::fromJSON(url)
+  }else{xmlfile <- jsonlite::fromJSON(url)}
   
-  return(xmlfile)
-}
-
-#' @title Overview of the Monalisa Database
-#' @description This function accesses the Monalisa Database via the API in JSON format
-#' and returns a list of the peatured parameters. In respect to the *getMonalisaDB* function
-#' *getMonalisaDB_sub* returns a subset of the whole database information.
-#' @param db MonalisaDB Object; For speeding up processing time a already preset MonalisaDB File
-#' relized with the getMonalisaDB() function can be inserted.
-#' @param subset character; the name of the subset that has to be taken.
-#' Digit either "station" for a list of tha available stations or "property" for
-#' a list of the available properties in the database
-#' @importFrom jsonlite fromJSON
-#' @importFrom dplyr select
-#' @importFrom tibble as.tibble
-#' @export
-
-getMonalisaDB_sub<-function(db=NULL, subset="station"){
+  if(subset=="") return(xmlfile)
   
-  if(is.null(db)) db<-getMonalisaDB()
+  split<-str_split(xmlfile$label,",")
   
-  if(subset=="station"){
-    
-    x<-db %>% 
-      select(.,contains("station")) %>% do.call(cbind,.) %>%
-      select(.,contains("properties")) %>% do.call(cbind,.) %>%
-      select(.,contains("label")) %>%  unique(.)
-    rownames(x) <- NULL
-    colnames(x) <- "Stations"
-    
+  if(subset=="foi"){
+    lsp1<- split %>% 
+      sapply(.,"[[",2) %>% 
+      unique
+    return(lsp1)
+  }
+  
+  if(subset=="procedure"){
+    lsp1<-split %>% 
+      sapply(.,"[[",1)
+      str_split(.," ")
+    lsp2<-lsp1 %>% 
+      grepl(pattern = "_",unlist(.)) %>% 
+      which %>% 
+      unlist(lsp1)[.] %>% 
+      unique
+    return(lsp2)
   }
   
   if(subset=="property"){
+    lsp1<-split %>% 
+      sapply(.,"[[",1) %>% 
+      gregexpr(pattern =' ',.)
+    lsp2<-lsp1 %>% 
+      lapply(., function(x){x[length(x)]}) %>% 
+      unlist %>% 
+      substring(lsp1,1,.) %>%
+      unique
     
-    z<-db %>% select(contains("label")) 
-    y<-db %>% select(contains("uom"))
-    x<-cbind(z,y)
-    names(x)[1:2] <- c("Observable properties", "Units")
-    
+    return(lsp2)
   }
-  
-  return(x)
-  
-}
-
-#' @title Monalisa Stations
-#' @description Returns all the Stations in the MONALISA Database
-#' @param db MonalisaDB Object; For speeding up processing time a already preset MonalisaDB File
-#' relized with the getMonalisaDB() function can be inserted.
-#' @import magrittr
-#' @import tibble
-#' @importFrom dplyr select
-#' @export
- 
-getMonalisaStat<-function(db=NULL){
-  
-  if(is.null(db)) db<-getMonalisaDB()
-  
-  coords<-db$station$geometry$coordinates %>% 
-    do.call(rbind,.) %>% 
-    as.tibble %>% 
-    select(.,-V3)
-  name<-db$station$properties$label
-  stats<-cbind.data.frame(coords,name)
-  colnames(stats)<-c("LONG","LAT","name")
-  
-  return(stats)
-  
-  
 }

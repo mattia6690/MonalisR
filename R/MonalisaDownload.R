@@ -1,12 +1,22 @@
 #' @title Download MONALISA Data
 #' @description Core script for handling the data provided in the MONALISA Database
 #' collected and stored by EURAC Research. For more information please visit http://monalisasos.eurac.edu/sos/.
-#' @param starturl URL, Path to the  MONLISA Database. If empty the adress will automatically be pasted.
+#' @param starturl URL, Path to the  MONLISA Database. If empty the adress of the EURAC Monalisa Database (27.11) will automatically be pasted.
 #' @param datestart date, Starting Date required in "Y-m-d H:M" format.
 #' @param dateend date, End Date required "Y-m-d H:M" format.
 #' @param fois Character, Aternative Input in case the FOIs for the download are already defined.
 #' @param path Character, Path for the Output. If blank the Output is returned as an object in the R Environment.
 #' @param csv Boolean, Additionally Save as csv?
+#' @examples
+#' 
+#' s <- "2016-01-01 00:00"
+#' e <- "2016-12-31 00:00"
+#' mnls_down<-downloadMonalisa(datestart = s,dateend = e)
+#' 
+#' downloadMonalisa(datestart = s,dateend = e,path= "Tempdir",csv=T)
+#' 
+#' #END
+#' 
 #' @import dplyr
 #' @import stringr
 #' @import magrittr
@@ -20,12 +30,12 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, fois = "", path 
 
   if(is.null(starturl)) starturl<-setMonalisaURL()
   xmlfile<-getMonalisaDB()
+  
+  if((as.Date(dateend)-as.Date(datestart))>365) break("The selected timespan has to be 1 Year or below")
 
   if(fois==""){
-    x<-select(xmlfile,contains("station")) %>%
-      do.call(cbind,.) %>%
-      select(.,contains("properties")) %>%
-      do.call(cbind,.) %>%
+    x<-select(xmlfile,contains("station")) %>% do.call(cbind,.) %>%
+      select(.,contains("properties")) %>% do.call(cbind,.) %>%
       select(.,contains("label")) %>%
       unique(.)
 
@@ -37,7 +47,7 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, fois = "", path 
     if((length(y) > 1)) stop("Please select one station at a time!")
 
     b<-suppressWarnings(as.numeric(y))
-    if((is.na(b))) stop("Please Digit a number for the ID")
+    if(is.na(b)) stop("Please Digit a number for the ID")
     foi<-as.matrix(x)[b]
   } else {foi <- fois}
 
@@ -45,8 +55,12 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, fois = "", path 
   u<-xmlfile %>% select(contains("label"))
   
   # Readline Option
-  u<-xmlfile %>% do.call(cbind,.) %>% as.list %>% do.call(cbind,.) %>% 
-    as.tibble  %>% filter(station.properties.label==foi)
+  u<-xmlfile %>% 
+    do.call(cbind,.) %>% 
+    as.list %>% 
+    do.call(cbind,.) %>% 
+    as.tibble  %>% 
+    filter(station.properties.label==foi)
   print(u)
   r<-readline(prompt = "Please digit the ID of the desired Properties for your FOI:      ")
   r<- strsplit(r,",") %>% unlist
