@@ -20,9 +20,9 @@ Within this project the [MONALISA Database](http://monalisasos.eurac.edu/sos/sta
 A second Platform to retrieve open Data for Science applications is now openly accessible via the [Open Data Portal](http://daten.buergernetz.bz.it/de/info) of the Autonomous Province of South Tyrol. On this Platform multiple meteorological variables have been opened to the public. A central API handles the request for each single Database stored. For now the package offers the possibilty to access one of these databases is addressable with this Package containing meteorological data of several fixed Stations continuously operated by the Meteorological Service of South Tyrol.<br>
 
 
-#### Download the Package from Gitlab
+#### Download the Package from Gitlab (development repository)
 
-For now this Package is in a develpment stage and therefore privatly hosted in a Gitlab repository. It is available only to registered group members and the access has to be granted by one of the active members of the group (see [Members Section](https://gitlab.inf.unibz.it/SOS/MonalisR/project_members) or below)
+This Package is in an active development stage and therefore [privatly hosted in a Gitlab repository](https://gitlab.inf.unibz.it/REMSEN). It is available only to registered group members and the access has to be granted by one of the active members of the group (see [Members Section](https://gitlab.inf.unibz.it/SOS/MonalisR/project_members) or below)
 A general way to load the package in R is provided with the following code:<br>
 
 ```r
@@ -37,6 +37,16 @@ devtools::install_git("https://gitlab.inf.unibz.it/SOS/MonalisR",
 
 ```
 
+#### Download the Package from Gitlab (Open Repository)
+
+The stable versions of the Packages will be shared on the [Open Repository](https://gitlab.inf.unibz.it/earth_observation_public) and can be downloaded without the need to provide the credentials: <br>
+
+```r
+library(devtools)
+
+devtools::install_git("https://gitlab.inf.unibz.it/SOS/MonalisR")
+
+```
 
 #### Contributors
 
@@ -47,4 +57,4 @@ devtools::install_git("https://gitlab.inf.unibz.it/SOS/MonalisR",
 
 #### Contact
 
-For further information please contact: mattia.rossi@eurac.edu
+For further information or interest/ideas for future development please contact: mattia.rossi@eurac.edu
