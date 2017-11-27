@@ -5,6 +5,20 @@
 #' @param url URL; URL of the Province Database. If left empty the original API will be used.
 #' @param format string; digit "table" if the output should be a tibble or "spatial" for a spatial
 #' output as sp-object
+#' @examples
+#' 
+#' s <- "2017-05-01 00:00"
+#' e <- "2017-06-01 00:00"
+#' a<-downloadMeteo(station_code = "27100MS",
+#'                  sensor_code = "LT",
+#'                  datestart = s,
+#'                  dateend = e)
+#' 
+#' downloadMeteo(station_code = "27100MS",
+#'               sensor_code = "LT",
+#'               datestart = s,
+#'               dateend = e, path= path,csv=T)
+#'              
 #' @import magrittr
 #' @import tibble
 #' @importFrom jsonlite fromJSON
