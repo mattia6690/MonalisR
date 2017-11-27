@@ -32,7 +32,7 @@ library(getPass)
 
 uname<-     "Your GITLAB username"
 
-devtools::install_git("https://gitlab.inf.unibz.it/SOS/MonalisR", 
+devtools::install_git("https://gitlab.inf.unibz.it/REMSEN/MonalisR", 
   credentials = git2r::cred_user_pass(uname, getPass::getPass()))
 
 ```
@@ -44,7 +44,7 @@ The stable versions of the Packages will be shared on the [Open Repository](http
 ```r
 library(devtools)
 
-devtools::install_git("https://gitlab.inf.unibz.it/SOS/MonalisR")
+devtools::install_git("https://gitlab.inf.unibz.it/earth_observation_public//MonalisR")
 
 ```
 
