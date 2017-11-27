@@ -1,6 +1,7 @@
-####' A Demo Script for the MonalisR Package
-####' Presented by Mattia Rossi
-####' 20. October 2017
+####' Demo Script 1
+####' MonalisR v. 0.2
+####' Mattia Rossi
+####' 30. October 2017
 ####' EURAC Reseach
 
 ### 1. Load the Package----
@@ -9,6 +10,7 @@
 library(devtools)
 library(git2r)
 library(getPass)
+library(rgdal)
 
 uname<- "mattia.rossi"
 
@@ -16,41 +18,39 @@ devtools::install_git("https://gitlab.inf.unibz.it/REMSEN/MonalisR",
                       credentials = git2r::cred_user_pass(uname, getPass::getPass()))
 library(MonalisR)
 
-### 2. MonalisR Package ----
+### 2. Package Help----
 help(package="MonalisR")
 ??Demo1_201017_MonalisR
 
-### 3. Databases ----
-##* 3.1 MONALISA ----
-
+### 3. MONALISA DB ----
+##* 3.1 Explore the Database ----
 mnls<-getMonalisaDB()
-mnls2<-getMonalisaDB_sub(subset="property")
-mnls3<-getMonalisaDB_sub(subset="station")
-mnls4<- getMonalisaStat()
-mnls4_unique<- unique(getMonalisaStat())
+mnls2<-getMonalisaDB(subset="property")
+mnls3<-getMonalisaDB(subset="station")
 
-s <- "2015-12-31 00:00"
-e <- "2016-02-28 00:00"
-
+##* 3.2 Download ----
+s <- "2016-01-01 00:00"
+e <- "2016-12-31 00:00"
 mnls_down<-downloadMonalisa(datestart = s,dateend = e)
+View(mnls_down[[1]])
 
 path<-"C:/Users/MRossi/Documents/07_Codes/"
 downloadMonalisa(datestart = s,dateend = e,path= path,csv=T)
 
+##* 3.3 Plot ----
 plotMonalisaLeaflet()
-
 plotMonalisaGG(mnls_down[[1]],stat="boxplot")
 
-##* 3.2 Meteo ----
-
+### 4. Meteo ----
+##* 4.1 Explore the Database ----
 met1<-getMeteoStat()
 met2<-getMeteoStat(format = "spatial")
 met3<-getMeteoSensor()
 met3<-getMeteoSensor(SCODE="27100MS")
 
+##* 4.2 Download ----
 s <- "2017-05-01 00:00"
 e <- "2017-06-01 00:00"
-
 a<-downloadMeteo(station_code = "27100MS",
                  sensor_code = "LT",
                  datestart = s,
@@ -61,19 +61,13 @@ downloadMeteo(station_code = "27100MS",
               datestart = s,
               dateend = e, path= path,csv=T)
 
+##* 4.3 Plot ----
 plotMeteoLeaflet()
 
-##* 3.2 Combine them ----
-# The buffmeteo function is able to combine the Points from the MeteoData with other data
+##* 4.4 Combine with other Data
+# Select the Stations in a radius of 10km from one Point Shapefile
 
-library("rgdal")
 shp<- readOGR("C:/Users/MRossi/Documents/07_Codes/03_TestData","TestPoint")
-
-buffmeteo(point=shp,bufferW=10000)
-
-# 4. Shiny ----
-# The Shiny WebApp can be called also within the package
-
-MonaShiny
+buffmeteo(point=shp,bufferW=10000) 
 
 
