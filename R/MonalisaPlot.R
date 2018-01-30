@@ -11,21 +11,20 @@
 #' @import leaflet
 #' @import magrittr
 #' @import tibble
-#' @import dplyr
 #' @export
 
 plotMonalisaLeaflet<- function(db=NULL){
   
-  if(is.null(db)) db<-getMonalisaDB()
-  coords<-db$station$geometry$coordinates %>% do.call(rbind,.) %>% as.tibble %>% select(.,-V3)
-  name<-db$station$properties$label
-  stats<-cbind.data.frame(coords,name)
+  if(is.null(db)) db<-setMonalisaURL(db=db)
+  
+  coords<-getMonalisaDB(db,subset = "geom") %>% as.tibble()
   
   m<-leaflet() %>% addTiles() %>% addMarkers(
-    lng=stats$V1 %>% as.character %>% as.numeric,
-    lat=stats$V2 %>% as.character %>% as.numeric,
-    popup=paste("FOI:",stats$name)
+    lng=coords$LAT %>% as.numeric,
+    lat=coords$LON %>% as.numeric,
+    popup=paste("Station: ",coords$FOI)
   )
+  
   return(m)
   
 }
