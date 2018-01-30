@@ -5,7 +5,7 @@
 \title{Download MONALISA Data}
 \usage{
 downloadMonalisa(starturl = NULL, datestart, dateend, foi = "",
-  procedure = "", property = "", path = "", csv = F)
+  procedure = "", property = "", path = "", abbr = T, csv = F)
 }
 \arguments{
 \item{starturl}{URL, Path to the  MONLISA Database. 
@@ -23,6 +23,9 @@ If empty the adress of the EURAC Monalisa Database (as available on 30.01.2017) 
 
 \item{path}{Character, Path for the Output of a RData File with the Respnse from the SOS Server. 
 If blank the Output is returned as an object in the R Environment.}
+
+\item{abbr}{Boolean, Do you want the Properties to be automatically abbreviated in the Output? 
+If TRUE the Abbreviate() function is applied.}
 
 \item{csv}{Boolean, Additionally Save as csv?}
 }

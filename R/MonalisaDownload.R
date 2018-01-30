@@ -10,6 +10,8 @@
 #' @param property Character, Input for the Property(ies). If left empty the Input is made manually during process.
 #' @param path Character, Path for the Output of a RData File with the Respnse from the SOS Server. 
 #' If blank the Output is returned as an object in the R Environment.
+#' @param abbr Boolean, Do you want the Properties to be automatically abbreviated in the Output? 
+#' If TRUE the Abbreviate() function is applied.
 #' @param csv Boolean, Additionally Save as csv?
 #' @examples
 #' 
@@ -26,11 +28,11 @@
 #' @import magrittr
 #' @import tibble
 #' @importFrom jsonlite fromJSON
-#' @importFrom purrr map_if
+#' @importFrom purrr map_if map2
 #' @importFrom utils write.csv
 #' @export
 
-downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", procedure = "", property = "",path = "", csv = F){
+downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", procedure = "", property = "",path = "", abbr=F, csv = F){
 
   # Handle Exceptions
   if((as.Date(dateend)-as.Date(datestart))>365) stop("The selected timespan has to be 1 Year or below")
@@ -104,7 +106,8 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", proced
   #Create the Filenames
   date_s <- datestart %>% str_replace(":","") %>% str_replace(" ", "T")
   date_e <- dateend %>%  str_replace(":","") %>% str_replace(" ", "T")
-  myfile <- paste0(path, "/", "SOS_", au$foi, "_",au$proc,"_",au$prop,"_",date_s,"&", date_e)
+  ifelse(abbr==T,pp<-abbreviate(au$prop),pp<-au$prop)
+  if (isTRUE(abbr)) myfile <- paste0(path, "/", "SOS_", au$foi, "_",au$proc,"_",pp,"_",date_s,"&", date_e)
   
   # Save the Files
   map2(myfile,response, function(i,j){
