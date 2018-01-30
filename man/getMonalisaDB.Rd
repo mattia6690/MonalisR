@@ -4,24 +4,26 @@
 \alias{getMonalisaDB}
 \title{Overview of the Monalisa Database}
 \usage{
-getMonalisaDB(url = NA, subset = "")
+getMonalisaDB(url = NA, subset = "all")
 }
 \arguments{
-\item{url}{URL; URL of the Monalisa SOS API. If empty a default path is used}
+\item{url}{URL; URL of the Monalisa SOS API. If left empty a default url for the MONALISA database is used.
+The url Paramater is needed until the timeseries path (e.g. ".../sos/api/v1/timeseries/")}
 
 \item{subset}{character; The subset of interest. If left empty the whole Data frame will be returned. 
-Possible Subsets are "foi","procedure","property"}
+Possible Subsets are "all","id","foi","procedure","property" and "combined"}
 }
 \description{
 This function accesses the Monalisa Database via the API in JSON format
-and returns a list of the peatured parameters.
+and returns a list of the featured parameters.
 }
 \examples{
 
 # Get the Information hosted in the MONALISA Database
-mnls<-getMonalisaDB()
-mnls2<-getMonalisaDB(subset="property")
-mnls3<-getMonalisaDB(subset="station")
+getMonalisaDB()
+getMonalisaDB(subset="property")
+getMonalisaDB(subset="station")
 
 # END
+
 }

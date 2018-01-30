@@ -7,9 +7,9 @@
 setMonalisaURL(db = NA)
 }
 \arguments{
-\item{url}{character; Input the URL to the Timeseries of the MONALISA Database.
+\item{db}{character; Input the URL to the Timeseries of the MONALISA Database.
 If this parameter is left empty the standard URL will be set.}
 }
 \description{
-Set the MONALISA URL or leave as default.
+Set the MONALISA URL or leave as default for EURACs MONALISA Database
 }

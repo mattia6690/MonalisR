@@ -4,19 +4,25 @@
 \alias{downloadMonalisa}
 \title{Download MONALISA Data}
 \usage{
-downloadMonalisa(starturl = NULL, datestart, dateend, fois = "",
-  path = "", csv = F)
+downloadMonalisa(starturl = NULL, datestart, dateend, foi = "",
+  procedure = "", property = "", path = "", csv = F)
 }
 \arguments{
-\item{starturl}{URL, Path to the  MONLISA Database. If empty the adress of the EURAC Monalisa Database (27.11) will automatically be pasted.}
+\item{starturl}{URL, Path to the  MONLISA Database. 
+If empty the adress of the EURAC Monalisa Database (as available on 30.01.2017) will automatically be pasted.}
 
 \item{datestart}{date, Starting Date required in "Y-m-d H:M" format.}
 
 \item{dateend}{date, End Date required "Y-m-d H:M" format.}
 
-\item{fois}{Character, Aternative Input in case the FOIs for the download are already defined.}
+\item{foi}{Character, Input for the FOI(s). If left empty the Input is made manually during process.}
 
-\item{path}{Character, Path for the Output. If blank the Output is returned as an object in the R Environment.}
+\item{procedure}{Character, Input for the Procedure(s). If left empty the Input is made manually during process.}
+
+\item{property}{Character, Input for the Property(ies). If left empty the Input is made manually during process.}
+
+\item{path}{Character, Path for the Output of a RData File with the Respnse from the SOS Server. 
+If blank the Output is returned as an object in the R Environment.}
 
 \item{csv}{Boolean, Additionally Save as csv?}
 }

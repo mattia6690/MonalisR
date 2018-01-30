@@ -19,6 +19,4 @@ plotMonalisaLeaflet() # Calls the Already Preconfuigured MONALISA Leaflet
 
 # END
 
-## Standard Plotting without Database
-MonalisaPlot()
 }
