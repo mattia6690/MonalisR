@@ -36,7 +36,6 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", proced
 
   # Handle Exceptions
   if((as.Date(dateend)-as.Date(datestart))>365) stop("The selected timespan has to be 1 Year or below")
-  if(length(foi)>1) stop("Please select only one Foi at a time")
   if(is.null(starturl)) starturl<-setMonalisaURL()
   
   x<-getMonalisaDB(url=starturl,subset="combined") %>% as.data.frame()
@@ -46,45 +45,47 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", proced
   dateend1<-dateend %>%  str_replace(.," ","T") %>% paste0(.,":00")
   
   # FOIs
-  if(suppressWarnings(foi=="")){
-    y<-x$foi %>% unique %>% as.data.frame %>% print
-    z<-readline(prompt = "Please digit the ID of the desired FOI:      ")
-    z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
-    if(is.na(z)) stop("Please insert a FOI or insert it in the Function")
-    foi<-y[z,] %>% as.character
-    
+  if(length(foi)==1){
+    if(foi==""){
+      y<-x$foi %>% unique %>% as.data.frame %>% print
+      z<-readline(prompt = "Please digit the ID of the desired FOI:      ")
+      z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
+      if(is.na(z)) stop("Please insert a FOI or insert it in the Function")
+      foi1<-y[z,] %>% as.character
+    }
   } else {
     ie<-is.element(foi,as.character(x$foi))
     if(!all(ie)) stop("One of the input FOIS were not found in the SOS Database")
-    foi <- foi
+    foi1 <- foi
     }
 
   # Observable Properties
-  if(suppressWarnings(prop=="")){
-    y<- x$prop %>% unique %>% as.data.frame %>% print
+  if(length(property)==1 ){
+    if(property==""){y<- x$prop %>% unique %>% as.data.frame %>% print
     z<- readline(prompt = "Please digit the ID of the desired Property:      ")
     z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
     if(is.na(z)) stop("Please insert a Property or insert it in the Function")
-    prop<-y[z,] %>% as.character
-    
+    prop1<-y[z,] %>% as.character
+    }
   } else {
-    ie<-is.element(prop,as.character(x$prop))
+    ie<-is.element(property,as.character(x$prop))
     if(!all(ie)) stop("One of the input OBSERVABLE PROPERTIES were not found in the SOS Database")
-    prop <- prop
+    prop1 <- property
     }
 
   # Procedure
-  if(suppressWarnings(proc=="")){
-    y<-x$proc %>% unique %>% as.data.frame %>% print
-    z<-readline(prompt = "Please digit the ID of the desired Procedure:      ")
-    z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
-    if(is.na(z)) stop("Please insert a Procedure or insert it in the Function")
-    proc<-y[z,] %>% as.character
-    
+  if(length(procedure)==1){
+    if(procedure==""){
+      y<-x$proc %>% unique %>% as.data.frame %>% print
+      z<-readline(prompt = "Please digit the ID of the desired Procedure:      ")
+      z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
+      if(is.na(z)) stop("Please insert a Procedure or insert it in the Function")
+      proc1<-y[z,] %>% as.character
+    }
   } else {
-    ie<-is.element(proc,as.character(x$proc))
+    ie<-is.element(procedure,as.character(x$proc))
     if(!all(ie)) stop("One of the input PROCEDURES were not found in the SOS Database")
-    proc <- proc
+    proc1 <- procedure
     }
   
   #Filter for Inputs
@@ -92,6 +93,8 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", proced
     filter(foi %in% foi1) %>% 
     filter(proc %in% proc1) %>% 
     filter(prop %in% prop1)
+  
+  if(nrow(au)==0) stop("The Combination of FOI, Property and Procedure is not available")
   
   # Get the Response from the Server and Modify the List
   url1<-paste0(starturl,au$id,"/getData?timespan=",datestart1,dateend1)

@@ -5,7 +5,7 @@
 \title{Download MONALISA Data}
 \usage{
 downloadMonalisa(starturl = NULL, datestart, dateend, foi = "",
-  procedure = "", property = "", path = "", abbr = T, csv = F)
+  procedure = "", property = "", path = "", abbr = F, csv = F)
 }
 \arguments{
 \item{starturl}{URL, Path to the  MONLISA Database. 
