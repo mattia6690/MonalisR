@@ -23,12 +23,15 @@ library(MonalisR)
 mnls<-setMonalisaURL(db="http://sdcgbe06.eurac.edu:8080/sos_test/api/v1/timeseries/")
 mnls
 
+#"all","id","foi","procedure","property", "combined" and "geom"
 # Get the LTER Information
 lter<-getMonalisaDB(url=mnls)
-lter_foi<-getMonalisaDB(url=mnls,subset = "foi")
-lter_props<-getMonalisaDB(url=mnls,subset = "property")
-lter_proc<-getMonalisaDB(url=mnls,subset = "procedure")
-lter_comb<-getMonalisaDB(url=mnls,subset = "combined")
+lter_all<-getMonalisaDB(url=mnls,subset = "all") # Get the complete response from the server
+lter_foi<-getMonalisaDB(url=mnls,subset = "foi") # Get the list of FOIs
+lter_geom<-getMonalisaDB(url=mnls,subset = "geom") # Get the Location of each FOI
+lter_props<-getMonalisaDB(url=mnls,subset = "property") # Get the list of properties
+lter_proc<-getMonalisaDB(url=mnls,subset = "procedure") # Get the list of procedures
+lter_comb<-getMonalisaDB(url=mnls,subset = "combined") # Get the list of all possible FOI/Property/Procedure combinations on the server
 
 # Plot on a Leaflet
 plotMonalisaLeaflet(lter)
@@ -41,5 +44,4 @@ s <- "2016-01-01 00:00"
 e <- "2016-12-31 00:00"
 
 down<-downloadMonalisa(starturl=mnls,datestart=s,dateend=e,foi=foi1,proc=proc1,prop=prop1,path=getwd())
-
 
