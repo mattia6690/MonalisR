@@ -11,7 +11,7 @@ getMonalisaDB(url = NA, subset = "all")
 The url Paramater is needed until the timeseries path (e.g. ".../sos/api/v1/timeseries/")}
 
 \item{subset}{character; The subset of interest. If left empty the whole Data frame will be returned. 
-Possible Subsets are "all","id","foi","procedure","property" and "combined"}
+Possible Subsets are "all","id","foi","procedure","property", "combined" and "geom"}
 }
 \description{
 This function accesses the Monalisa Database via the API in JSON format
