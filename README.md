@@ -19,13 +19,12 @@ Two environmental databases hosted by [EURAC research](http://www.eurac.edu/) ca
 
 #### 1.1. MONALISA
   
-The [MONALISA project](http://monalisasos.eurac.edu/sos/index) (**MON**itoring key environmental parameters in the **AL**pine environment **I**nvolving **S**cience, technology and **A**pplication) aims at the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. <br>
+The [MONALISA project](http://monalisasos.eurac.edu/sos/index) (**MON**itoring key environmental parameters in the **AL**pine environment **I**nvolving **S**cience, technology and **A**pplication) aims at the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. 
 Within this project the [MONALISA Database](http://monalisasos.eurac.edu/sos/static/client/helgoland/index.html#/map) has been created to store and distribute the wide variety of environmental parameters collected.<br>
 
 #### 1.2. LTSER
 
-The [LTSER](http://lter.eurac.edu/de/) (**L**ong **T**erm **S**ocio **E**cological **R**esearch ) network located in the allows scientists to continuously monitor and record the biotic and abiotic parameters as well as climate and land-use changes over a long-term period. The complete LTSER Network from EURAC Research is located in the Matschertal/Val di Mazia.<br>
-Within this project a database is in a test phase and therefore under active development. Until now, the access is only granted within the *ScientificNetworkSouthtyrol*. It is structurized in a similar way as the Monalisa Database. 
+The [LTSER](http://lter.eurac.edu/de/) (**L**ong **T**erm **S**ocio **E**cological **R**esearch ) network located in the allows scientists to continuously monitor and record the biotic and abiotic parameters as well as climate and land-use changes over a long-term period. The complete LTSER Network from EURAC Research is located in the Matschertal/Val di Mazia. Within this project a database is in a test phase and therefore under active development. Until now, the access is only granted within the *ScientificNetworkSouthtyrol*. It is structurized in a similar way as the Monalisa Database. 
 
 ### 2. Open Data Portal South Tyrol - Meteo Data
 
@@ -35,7 +34,7 @@ A second platform to retrieve open data for scientific applications is now openl
 ### 3. Download the Package
 #### 3.1 Development Repository
 
-This package is in an active development stage and therefore [privatly hosted in a Gitlab repository](https://gitlab.inf.unibz.it/REMSEN). It is available only to registered group members and the access has to be granted by one of the active members of the group (see [Members Section](https://gitlab.inf.unibz.it/SOS/MonalisR/project_members) or below)
+This package is in an active development stage and therefore [privatly hosted in a Gitlab repository](https://gitlab.inf.unibz.it/REMSEN). It is available only to registered group members and the access has to be granted by one of the active members of the group (see [Members Section](https://gitlab.inf.unibz.it/SOS/MonalisR/project_members))
 A general way to load the package in R is provided with the following code:<br>
 
 ```r
