@@ -3,8 +3,9 @@
 ####' Mattia Rossi
 ####' 30. October 2017
 ####' EURAC Reseach
+####' 
+####' The Open Database South Tyrol - Meteorological Data
 
-### 1. Load the Package----
 
 # Download and load directy from Gitlab
 library(devtools)
@@ -22,26 +23,7 @@ library(MonalisR)
 help(package="MonalisR")
 ??Demo1_201017_MonalisR
 
-### 3. MONALISA DB ----
-##* 3.1 Explore the Database ----
-mnls<-getMonalisaDB()
-mnls2<-getMonalisaDB(subset="property")
-mnls3<-getMonalisaDB(subset="station")
 
-##* 3.2 Download ----
-s <- "2016-01-01 00:00"
-e <- "2016-12-31 00:00"
-mnls_down<-downloadMonalisa(datestart = s,dateend = e)
-View(mnls_down[[1]])
-
-path<-"C:/Users/MRossi/Documents/07_Codes/"
-downloadMonalisa(datestart = s,dateend = e,path= path,csv=T)
-
-##* 3.3 Plot ----
-plotMonalisaLeaflet()
-plotMonalisaGG(mnls_down[[1]],stat="boxplot")
-
-### 4. Meteo ----
 ##* 4.1 Explore the Database ----
 met1<-getMeteoStat()
 met2<-getMeteoStat(format = "spatial")
@@ -69,5 +51,3 @@ plotMeteoLeaflet()
 
 shp<- readOGR("C:/Users/MRossi/Documents/07_Codes/03_TestData","TestPoint")
 buffmeteo(point=shp,bufferW=10000) 
-
-
