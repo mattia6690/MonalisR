@@ -1,23 +1,33 @@
 # MonalisR
 ## An R-package for handling open Databases for South Tyrol
 
-This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The Databases are all openly accessible via central APIs and structurized storages. This makes them addressable and accessible via R. For all the Databases core functionalities were implemented simplifying
+This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The databases are all openly accessible via central APIs and structurized storages. This makes them addressable and accessible via R. For all the databases core functionalities were implemented simplifying
 
 * data access and exploration
 * spatial and data plots of locations (or stations) of interest
 * download and storage of the desired dataset(s)<br>
 
-For earch database the respective functions are devided according to the three tasks. Following that, th naming conventions utilize the prefixes *get*, *plot* and *download*
+For each database the respective functions are devided according to the three tasks. Following that, th naming conventions utilize the prefixes *get*, *plot* and *download*.
 
-### DB01: The MONALISA Database
+Additionally the repository contains a */Demo* folder with exemplary codes showing the basic functionalities of the MonalisR package.
+
+### 1. EURAC Databases
+
+Two environmental Databases hosted by EURAC research can be accessed with the MonalisR Package. Both are based on the [Sensor Observation Service (SOS)](http://www.opengeospatial.org/standards/sos) convention defined by the [Open Geospatial Consortium (OGC)](http://www.opengeospatial.org/) and contain environmental parameters from multiple fixed station across South Tyrol, Italy.
+
+#### 1.1. MONALISA
   
-The [MONALISA project](http://monalisasos.eurac.edu/sos/index) (**MON**itoring key environmental parameters in the **AL**pine environment **I**nvolving **S**cience, technology and **A**pplication)
-aims at the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. <br>
+The [MONALISA project](http://monalisasos.eurac.edu/sos/index) (**MON**itoring key environmental parameters in the **AL**pine environment **I**nvolving **S**cience, technology and **A**pplication) aims at the development of multi-scale monitoring approaches for key environmental parameters and production processes using innovative monitoring technologies and non-destructive methods in the application field of agriculture. <br>
 Within this project the [MONALISA Database](http://monalisasos.eurac.edu/sos/static/client/helgoland/index.html#/map) has been created to store and distribute the wide variety of environmental parameters collected. Mainly based on Postgres, the Database works with OGC standardized format and it is distributed based on 52noths SOS impementation.<br>
 
-### DB02: Meteorological Data
+#### 1.2. LSTER
 
-A second Platform to retrieve open Data for Science applications is now openly accessible via the [Open Data Portal](http://daten.buergernetz.bz.it/de/info) of the Autonomous Province of South Tyrol. On this Platform multiple meteorological variables have been opened to the public. A central API handles the request for each single Database stored. For now the package offers the possibilty to access one of these databases is addressable with this Package containing meteorological data of several fixed Stations continuously operated by the Meteorological Service of South Tyrol.<br>
+The [LTSER](http://lter.eurac.edu/de/) (**L**ong **T**erm **S**ocio **E**cological **R**esearch site) network located in the Matschertal alows scientists to monitor and record continuously the biotic and abiotic parameters as well as climate and land-use changes over a long-term period. <br>
+Within this project a database is in a test phase and therefore under active development. Until now, the access is only granted within the *ScientificNetworkSouthtyrol*. It is structurized in a similar way as the Monalisa Database. The complete LTSER Network from EURAC Research is located in the Matschertal/Val di Mazia.
+
+### 2: Open Data Portal South Tyrol
+
+A second platform to retrieve open data for scientific applications is now openly accessible via the [Open Data Portal](http://daten.buergernetz.bz.it/de/info) of the Autonomous Province of South Tyrol. On this platform multiple meteorological variables have been opened to the public. A central API handles the request for each single database stored. For now the package offers the possibilty to access one of these databases is addressable with this package containing meteorological data of several fixed Stations continuously operated by the Meteorological Service of South Tyrol.<br>
 
 
 #### Download the Package from Gitlab (development repository)
