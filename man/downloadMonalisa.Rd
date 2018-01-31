@@ -4,8 +4,8 @@
 \alias{downloadMonalisa}
 \title{Download MONALISA Data}
 \usage{
-downloadMonalisa(starturl = NULL, datestart, dateend, foi = "",
-  procedure = "", property = "", path = "", abbr = F, csv = F)
+downloadMonalisa(starturl = NULL, datestart, dateend, foi = NULL,
+  procedure = NULL, property = NULL, path = "", abbr = F, csv = F)
 }
 \arguments{
 \item{starturl}{URL, Path to the  MONLISA Database. 
@@ -15,11 +15,11 @@ If empty the adress of the EURAC Monalisa Database (as available on 30.01.2017) 
 
 \item{dateend}{date, End Date required "Y-m-d H:M" format.}
 
-\item{foi}{Character, Input for the FOI(s). If left empty the Input is made manually during process.}
+\item{foi}{Character, Input for the FOI. Multiple input possible. Read Notes for further information}
 
-\item{procedure}{Character, Input for the Procedure(s). If left empty the Input is made manually during process.}
+\item{procedure}{Character, Input for the Procedure. Multiple input possible. Read Notes for further information}
 
-\item{property}{Character, Input for the Property(ies). If left empty the Input is made manually during process.}
+\item{property}{Character, Input for the Property. Multiple input possible. Read Notes for further information}
 
 \item{path}{Character, Path for the Output of a RData File with the Respnse from the SOS Server. 
 If blank the Output is returned as an object in the R Environment.}
@@ -32,6 +32,12 @@ If TRUE the Abbreviate() function is applied.}
 \description{
 Core script for handling the data provided in the MONALISA Database
 collected and stored by EURAC Research. For more information please visit http://monalisasos.eurac.edu/sos/.
+}
+\note{
+For the Parameters **foi**, **procedures** and **property** the Input can be left empty. This is standard for the function. 
+In this case the respective items are listed and can then be selected one by one by digitizing the index number. 
+
+When the three parameters are left empty ("") every element is taken into consideration
 }
 \examples{
 

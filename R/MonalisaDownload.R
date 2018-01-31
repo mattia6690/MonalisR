@@ -5,14 +5,19 @@
 #' If empty the adress of the EURAC Monalisa Database (as available on 30.01.2017) will automatically be pasted.
 #' @param datestart date, Starting Date required in "Y-m-d H:M" format.
 #' @param dateend date, End Date required "Y-m-d H:M" format.
-#' @param foi Character, Input for the FOI(s). If left empty the Input is made manually during process.
-#' @param procedure Character, Input for the Procedure(s). If left empty the Input is made manually during process.
-#' @param property Character, Input for the Property(ies). If left empty the Input is made manually during process.
+#' @param foi Character, Input for the FOI. Multiple input possible. Read Notes for further information
+#' @param procedure Character, Input for the Procedure. Multiple input possible. Read Notes for further information
+#' @param property Character, Input for the Property. Multiple input possible. Read Notes for further information
 #' @param path Character, Path for the Output of a RData File with the Respnse from the SOS Server. 
 #' If blank the Output is returned as an object in the R Environment.
 #' @param abbr Boolean, Do you want the Properties to be automatically abbreviated in the Output? 
 #' If TRUE the Abbreviate() function is applied.
 #' @param csv Boolean, Additionally Save as csv?
+#' @note 
+#' For the Parameters foi, procedures and property the Input can be left empty. This is standard for the function. 
+#' In this case the respective items are listed and can then be selected one by one by digitizing the index number. 
+#' 
+#' When the three parameters are left empty ("") every element is taken into consideration
 #' @examples
 #' 
 #' s <- "2016-01-01 00:00"
@@ -32,7 +37,7 @@
 #' @importFrom utils write.csv
 #' @export
 
-downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", procedure = "", property = "",path = "", abbr=F, csv = F){
+downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, procedure = NULL, property = NULL,path = "", abbr=F, csv = F){
 
   # Handle Exceptions
   if((as.Date(dateend)-as.Date(datestart))>365) stop("The selected timespan has to be 1 Year or below")
@@ -46,47 +51,63 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", proced
   
   # FOIs
   if(length(foi)==1){
-    if(foi==""){
+    if(is.null(foi)){
       y<-x$foi %>% unique %>% as.data.frame %>% print
       z<-readline(prompt = "Please digit the ID of the desired FOI:      ")
       z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
       if(is.na(z)) stop("Please insert a FOI or insert it in the Function")
       foi1<-y[z,] %>% as.character
     }
-  } else {
+    if(foi=="") foi1<-x$foi %>% unique
+  }
+  
+  if(!is.null(foi) & foi!=""){
+    
     ie<-is.element(foi,as.character(x$foi))
-    if(!all(ie)) stop("One of the input FOIS were not found in the SOS Database")
+    if(!all(ie)) stop("One of the input FOIs were not found in the SOS Database")
     foi1 <- foi
-    }
+    
+  }
 
   # Observable Properties
-  if(length(property)==1 ){
-    if(property==""){y<- x$prop %>% unique %>% as.data.frame %>% print
-    z<- readline(prompt = "Please digit the ID of the desired Property:      ")
-    z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
-    if(is.na(z)) stop("Please insert a Property or insert it in the Function")
-    prop1<-y[z,] %>% as.character
+  if(length(property)==1){
+    if(is.null(property)){
+      y<- x$prop %>% unique %>% as.data.frame %>% print
+      z<- readline(prompt = "Please digit the ID of the desired Property:      ")
+      z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
+      if(is.na(z)) stop("Please insert a Property or insert it in the Function")
+      prop1<-y[z,] %>% as.character
     }
-  } else {
+    if(property=="") prop1<-x$prop %>% unique
+  }
+  
+  if(!is.null(property) & property!=""){
+    
     ie<-is.element(property,as.character(x$prop))
     if(!all(ie)) stop("One of the input OBSERVABLE PROPERTIES were not found in the SOS Database")
     prop1 <- property
-    }
-
+    
+  }
+  
   # Procedure
   if(length(procedure)==1){
-    if(procedure==""){
+    if(is.null(procedure)){
       y<-x$proc %>% unique %>% as.data.frame %>% print
       z<-readline(prompt = "Please digit the ID of the desired Procedure:      ")
       z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
       if(is.na(z)) stop("Please insert a Procedure or insert it in the Function")
       proc1<-y[z,] %>% as.character
     }
-  } else {
+    if(procedure=="") proc1<-x$proc %>% unique
+  } 
+  
+  if(!is.null(procedure) & procedure!=""){
+    
     ie<-is.element(procedure,as.character(x$proc))
     if(!all(ie)) stop("One of the input PROCEDURES were not found in the SOS Database")
     proc1 <- procedure
-    }
+    
+  }
   
   #Filter for Inputs
   au<-x %>% 
@@ -110,7 +131,7 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = "", proced
   date_s <- datestart %>% str_replace(":","") %>% str_replace(" ", "T")
   date_e <- dateend %>%  str_replace(":","") %>% str_replace(" ", "T")
   ifelse(abbr==T,pp<-abbreviate(au$prop),pp<-au$prop)
-  if (isTRUE(abbr)) myfile <- paste0(path, "/", "SOS_", au$foi, "_",au$proc,"_",pp,"_",date_s,"&", date_e)
+  myfile <- paste0(path, "/", "SOS_", au$foi, "_",au$proc,"_",pp,"_",date_s,"&", date_e)
   
   # Save the Files
   map2(myfile,response, function(i,j){
