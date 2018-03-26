@@ -34,7 +34,7 @@ Core script for handling the data provided in the MONALISA Database
 collected and stored by EURAC Research. For more information please visit http://monalisasos.eurac.edu/sos/.
 }
 \note{
-For the Parameters **foi**, **procedures** and **property** the Input can be left empty. This is standard for the function. 
+For the Parameters foi, procedures and property the Input can be left empty. This is standard for the function. 
 In this case the respective items are listed and can then be selected one by one by digitizing the index number. 
 
 When the three parameters are left empty ("") every element is taken into consideration
