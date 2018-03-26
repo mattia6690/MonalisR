@@ -37,7 +37,7 @@
 #' @importFrom utils write.csv
 #' @export
 
-downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, procedure = NULL, property = NULL,path = "", abbr=F, csv = F){
+downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, procedure = NULL, property = NULL, path = "", abbr=F, csv = F){
 
   # Handle Exceptions
   if((as.Date(dateend)-as.Date(datestart))>365) stop("The selected timespan has to be 1 Year or below")
@@ -50,16 +50,14 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
   dateend1<-dateend %>%  str_replace(.," ","T") %>% paste0(.,":00")
   
   # FOIs
-  if(length(foi)==1){
-    if(is.null(foi)){
-      y<-x$foi %>% unique %>% as.data.frame %>% print
-      z<-readline(prompt = "Please digit the ID of the desired FOI:      ")
-      z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
-      if(is.na(z)) stop("Please insert a FOI or insert it in the Function")
-      foi1<-y[z,] %>% as.character
-    }
-    if(foi=="") foi1<-x$foi %>% unique
+  if(is.null(foi)){
+    y<-x$foi %>% unique %>% as.data.frame %>% print
+    z<-readline(prompt = "Please digit the ID of the desired FOI:      ")
+    z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
+    if(is.na(z)) stop("Please insert a FOI or insert it in the Function")
+    foi1<-y[z,] %>% as.character
   }
+  if(foi=="") foi1<-x$foi %>% unique
   
   if(!is.null(foi) & foi!=""){
     
@@ -68,18 +66,17 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
     foi1 <- foi
     
   }
-
+  
   # Observable Properties
-  if(length(property)==1){
-    if(is.null(property)){
-      y<- x$prop %>% unique %>% as.data.frame %>% print
-      z<- readline(prompt = "Please digit the ID of the desired Property:      ")
-      z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
-      if(is.na(z)) stop("Please insert a Property or insert it in the Function")
-      prop1<-y[z,] %>% as.character
-    }
-    if(property=="") prop1<-x$prop %>% unique
+  if(is.null(property)){
+    y<- x$prop %>% unique %>% as.data.frame %>% print
+    z<- readline(prompt = "Please digit the ID of the desired Property:      ")
+    z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
+    if(is.na(z)) stop("Please insert a Property or insert it in the Function")
+    prop1<-y[z,] %>% as.character
   }
+  
+  if(property=="") prop1<-x$prop %>% unique
   
   if(!is.null(property) & property!=""){
     
@@ -90,16 +87,15 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
   }
   
   # Procedure
-  if(length(procedure)==1){
-    if(is.null(procedure)){
-      y<-x$proc %>% unique %>% as.data.frame %>% print
-      z<-readline(prompt = "Please digit the ID of the desired Procedure:      ")
-      z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
-      if(is.na(z)) stop("Please insert a Procedure or insert it in the Function")
-      proc1<-y[z,] %>% as.character
-    }
-    if(procedure=="") proc1<-x$proc %>% unique
-  } 
+  if(is.null(procedure)){
+    y<-x$proc %>% unique %>% as.data.frame %>% print
+    z<-readline(prompt = "Please digit the ID of the desired Procedure:      ")
+    z<- suppressWarnings(str_split(z,",") %>% unlist %>% as.numeric)
+    if(is.na(z)) stop("Please insert a Procedure or insert it in the Function")
+    proc1<-y[z,] %>% as.character
+  }
+ 
+  if(procedure=="") proc1<-x$proc %>% unique
   
   if(!is.null(procedure) & procedure!=""){
     
