@@ -1,0 +1,32 @@
+development:
+  mode: unreleased
+
+home:
+  links:
+  - text: Browse source code
+    href: http://github.com/mattia6690/MonalisR
+  - text: Comments and Issues are welcomed
+    href: https://github.com/mattia6690/MonalisR/issues
+
+navbar:
+  title: "MonalisR"
+  type: inverse
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "Tutorial"
+      menu:
+      - text: "Get Data"
+        href: articles/Environmental.html
+      - text: "Process Data"
+        href: articles/Meteo.html
+    - text: "Functions"
+      href: reference/index.html
+    - text: "Changelog"
+      href: articles/changelog.html
+
+  right:
+    - icon: fa-twitter fa-lg
+      href: http://www.twitter.com/mattia6690
+    - icon: fa-github fa-lg
+      href: http://www.github.com/mattia6690
