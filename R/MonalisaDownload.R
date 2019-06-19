@@ -99,37 +99,42 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
   #Filter for Inputs
   au<-x %>% 
     filter(foi %in% foi1) %>% 
-    filter(procedure %in% proc1) %>% 
-    filter(property %in% prop1)
+    filter(proc %in% proc1) %>% 
+    filter(prop %in% prop1) %>% 
+    as_tibble
   
   if(nrow(au)==0) stop("The Combination of FOI, Property and Procedure is not available")
   
   # Get the Response from the Server and Modify the List
   url1<-paste0(starturl,au$id,"/getData?timespan=",datestart1,dateend1)
-  response<-lapply(url1,function(i){
+  response1<-lapply(url1,function(i){
     u<-jsonlite::fromJSON(i)
     u<-do.call(cbind,u)
     u[,1]<-convertDate(u[,1])
     colnames(u)<-c("TimeStamp","Value")
+    u<-as_tibble(u)
     return(u)})
   
+  response<-mutate(au,Data=response1)
  
   #Create the Filenames
-  date_s <- datestart %>% str_replace(":","") %>% str_replace(" ", "T")
-  date_e <- dateend %>%  str_replace(":","") %>% str_replace(" ", "T")
-  ifelse(abbr==T,pp<-abbreviate(au$prop),pp<-au$prop)
-  myfile <- paste0(path, "/", "SOS_", au$foi, "_",au$proc,"_",pp,"_",date_s,"&", date_e)
-  
-  # Save the Files
-  map2(myfile,response, function(i,j){
+  if(path!=""){
     
-    if(path != ""){
+    date_s <- datestart %>% str_replace(":","") %>% str_replace(" ", "T")
+    date_e <- dateend %>%  str_replace(":","") %>% str_replace(" ", "T")
+    ifelse(abbr==T,pp<-abbreviate(au$prop),pp<-au$prop)
+    myfile <- paste0(path, "/", "SOS_", au$foi, "_",au$proc,"_",pp,"_",date_s,"&", date_e)
+    
+    # Save the Files
+    map2(myfile,response, function(i,j){
+      
       save(j, file = paste0(i,".RData"))
       if(csv == T){
         write.csv(j, paste0(i,".csv"))
       }
-    }
-  })
+    })
+  }
   
   return(response)
+
 }
