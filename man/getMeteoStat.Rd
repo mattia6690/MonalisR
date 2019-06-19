@@ -17,18 +17,3 @@ Retreive the meteorological stations within the borders of the autonomous provin
 this script dives the possibility to download the information of these stations as
 a table containing all relevant information as well as a spatial in form of an "sp" object.
 }
-\examples{
-
-s <- "2017-05-01 00:00"
-e <- "2017-06-01 00:00"
-a<-downloadMeteo(station_code = "27100MS",
-                 sensor_code = "LT",
-                 datestart = s,
-                 dateend = e)
-
-downloadMeteo(station_code = "27100MS",
-              sensor_code = "LT",
-              datestart = s,
-              dateend = e, path= path,csv=T)
-             
-}

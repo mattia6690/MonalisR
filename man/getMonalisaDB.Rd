@@ -17,13 +17,3 @@ Possible Subsets are "all","id","foi","procedure","property", "combined" and "ge
 This function accesses the Monalisa Database via the API in JSON format
 and returns a list of the featured parameters.
 }
-\examples{
-
-# Get the Information hosted in the MONALISA Database
-getMonalisaDB()
-getMonalisaDB(subset="property")
-getMonalisaDB(subset="station")
-
-# END
-
-}

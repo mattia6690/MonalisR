@@ -8,15 +8,10 @@ plotMonalisaGG(x, stat = "line")
 }
 \arguments{
 \item{x}{tbl, Table with the Value that should be implemented in the}
+
+\item{stat}{chr, You want to plot a "line" (default) or "boxplot"}
 }
 \description{
 Plot the MONALISA Requests either as Line or Boxplot. Both outputs
 are displayed as GGPlots
-}
-\examples{
-
-plotMonalisaGG(mnls_down[[1]],stat="boxplot")
-
-# END
-
 }

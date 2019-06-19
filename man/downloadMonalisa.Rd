@@ -5,7 +5,8 @@
 \title{Download MONALISA Data}
 \usage{
 downloadMonalisa(starturl = NULL, datestart, dateend, foi = NULL,
-  procedure = NULL, property = NULL, path = "", abbr = F, csv = F)
+  procedure = NULL, property = NULL, path = "", abbr = F,
+  csv = F)
 }
 \arguments{
 \item{starturl}{URL, Path to the  MONLISA Database. 
@@ -38,15 +39,4 @@ For the Parameters foi, procedures and property the Input can be left empty. Thi
 In this case the respective items are listed and can then be selected one by one by digitizing the index number. 
 
 When the three parameters are left empty ("") every element is taken into consideration
-}
-\examples{
-
-s <- "2016-01-01 00:00"
-e <- "2016-12-31 00:00"
-mnls_down<-downloadMonalisa(datestart = s,dateend = e)
-
-downloadMonalisa(datestart = s,dateend = e,path= "Tempdir",csv=T)
-
-#END
-
 }

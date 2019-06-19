@@ -4,8 +4,8 @@
 \alias{downloadMeteo}
 \title{Download Meteorological Data}
 \usage{
-downloadMeteo(dburl = NULL, station_code, sensor_code, datestart, dateend,
-  path = "", csv = FALSE)
+downloadMeteo(dburl = NULL, station_code, sensor_code, datestart,
+  dateend, path = "", csv = FALSE)
 }
 \arguments{
 \item{dburl}{URL; URL of the Province Database. If left empty the original API will be used}
