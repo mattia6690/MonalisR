@@ -1,4 +1,3 @@
-![](http://www.eurac.edu/Style%20Library/logoEURAC.jpg)<br><br>
 
 # MonalisR
 ## An R-package for handling open Databases for South Tyrol
@@ -15,7 +14,7 @@ Additionally the repository contains a */Demo* folder with exemplary codes showi
 
 ### Databases
 
-This package offers the possibility to access databases exposing JSON Files with [Sensor Observation Service (SOS)](http://www.opengeospatial.org/standards/sos) convention defined by the [Open Geospatial Consortium (OGC)](http://www.opengeospatial.org/) or by [CKAN APIs](https://ckan.org/portfolio/api/). We implemented the access to two different Databases as exposed by [EURAC Research](www.eurac.edu) and the [OpenDData Portal South Tytol](http://daten.buergernetz.bz.it/).
+This package offers the possibility to access databases exposing JSON Files with [Sensor Observation Service (SOS)](http://www.opengeospatial.org/standards/sos) convention defined by the [Open Geospatial Consortium (OGC)](http://www.opengeospatial.org/) or by [CKAN APIs](https://ckan.org/portfolio/api/). We implemented the access to two different Databases as exposed by [EURAC Research](www.eurac.edu) and the [OpenData Portal South Tytol](http://daten.buergernetz.bz.it/).
 Both Databases offer rich environamental and meteorological Databases across the province of South Tyrol.
 
 #### MONALISA
@@ -41,6 +40,7 @@ devtools::install_github("https://github.com/mattia6690/MonalisR")
 
 ### Contributors & Contact
 
-* [Mattia Rossi] (https://github.com/mattia6690)
-* [Daniel Frisinghelli] (https://gitlab.inf.unibz.it/Daniel.Frisinghelli)<br>
+[Mattia Rossi](https://github.com/mattia6690)  <br>
+[Daniel Frisinghelli](https://gitlab.inf.unibz.it/Daniel.Frisinghelli)  <br>
 
+![](http://www.eurac.edu/Style%20Library/logoEURAC.jpg)
