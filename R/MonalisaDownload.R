@@ -18,20 +18,11 @@
 #' In this case the respective items are listed and can then be selected one by one by digitizing the index number. 
 #' 
 #' When the three parameters are left empty ("") every element is taken into consideration
-#' @examples
-#' 
-#' s <- "2016-01-01 00:00"
-#' e <- "2016-12-31 00:00"
-#' mnls_down<-downloadMonalisa(datestart = s,dateend = e)
-#' 
-#' downloadMonalisa(datestart = s,dateend = e,path= "Tempdir",csv=T)
-#' 
-#' #END
 #' 
 #' @import dplyr
 #' @import stringr
-#' @import magrittr
 #' @import tibble
+#' @importFrom magrittr "%>%"
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr map_if map2
 #' @importFrom utils write.csv
@@ -108,8 +99,8 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
   #Filter for Inputs
   au<-x %>% 
     filter(foi %in% foi1) %>% 
-    filter(proc %in% proc1) %>% 
-    filter(prop %in% prop1)
+    filter(procedure %in% proc1) %>% 
+    filter(property %in% prop1)
   
   if(nrow(au)==0) stop("The Combination of FOI, Property and Procedure is not available")
   
@@ -142,83 +133,3 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
   
   return(response)
 }
-
-
-
-# 
-# # Save
-# if(path != ""){
-#   save(DAT, file = paste0(myfile,".RData"))
-#   if(csv == T){
-#     write.csv(DAT, paste0(myfile,".csv"))
-#   }
-# }
-# return(DAT)
-# # Get Timeseries
-# u<-xmlfile %>% select(contains("label"))
-# 
-# # Readline Option
-# u<-xmlfile %>% 
-#   do.call(cbind,.) %>% as.list %>% 
-#   do.call(cbind,.) %>% as.tibble  %>% 
-#   filter(station.properties.label==foi)
-# print(u)
-# r<-readline(prompt = "Please digit the ID of the desired Properties for your FOI:      ")
-# r<- strsplit(r,",") %>% unlist
-# 
-# # Error handling
-# a<-suppressWarnings(as.numeric(r))
-# if(any(is.na(a))) stop("Please Digit Numbers for the IDs")
-# 
-# # Get required TS
-# ID <-u[a,] %>% select(id) %>% as.matrix()
-# 
-# # for loop building requests depending on the number of user inputs
-# request<-list()
-# DAT <- list()
-# for(i in 1:length(ID)){
-#   
-#   url1<-paste0(starturl,ID[i],"/getData?timespan=")
-#   
-#   datestart1 <- datestart %>% str_replace(.," ","T") %>% paste0(.,":00%2F")
-#   dateend1<-dateend %>%  str_replace(.," ","T") %>% paste0(.,":00")
-#   
-#   # Request & Parsing
-#   request[i]<-paste0(url1,datestart1,dateend1)
-#   SOS_data <- jsonlite::fromJSON(request[[i]]) %>% do.call(cbind,.)
-#   SOS_data[,1] <- convertDate(SOS_data[,1])
-#   
-#   # Header definition
-#   property_spec <- u[a[i],] %>% select(label) %>% map_if(is.factor, as.character) %>% unlist %>%
-#     strsplit(.,"-") %>% unlist
-#   
-#   property <- property_spec[1]
-#   spec <- property_spec[2] %>% str_replace(.," ", "") %>% str_split(., "[:blank:][:upper:]") %>% unlist %>% .[1]
-#   colnames(SOS_data) <- c("Timestamp", paste0(property,"(",spec,")"))
-#   SOS_data$FOI<-rep(foi,times=nrow(SOS_data))
-#   
-#   # Append data to List
-#   DAT[[i]] <- SOS_data
-# }
-# 
-# # Output Infos
-# date_s <- datestart %>% str_replace(":","") %>% str_replace(" ", "T")
-# date_e <- dateend %>%  str_replace(":","") %>% str_replace(" ", "T")
-# myfile = paste0(path, "/", "SOS4R_", foi, "_", date_s, "&", date_e)
-# 
-# # Save
-# if(path != ""){
-#   save(DAT, file = paste0(myfile,".RData"))
-#   if(csv == T){
-#     write.csv(DAT, paste0(myfile,".csv"))
-#   }
-# }
-# return(DAT)
-# }
-# 
-# 
-# 
-# 
-# 
-# 
-# 

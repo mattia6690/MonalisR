@@ -17,19 +17,11 @@ setMonalisaURL<-function(db=NA){
 #' The url Paramater is needed until the timeseries path (e.g. ".../sos/api/v1/timeseries/")
 #' @param subset character; The subset of interest. If left empty the whole Data frame will be returned. 
 #' Possible Subsets are "all","id","foi","procedure","property", "combined" and "geom"
-#' @examples 
-#' 
-#' # Get the Information hosted in the MONALISA Database
-#' getMonalisaDB()
-#' getMonalisaDB(subset="property")
-#' getMonalisaDB(subset="station")
-#' 
-#' # END
-#' 
-#' @import magrittr
+#' @importFrom magrittr "%>%"
 #' @importFrom jsonlite fromJSON
 #' @importFrom stringr str_split
 #' @importFrom dplyr select
+#' @importFrom utils head tail
 #' @export
 
 getMonalisaDB<-function(url=NA,subset="all"){
@@ -37,7 +29,7 @@ getMonalisaDB<-function(url=NA,subset="all"){
   # Subset NA handling
   possibleSubsets<-c("all","foi","procedure","property","combined","geom")
   ie<-is.element(subset,possibleSubsets)
-  if(!isTRUE(ie)) break("The Subset is not available in the function")
+  if(!isTRUE(ie)) stop("The Subset is not available in the function")
   
   # Construct URL
   if(is.na(url)){
