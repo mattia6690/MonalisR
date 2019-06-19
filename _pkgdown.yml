@@ -16,10 +16,12 @@ navbar:
       href: index.html
     - text: "Tutorial"
       menu:
-      - text: "Get Data"
+      - text: "Environmental Data"
         href: articles/Environmental.html
-      - text: "Process Data"
+      - text: "Meteorological Data"
         href: articles/Meteo.html
+    - text: "Meteo Browser"
+      href: articles/MeteoBrowser.html
     - text: "Functions"
       href: reference/index.html
     - text: "Changelog"
