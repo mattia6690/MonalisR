@@ -8,10 +8,11 @@
 #' @param dateend string; End time for the download in "Ymd" Format
 #' @param path string; Specify the output path. If left empty only a object is returned
 #' @param csv boolean; output as csv?
-#' @import magrittr
 #' @import dplyr
 #' @import stringr
+#' @importFrom magrittr "%>%" 
 #' @importFrom jsonlite fromJSON
+#' @importFrom lubridate as_datetime
 #' @export
 
 downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, dateend, path = "", csv = FALSE){
@@ -35,8 +36,10 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
     
     DAT<- DAT %>% 
       add_column(rep(sensor_code,times=nrow(.)),.before=2) %>% 
-      add_column(rep(station_code,times=nrow(.)),.before=2)
-    colnames(DAT)<-c("TimeStamp","Station","Sensor","Value")
+      add_column(rep(station_code,times=nrow(.)),.before=2) %>% 
+      setNames(c("TimeStamp","Station","Sensor","Value")) %>% 
+      mutate(TimeStamp=as_datetime(TimeStamp)) %>% 
+      arrange(TimeStamp)
     
     if(path != ""){
       myfile=paste0(path,"/",station_code,"_",sensor_code,"_",dates[1],"_",dates[2])
