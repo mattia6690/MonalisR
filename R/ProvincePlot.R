@@ -10,7 +10,7 @@
 #' @import leaflet
 #' @import magrittr
 #' @importFrom rgeos gBuffer gDistance 
-#' @importFrom sp coordinates spTransform
+#' @importFrom sp coordinates CRS spTransform
 #' @export
 
 # Get a map with the Spatial Location of the Stations
