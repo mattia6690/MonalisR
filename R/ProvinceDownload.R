@@ -13,6 +13,7 @@
 #' @importFrom magrittr "%>%" 
 #' @importFrom jsonlite fromJSON
 #' @importFrom lubridate as_datetime
+#' @importFrom stats setNames
 #' @export
 
 downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, dateend, path = "", csv = FALSE){
@@ -51,3 +52,62 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
     return(DAT)
   }
 }
+
+#' @title Download Meteorological Data (v2)
+#' @description Function for accessing the Meteorological Data. This function will replace the
+#' Original Function in the next version. No save to CSV is possible anymore. On the other side
+#' it will be possible to speed up the actual processing times and to make multiple requests at once
+#' @param dburl URL; URL of the Province Database. If left empty the original API will be used
+#' @param station_code string; Station of Interest ("SCODE")
+#' @param sensor_code string; Abbreviation of the sensor of interest (e.g. "N" for Precipitation)
+#' @param datestart string; Starting time for the download in "Ymd" Format
+#' @param dateend string; End time for the download in "Ymd" Format
+#' @importFrom dplyr mutate select rename
+#' @importFrom stringr str_replace_all
+#' @importFrom glue glue
+#' @importFrom magrittr "%>%" extract
+#' @importFrom lubridate as_datetime
+#' @importFrom stats setNames
+#' @importFrom tidyr unnest
+#' @importFrom httr GET content
+#' @importFrom tibble as_tibble
+#' @importFrom purrr pmap_chr map_df
+#' @importFrom tidyselect everything
+#' @export
+
+downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, dateend){
+  
+  if(is.null(dburl)) dburl<- "http://daten.buergernetz.bz.it/services/meteo/v1/timeseries"
+  datestart1 <- convertDate(datestart, db="Meteo")
+  dateend1   <- convertDate(dateend, db="Meteo")
+  
+  dat<-expand.grid(station_code,sensor_code) %>% 
+    as_tibble() %>% 
+    setNames(c("SCODE","TYPE")) %>% 
+    mutate(Start=format(as.Date(datestart),format="%Y%m%d")) %>% 
+    mutate(End=format(as.Date(dateend),format="%Y%m%d")) %>% 
+    mutate(URL=pmap_chr(.,function(SCODE,TYPE,Start,End){
+      
+      a<-glue('{dburl}?station_code=
+              {SCODE}&output_format=JSON&sensor_code=
+              {TYPE}&date_from=
+              {Start}&date_to=
+              {End}')
+      
+    })) %>% 
+    mutate(Data= lapply(URL, function(x){
+      tryCatch({a<-map_df(content(GET(x)),magrittr::extract)},error=function(a){NA})
+      }))
+  
+  fmt<- dat %>% 
+    unnest() %>% 
+    mutate(Date=as_datetime(DATE)) %>% 
+    rename(Value=VALUE) %>% 
+    select(-c(URL,DATE)) %>% 
+    select(Date, everything())
+  
+  return(fmt)
+  
+}
+
+

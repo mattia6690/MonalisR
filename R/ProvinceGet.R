@@ -102,3 +102,34 @@ buffmeteo<-function(point,bufferW=5000,getBufferShp=F,dist=F){
   if(getBufferShp==T){return(buff1)}
   return(df)
 }
+
+#' @title Return Meteo Metainformation
+#' @description This function is a further development of both functions 
+#' `getMeteoStat` and `getMeteoSensor`. It unifies both information returning the complete range
+#' of information present in the Open Data Portal South Tyrol.
+#' @param url URL; URL of the Province Database. If left empty the original API will be used.
+#' @param spatial boolean; Output as Simple Feature (sf) Object?
+#' @importFrom magrittr extract
+#' @importFrom httr GET content
+#' @importFrom purrr map_df
+#' @importFrom sf st_as_sf
+#' @importFrom dplyr left_join
+#' @export
+getMeteoInfo<-function(url=NA,spatial=F){
+  
+  if(is.na(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/stations"
+  
+  u  <- content(GET(url))
+  ui <- map_df(u,magrittr::extract)
+  ret<- left_join(ui,getMeteoStat())
+  
+  if(isTRUE(spatial)){
+    
+    ret<-st_as_sf(ret2,coords = c("LONG","LAT"),crs=4326,na.fail = F)
+    
+  }
+  return(ret)
+}
+
+
+
