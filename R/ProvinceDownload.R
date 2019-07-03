@@ -8,11 +8,12 @@
 #' @param dateend string; End time for the download in "Ymd" Format
 #' @param path string; Specify the output path. If left empty only a object is returned
 #' @param csv boolean; output as csv?
-#' @import dplyr
-#' @import stringr
+#' @importFrom dplyr mutate select rename
+#' @importFrom stringr str_replace_all
 #' @importFrom magrittr "%>%" 
 #' @importFrom jsonlite fromJSON
 #' @importFrom lubridate as_datetime
+#' @importFrom sp coordinates CRS spTransform
 #' @importFrom stats setNames
 #' @export
 

@@ -5,9 +5,10 @@
 #' @param url URL; URL of the Province Database. If left empty the original API will be used.
 #' @param format string; digit "table" if the output should be a tibble or "spatial" for a spatial
 #' output as sp-object
-#' @import magrittr
+#' @importFrom magrittr extract
 #' @import tibble
 #' @importFrom jsonlite fromJSON
+#' @importFrom dplyr select_if
 #' @importFrom geojsonio geojson_read
 #' @export
 
@@ -16,13 +17,15 @@ getMeteoStat<- function(url=NA,format="table"){
   if(is.na(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/stations"
   if(format == "table"){
     
-    js1<-fromJSON(url)
-    js1<-js1$features$properties %>% as.tibble
+    js1<- content(GET(url))
+    js2<- map_df(js1,magrittr::extract)
+    js3<- select_if(js2, grepl("properties"))
     return(js1)
     
   } else if (format =="spatial") {
     
     js1<-geojson_read(paste0(url,".geojson"),method = "web",what = "sp")
+    js1 %>% select_if(grepl("properties", names(.)))
     return(js1)
     
   } 
@@ -36,7 +39,7 @@ getMeteoStat<- function(url=NA,format="table"){
 #' @param onlySensor logical; Sould only the available Sensors be returned?
 #' If false all the combination of SCODE and Sensor are returned as tibble
 #' @import tibble
-#' @import httr
+#' @importFrom httr GET content
 #' @importFrom jsonlite fromJSON
 #' @export
 
@@ -44,8 +47,8 @@ getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
   
   if(is.null(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/sensors"
   
-  u<-GET(url) %>% content
-  ui<-cbind(sapply(u, "[[", 1),sapply(u, "[[", 2)) %>% as.tibble
+  u<-content(GET(url))
+  ui<-cbind(sapply(u, "[[", 1),sapply(u, "[[", 2)) %>% as_tibble
   colnames(ui)<-c("SCODE","Sensor")
   
   if(!is.null(SCODE)) ui<-is.element(ui$SCODE,SCODE) %>% which(.==T) %>% ui[.,]
@@ -63,16 +66,16 @@ getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
 #' @param point SpatialPointDataFrame; Indicates the position of the Points
 #' which are examined together with the meteorological stations
 #' @param bufferW numeric; width of the Buffer in meters
-#' @param getBufferShp Boolean; return only the buffer(s)?
+#' @param getSHP Boolean; return only the buffer(s)?
 #' @param dist Boolean; shall the distances from the Points to the stations be added to
 #' the output?
-#' @import magrittr
+#' @importFrom magrittr "%>%" 
 #' @importFrom rgeos gBuffer gDistance 
 #' @importFrom sp coordinates CRS spTransform
 #' @importFrom raster projection
 #' @export
 
-buffmeteo<-function(point,bufferW=5000,getBufferShp=F,dist=F){
+buffmeteo<-function(point,bufferW=5000,getSHP=F,dist=F){
   
   sp  <- getMeteoStat(format="spatial")
   shp <- spTransform(point,CRS=CRS(projection(sp))) # Transform
@@ -99,7 +102,7 @@ buffmeteo<-function(point,bufferW=5000,getBufferShp=F,dist=F){
       
     }
   }
-  if(getBufferShp==T){return(buff1)}
+  if(getSHP==T){return(buff1)}
   return(df)
 }
 
