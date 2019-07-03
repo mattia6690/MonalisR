@@ -39,7 +39,7 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
       add_column(rep(sensor_code,times=nrow(.)),.before=2) %>% 
       add_column(rep(station_code,times=nrow(.)),.before=2) %>% 
       setNames(c("TimeStamp","Station","Sensor","Value")) %>% 
-      mutate(TimeStamp=as_datetime(TimeStamp)) %>% 
+      mutate(TimeStamp=as_datetime(TimeStamp,tzone = "Europe/Berlin")) %>% 
       arrange(TimeStamp)
     
     if(path != ""){
@@ -101,7 +101,7 @@ downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, datee
   
   fmt<- dat %>% 
     unnest() %>% 
-    mutate(Date=as_datetime(DATE)) %>% 
+    mutate(Date=as_datetime(DATE,tzone = "Europe/Berlin")) %>% 
     rename(Value=VALUE) %>% 
     select(-c(URL,DATE)) %>% 
     select(Date, everything())
