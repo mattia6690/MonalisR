@@ -64,7 +64,7 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
 #' @param sensor_code string; Abbreviation of the sensor of interest (e.g. "N" for Precipitation)
 #' @param datestart string; Starting time for the download in "Ymd" Format
 #' @param dateend string; End time for the download in "Ymd" Format
-#' @importFrom dplyr mutate select rename
+#' @importFrom dplyr mutate select rename arrange
 #' @importFrom magrittr "%>%" extract
 #' @importFrom lubridate as_datetime
 #' @importFrom stats setNames
