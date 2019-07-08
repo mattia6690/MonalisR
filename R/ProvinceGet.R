@@ -119,7 +119,7 @@ getMeteoInfo<-function(format="table"){
   
   ret<- merge(stat.prop,sens.prop,by="SCODE")
   
-  if(format == "table")   ret<-js.prop
+  if(format == "table")   ret<-ret
   if(format == "spatial") ret<-st_as_sf(ret,coords=c("LONG","LAT"),crs=4326,na.fail = F)
   
   return(ret)
