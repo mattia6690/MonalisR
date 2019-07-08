@@ -20,9 +20,10 @@
 downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, dateend, path = "", csv = FALSE){
   
   if(is.null(dburl)) dburl<- "http://daten.buergernetz.bz.it/services/meteo/v1/timeseries"
-  datestart1 <- datestart %>% convertDate(.,db="Meteo")
-  dateend1<-    dateend %>%  convertDate(.,db="Meteo")
-  dates<-c(datestart %>% as.Date,dateend %>% as.Date) %>% str_replace_all(.,"-","")
+  datestart1 <- convertDate(datestart,db="Meteo")
+  dateend1<-    convertDate(dateend,db="Meteo")
+  dates1<- c(as.Date(datestart),as.Date(dateend))
+  dates <- str_replace_all(dates1,"-","")
   
   # Build the Request String
   req1<-dburl %>% 
@@ -64,7 +65,6 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
 #' @param datestart string; Starting time for the download in "Ymd" Format
 #' @param dateend string; End time for the download in "Ymd" Format
 #' @importFrom dplyr mutate select rename
-#' @importFrom stringr str_replace_all
 #' @importFrom glue glue
 #' @importFrom magrittr "%>%" extract
 #' @importFrom lubridate as_datetime
@@ -74,6 +74,7 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
 #' @importFrom tibble as_tibble
 #' @importFrom purrr pmap_chr map_df
 #' @importFrom tidyselect everything
+#' @importFrom base expand.grid
 #' @export
 
 downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, dateend){
