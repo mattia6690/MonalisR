@@ -83,15 +83,15 @@ downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, datee
   
   dat<-expand.grid(station_code,sensor_code) %>% 
     as_tibble() %>% 
-    setNames(c("SCODE","Type")) %>% 
+    setNames(c("SCODE","Sensor")) %>% 
     mutate(Start=format(as.Date(datestart),format="%Y%m%d")) %>% 
     mutate(End=format(as.Date(dateend),format="%Y%m%d")) %>% 
-    mutate(URL=pmap_chr(.,function(SCODE,Type,Start,End){
+    mutate(URL=pmap_chr(.,function(SCODE,Sensor,Start,End){
       
       dburl %>% 
         paste0(.,"?station_code=",SCODE) %>% 
         paste0(.,"&output_format=JSON") %>% 
-        paste0(.,"&sensor_code=",Type) %>% 
+        paste0(.,"&sensor_code=",Sensor) %>% 
         paste0(.,"&date_from=",Start) %>% 
         paste0(.,"&date_to=",End)
       
@@ -104,11 +104,11 @@ downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, datee
   if(nrow(fmt)>0){
     
     fmt2<- fmt %>% 
-      mutate(Date=as_datetime(DATE)) %>% 
+      mutate(TimeStamp=as_datetime(DATE)) %>% 
       rename(Value=VALUE) %>% 
       select(-c(URL,DATE)) %>% 
-      select(Date, everything()) %>% 
-      arrange(Type,Date)
+      select(TimeStamp, everything()) %>% 
+      arrange(Sensor,TimeStamp)
     
     return(fmt2)
   } else {stop("None of the URLS is valid. Please modify the Input parameters")}
