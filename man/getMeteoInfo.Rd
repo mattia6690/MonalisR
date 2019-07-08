@@ -2,9 +2,9 @@
 % Please edit documentation in R/ProvinceGet.R
 \name{getMeteoInfo}
 \alias{getMeteoInfo}
-\title{Return Meteo Metainformation}
+\title{Return Meteo South Tyrol Metainformation}
 \usage{
-getMeteoInfo(url = NA, spatial = F)
+getMeteoInfo(format = "table")
 }
 \arguments{
 \item{url}{URL; URL of the Province Database. If left empty the original API will be used.}
