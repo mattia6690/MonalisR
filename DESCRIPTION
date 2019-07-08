@@ -34,7 +34,6 @@ Imports:
     sp,
     sf,
     stats,
-    glue,
     tidyr,
     tidyselect
 Encoding: UTF-8
