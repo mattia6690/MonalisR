@@ -65,12 +65,11 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
 #' @param datestart string; Starting time for the download in "Ymd" Format
 #' @param dateend string; End time for the download in "Ymd" Format
 #' @importFrom dplyr mutate select rename
-#' @importFrom glue glue
 #' @importFrom magrittr "%>%" extract
 #' @importFrom lubridate as_datetime
 #' @importFrom stats setNames
 #' @importFrom tidyr unnest
-#' @importFrom httr GET content
+#' @importFrom jsonlite fromJSON
 #' @importFrom tibble as_tibble
 #' @importFrom purrr pmap_chr map_df
 #' @importFrom tidyselect everything
@@ -89,26 +88,29 @@ downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, datee
     mutate(End=format(as.Date(dateend),format="%Y%m%d")) %>% 
     mutate(URL=pmap_chr(.,function(SCODE,TYPE,Start,End){
       
-      a<-glue('{dburl}?station_code=
-              {SCODE}&output_format=JSON&sensor_code=
-              {TYPE}&date_from=
-              {Start}&date_to=
-              {End}')
+      dburl %>% 
+        paste0(.,"?station_code=",SCODE) %>% 
+        paste0(.,"&output_format=JSON") %>% 
+        paste0(.,"&sensor_code=",TYPE) %>% 
+        paste0(.,"&date_from=",Start) %>% 
+        paste0(.,"&date_to=",End)
       
     })) %>% 
     mutate(Data= lapply(URL, function(x){
-      tryCatch({a<-map_df(content(GET(x)),magrittr::extract)},error=function(a){NA})
+      tryCatch({as_tibble(fromJSON(x))},error=function(e){NA})
       }))
   
-  fmt<- dat %>% 
-    unnest() %>% 
-    mutate(Date=as_datetime(DATE)) %>% 
-    rename(Value=VALUE) %>% 
-    select(-c(URL,DATE)) %>% 
-    select(Date, everything())
-  
-  return(fmt)
-  
+  fmt<- unnest(dat)
+  if(nrow(fmt)>0){
+    
+    fmt2<- fmt %>% 
+      mutate(Date=as_datetime(DATE)) %>% 
+      rename(Value=VALUE) %>% 
+      select(-c(URL,DATE)) %>% 
+      select(Date, everything())
+    
+    return(fmt2)
+  } else {stop("None of the URLS is valid. Please modify the Input parameters")}
 }
 
 
