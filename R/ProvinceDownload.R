@@ -86,7 +86,7 @@ downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, datee
     setNames(c("SCODE","Type")) %>% 
     mutate(Start=format(as.Date(datestart),format="%Y%m%d")) %>% 
     mutate(End=format(as.Date(dateend),format="%Y%m%d")) %>% 
-    mutate(URL=pmap_chr(.,function(SCODE,TYPE,Start,End){
+    mutate(URL=pmap_chr(.,function(SCODE,Type,Start,End){
       
       dburl %>% 
         paste0(.,"?station_code=",SCODE) %>% 
