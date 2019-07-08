@@ -7,9 +7,8 @@
 getMeteoInfo(format = "table")
 }
 \arguments{
-\item{url}{URL; URL of the Province Database. If left empty the original API will be used.}
-
-\item{spatial}{boolean; Output as Simple Feature (sf) Object?}
+\item{format}{string; digit "table" if the output should be a Dataframe or "spatial" for a spatial
+output as sf-object}
 }
 \description{
 This function is a further development of both functions 

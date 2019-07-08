@@ -106,11 +106,10 @@ buffmeteo<-function(point,bufferW=5000,getSHP=F,dist=F){
 #' @description This function is a further development of both functions 
 #' `getMeteoStat` and `getMeteoSensor`. It unifies both information returning the complete range
 #' of information present in the Open Data Portal South Tyrol.
-#' @param url URL; URL of the Province Database. If left empty the original API will be used.
-#' @param spatial boolean; Output as Simple Feature (sf) Object?
+#' @param format string; digit "table" if the output should be a Dataframe or "spatial" for a spatial
+#' output as sf-object
 #' @importFrom jsonlite fromJSON
 #' @importFrom sf st_as_sf
-#' @importFrom base merge
 #' @export
 getMeteoInfo<-function(format="table"){
   

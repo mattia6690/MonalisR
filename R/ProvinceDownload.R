@@ -74,7 +74,6 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
 #' @importFrom tibble as_tibble
 #' @importFrom purrr pmap_chr map_df
 #' @importFrom tidyselect everything
-#' @importFrom base expand.grid
 #' @export
 
 downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, dateend){
