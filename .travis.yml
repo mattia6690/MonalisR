@@ -1,0 +1,18 @@
+language: R
+dist: trusty
+cache: packages
+
+r:
+ -  release
+ -  devel
+ -  oldrel
+
+sudo: required
+
+apt_packages:
+  - libgdal-dev
+  - libproj-dev
+  - libudunits2-dev
+  - libhdf5-serial-dev
+  - libnetcdf-dev
+  - netcdf-bin
