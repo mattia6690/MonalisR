@@ -16,3 +16,4 @@ apt_packages:
   - libhdf5-serial-dev
   - libnetcdf-dev
   - netcdf-bin
+  - libv8-dev
