@@ -18,3 +18,4 @@ apt_packages:
   - libnetcdf-dev
   - netcdf-bin
   - libv8-dev
+  - libjq-dev
