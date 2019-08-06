@@ -19,3 +19,4 @@ apt_packages:
   - netcdf-bin
   - libv8-dev
   - libjq-dev
+  - libprotobuf-dev
