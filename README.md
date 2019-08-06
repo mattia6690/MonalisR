@@ -1,5 +1,5 @@
 
-# MonalisR <a href="https://mattia6690.github.io/MonalisR"><img align="right" src="man/figures/logo.png" width="25"></a>
+# MonalisR <a href="https://mattia6690.github.io/MonalisR"><img align="right" src="man/figures/logo.png" width="25%"></a>
 ## An R-package for handling open Databases for South Tyrol
 
 This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The databases are all openly accessible via central APIs and structurized storages. This makes them addressable and accessible via R. For all the databases core functionalities were implemented simplifying
