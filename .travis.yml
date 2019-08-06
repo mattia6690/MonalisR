@@ -12,6 +12,7 @@ sudo: required
 apt_packages:
   - libgdal-dev
   - libproj-dev
+  - libgeos-dev
   - libudunits2-dev
   - libhdf5-serial-dev
   - libnetcdf-dev
