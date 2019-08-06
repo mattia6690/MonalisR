@@ -41,7 +41,7 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
       add_column(rep(sensor_code,times=nrow(.)),.before=2) %>% 
       add_column(rep(station_code,times=nrow(.)),.before=2) %>% 
       setNames(c("TimeStamp","Station","Sensor","Value")) %>% 
-      mutate(TimeStamp=as_datetime(TimeStamp)) %>% 
+      mutate(TimeStamp=as_datetime(TimeStamp,tzone = "Europe/Berlin")) %>% 
       arrange(TimeStamp)
     
     if(path != ""){
@@ -100,11 +100,12 @@ downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, datee
       tryCatch({as_tibble(fromJSON(x))},error=function(e){NA})
       }))
   
+
   fmt<- unnest(dat)
   if(nrow(fmt)>0){
     
     fmt2<- fmt %>% 
-      mutate(TimeStamp=as_datetime(DATE)) %>% 
+      mutate(TimeStamp=as_datetime(DATE,tzone = "Europe/Berlin")) %>% 
       rename(Value=VALUE) %>% 
       select(-c(URL,DATE)) %>% 
       select(TimeStamp, everything()) %>% 
@@ -112,6 +113,7 @@ downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, datee
     
     return(fmt2)
   } else {stop("None of the URLS is valid. Please modify the Input parameters")}
+  
 }
 
 
