@@ -4,7 +4,7 @@
 \alias{buffmeteo}
 \title{Buffer intersect with meteorological Stations}
 \usage{
-buffmeteo(point, bufferW = 5000, getBufferShp = F, dist = F)
+buffmeteo(point, bufferW = 5000, getSHP = F, dist = F)
 }
 \arguments{
 \item{point}{SpatialPointDataFrame; Indicates the position of the Points
@@ -12,7 +12,7 @@ which are examined together with the meteorological stations}
 
 \item{bufferW}{numeric; width of the Buffer in meters}
 
-\item{getBufferShp}{Boolean; return only the buffer(s)?}
+\item{getSHP}{Boolean; return only the buffer(s)?}
 
 \item{dist}{Boolean; shall the distances from the Points to the stations be added to
 the output?}

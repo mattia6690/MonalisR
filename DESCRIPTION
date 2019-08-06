@@ -1,6 +1,6 @@
 Package: MonalisR
 Title: Handling openly accessibla Databasey by SOS and CKAN standarts
-Version: 0.1.2
+Version: 0.1.4
 Authors@R: c(
   person("Mattia", "Rossi", email="mattia.rossi@eurac.edu", role=c("aut", "cre")),
   person("Daniel", "Frisinghelli", role="aut"))
@@ -34,7 +34,6 @@ Imports:
     sp,
     sf,
     stats,
-    glue,
     tidyr,
     tidyselect
 Encoding: UTF-8

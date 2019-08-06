@@ -7,7 +7,7 @@
 CheckGaps(x)
 }
 \arguments{
-\item{x}{a MONALISA Server Response}
+\item{x}{A MONALISA Server Response}
 }
 \description{
 Analysis Function for the Server response of a MONALISA Request.

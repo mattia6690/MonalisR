@@ -3,7 +3,6 @@
 .Rhistory
 .RData
 .Ruserdata
-.Rbuildignore
 /old
 /inst
 /vignettes

@@ -18,10 +18,10 @@
 #' In this case the respective items are listed and can then be selected one by one by digitizing the index number. 
 #' 
 #' When the three parameters are left empty ("") every element is taken into consideration
-#' 
-#' @import dplyr
-#' @import stringr
-#' @import tibble
+#'
+#' @importFrom dplyr filter mutate
+#' @importFrom stringr str_replace str_split
+#' @importFrom tibble as_tibble
 #' @importFrom magrittr "%>%"
 #' @importFrom jsonlite fromJSON
 #' @importFrom purrr map_if map2
@@ -38,7 +38,7 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
   
   # Dates
   datestart1 <- datestart %>% str_replace(.," ","T") %>% paste0(.,":00%2F")
-  dateend1<-dateend %>%  str_replace(.," ","T") %>% paste0(.,":00")
+  dateend1   <- dateend   %>% str_replace(.," ","T") %>% paste0(.,":00")
   
   # FOIs
   if(is.null(foi)){
