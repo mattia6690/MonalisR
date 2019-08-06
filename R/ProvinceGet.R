@@ -5,8 +5,6 @@
 #' @param url URL; URL of the Province Database. If left empty the original API will be used.
 #' @param format string; digit "table" if the output should be a tibble or "spatial" for a spatial
 #' output as sp-object
-#' @import magrittr
-#' @import tibble
 #' @importFrom jsonlite fromJSON
 #' @importFrom geojsonio geojson_read
 #' @export
@@ -17,7 +15,7 @@ getMeteoStat<- function(url=NA,format="table"){
   if(format == "table"){
     
     js1<-fromJSON(url)
-    js1<-js1$features$properties %>% as.tibble
+    js1<-js1$features$properties
     return(js1)
     
   } else if (format =="spatial") {
@@ -35,21 +33,21 @@ getMeteoStat<- function(url=NA,format="table"){
 #' empty all the possible combinations of SCODE and Sensors will be returned
 #' @param onlySensor logical; Sould only the available Sensors be returned?
 #' If false all the combination of SCODE and Sensor are returned as tibble
-#' @import tibble
-#' @import httr
-#' @importFrom jsonlite fromJSON
+#' @importFrom tibble as_tibble
+#' @importFrom httr content GET
 #' @export
 
 getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
   
   if(is.null(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/sensors"
   
-  u<-GET(url) %>% content
-  ui<-cbind(sapply(u, "[[", 1),sapply(u, "[[", 2)) %>% as.tibble
+  u<-content(GET(url))
+  ui<-cbind(sapply(u, "[[", 1),sapply(u, "[[", 2))
+  ui<-as_tibble(ui)
   colnames(ui)<-c("SCODE","Sensor")
   
-  if(!is.null(SCODE)) ui<-is.element(ui$SCODE,SCODE) %>% which(.==T) %>% ui[.,]
-  if(onlySensor==T)   ui<-ui$Sensor %>% unique
+  if(!is.null(SCODE)) ui<-ui[which(is.element(ui$SCODE,SCODE)==T),]
+  if(onlySensor==T)   ui<-unique(ui$Sensor)
   
   return(ui)
   
@@ -63,22 +61,23 @@ getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
 #' @param point SpatialPointDataFrame; Indicates the position of the Points
 #' which are examined together with the meteorological stations
 #' @param bufferW numeric; width of the Buffer in meters
-#' @param getBufferShp Boolean; return only the buffer(s)?
+#' @param getSHP Boolean; return only the buffer(s)?
 #' @param dist Boolean; shall the distances from the Points to the stations be added to
 #' the output?
-#' @import magrittr
+#' @importFrom magrittr "%>%" 
 #' @importFrom rgeos gBuffer gDistance 
-#' @importFrom sp coordinates CRS spTransform
+#' @importFrom sp coordinates CRS spTransform over
+#' @importFrom rgeos gBuffer
 #' @importFrom raster projection
 #' @export
 
-buffmeteo<-function(point,bufferW=5000,getBufferShp=F,dist=F){
+buffmeteo<-function(point,bufferW=5000,getSHP=F,dist=F){
   
   sp  <- getMeteoStat(format="spatial")
   shp <- spTransform(point,CRS=CRS(projection(sp))) # Transform
   
-  buff1<-rgeos::gBuffer(shp,byid = T,width=bufferW) # Compute
-  ov<-sp::over(sp,buff1,returnList = T)
+  buff1<-gBuffer(shp,byid = T,width=bufferW) # Compute
+  ov<-over(sp,buff1,returnList = T)
   names(ov)<-sp$SCODE
   dc<-do.call(rbind,ov)
   
@@ -99,35 +98,30 @@ buffmeteo<-function(point,bufferW=5000,getBufferShp=F,dist=F){
       
     }
   }
-  if(getBufferShp==T){return(buff1)}
+  if(getSHP==T){return(buff1)}
   return(df)
 }
 
-#' @title Return Meteo Metainformation
+#' @title Return Meteo South Tyrol Metainformation
 #' @description This function is a further development of both functions 
 #' `getMeteoStat` and `getMeteoSensor`. It unifies both information returning the complete range
 #' of information present in the Open Data Portal South Tyrol.
-#' @param url URL; URL of the Province Database. If left empty the original API will be used.
-#' @param spatial boolean; Output as Simple Feature (sf) Object?
-#' @importFrom magrittr extract
-#' @importFrom httr GET content
-#' @importFrom purrr map_df
+#' @param format string; digit "table" if the output should be a Dataframe or "spatial" for a spatial
+#' output as sf-object
+#' @importFrom jsonlite fromJSON
 #' @importFrom sf st_as_sf
-#' @importFrom dplyr left_join
 #' @export
-getMeteoInfo<-function(url=NA,spatial=F){
+getMeteoInfo<-function(format="table"){
   
-  if(is.na(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/stations"
+  stat      <-fromJSON("http://daten.buergernetz.bz.it/services/meteo/v1/stations")
+  stat.prop <-stat$features$properties
+  sens.prop <-fromJSON("http://daten.buergernetz.bz.it/services/meteo/v1/sensors")
   
-  u  <- content(GET(url))
-  ui <- map_df(u,magrittr::extract)
-  ret<- left_join(ui,getMeteoStat())
+  ret<- merge(stat.prop,sens.prop,by="SCODE")
   
-  if(isTRUE(spatial)){
-    
-    ret<-st_as_sf(ret2,coords = c("LONG","LAT"),crs=4326,na.fail = F)
-    
-  }
+  if(format == "table")   ret<-ret
+  if(format == "spatial") ret<-st_as_sf(ret,coords=c("LONG","LAT"),crs=4326,na.fail = F)
+  
   return(ret)
 }
 

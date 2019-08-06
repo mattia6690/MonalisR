@@ -2,14 +2,13 @@
 % Please edit documentation in R/ProvinceGet.R
 \name{getMeteoInfo}
 \alias{getMeteoInfo}
-\title{Return Meteo Metainformation}
+\title{Return Meteo South Tyrol Metainformation}
 \usage{
-getMeteoInfo(url = NA, spatial = F)
+getMeteoInfo(format = "table")
 }
 \arguments{
-\item{url}{URL; URL of the Province Database. If left empty the original API will be used.}
-
-\item{spatial}{boolean; Output as Simple Feature (sf) Object?}
+\item{format}{string; digit "table" if the output should be a Dataframe or "spatial" for a spatial
+output as sf-object}
 }
 \description{
 This function is a further development of both functions 

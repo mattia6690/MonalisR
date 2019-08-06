@@ -7,9 +7,9 @@
 #' @param addPoints Points; Additional Points on the Leaflet Map. If left empty no Points will be added
 #' @param addBuff Boolean; add a Buffer to the additional points
 #' @param widthBuff numeric; The width of a buffer in case it is added
-#' @import leaflet
-#' @import magrittr
-#' @importFrom rgeos gBuffer gDistance 
+#' @importFrom leaflet leaflet awesomeIcons addTiles addAwesomeMarkers addPolygons
+#' @importFrom magrittr "%>%"
+#' @importFrom rgeos gBuffer
 #' @importFrom sp coordinates CRS spTransform
 #' @export
 
@@ -20,15 +20,18 @@ plotMeteoLeaflet<- function(stations=NULL,addPoints=NULL,addBuff=F,widthBuff=100
   c1<-awesomeIcons(icon = 'ios-close',iconColor = 'black',library = 'ion',markerColor = "blue")
   c2<-awesomeIcons(icon = 'ios-close',iconColor = 'black',library = 'ion',markerColor = "red")
   
-  m<-leaflet() %>% addTiles() %>% addAwesomeMarkers(
-    lng=stations$LONG %>% as.character %>% as.numeric,
-    lat=stations$LAT %>% as.character %>% as.numeric,
-    icon=c1,
-    popup=paste("Code:",stations$SCODE,"<br>",
+  m<-leaflet() %>% 
+    addTiles() %>% 
+    addAwesomeMarkers(
+      lng=stations$LONG %>% as.character %>% as.numeric,
+      lat=stations$LAT %>% as.character %>% as.numeric,
+      icon=c1,
+      popup=paste("Code:",stations$SCODE,"<br>",
                 "Name GER:",stations$NAME_D,"<br>",
                 "Name ITA:",stations$NAME_I,"<br>",
                 "Altitude:",stations$ALT)
-  )
+      )
+  
   if(!is.null(addPoints)) {
     coords<-coordinates(addPoints)
     m<-m %>% addAwesomeMarkers(coords[,1], coords[,2],icon=c2)

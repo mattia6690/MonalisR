@@ -1,5 +1,8 @@
 
-# MonalisR
+# MonalisR <a href="https://mattia6690.github.io/MonalisR"><img align="right" src="man/figures/logo.png" width="25%"></a>
+[![Build Status](https://travis-ci.org/mattia6690/MonalisR.svg?branch=master)](https://travis-ci.org/mattia6690/MonalisR) 
+[![CRAN](http://www.r-pkg.org/badges/version/MonalisR)](https://cran.r-project.org/package=MonalisR)
+[![Lifecycle:stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 ## An R-package for handling open Databases for South Tyrol
 
 This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The databases are all openly accessible via central APIs and structurized storages. This makes them addressable and accessible via R. For all the databases core functionalities were implemented simplifying
