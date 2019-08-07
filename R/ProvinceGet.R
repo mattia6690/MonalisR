@@ -1,4 +1,4 @@
-#' @title Retreive meteorological Stations
+#' @title Retrieve meteorological Stations
 #' @description Retreive the meteorological stations within the borders of the autonomous province of South Tyrol, Italy
 #' this script dives the possibility to download the information of these stations as
 #' a table containing all relevant information as well as a spatial in form of an "sp" object.
@@ -54,15 +54,15 @@ getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
 }
 
 #' @title Buffer intersect with meteorological Stations
-#' @description This function add the possibility to create a Buffer around a Spatial point
+#' @description This function add the possibility to create a buffer around a spatial point
 #' and spatially examine it together with the meteorological stations of the province
 #' South Tyrol. The return can either be the nearest station or a list of the distances
 #' from he point to all station within the buffered area.
-#' @param point SpatialPointDataFrame; Indicates the position of the Points
+#' @param point SpatialPointDataFrame; Indicates the position of the points
 #' which are examined together with the meteorological stations
-#' @param bufferW numeric; width of the Buffer in meters
+#' @param bufferW numeric; width of the buffer in meters
 #' @param getSHP Boolean; return only the buffer(s)?
-#' @param dist Boolean; shall the distances from the Points to the stations be added to
+#' @param dist Boolean; shall the distances from the points to the stations be added to
 #' the output?
 #' @importFrom magrittr "%>%" 
 #' @importFrom rgeos gBuffer gDistance 
@@ -103,9 +103,9 @@ buffmeteo<-function(point,bufferW=5000,getSHP=F,dist=F){
 }
 
 #' @title Return Meteo South Tyrol Metainformation
-#' @description This function is a further development of both functions 
-#' `getMeteoStat` and `getMeteoSensor`. It unifies both information returning the complete range
-#' of information present in the Open Data Portal South Tyrol.
+#' @description This function returns all the metainformation of the meteorological Data from
+#' the OpenData Portal South Tyrol, It is a combination of both `getMeteoStat` and `getMeteoSensor`. 
+#' It unifies both information returning the complete range of information present in the Open Data Portal South Tyrol.
 #' @param format string; digit "table" if the output should be a Dataframe or "spatial" for a spatial
 #' output as sf-object
 #' @importFrom jsonlite fromJSON
