@@ -11,6 +11,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Environmental Data">
 <meta property="og:description" content="">
+<meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MonalisR</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2</span>
       </span>
     </div>
 
@@ -109,12 +110,15 @@
 <h2 class="hasAnchor">
 <a href="#connect-to-monalisr" class="anchor"></a>Connect to MonalisR</h2>
 <p>First of all we have to load the MonalisR package</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(MonalisR)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(MonalisR)</a></code></pre></div>
+<pre><code>## Registered S3 method overwritten by 'geojsonio':
+##   method         from 
+##   print.location dplyr</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tibble)</a></code></pre></div>
 <p>Then we have to Set the path to the Database we want to access. If this field is left empty the URL is automatically set to the MONALISA Database</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Set the Path to the SOS JSON</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">SOS&lt;-<span class="kw"><a href="../reference/setMonalisaURL.html">setMonalisaURL</a></span>() <span class="co"># The Default Path for this Function is already the MONALISA Database</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">SOS</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Set the Path to the SOS JSON</span></a>
+<a class="sourceLine" id="cb4-2" title="2">SOS&lt;-<span class="kw"><a href="../reference/setMonalisaURL.html">setMonalisaURL</a></span>() <span class="co"># The Default Path for this Function is already the MONALISA Database</span></a>
+<a class="sourceLine" id="cb4-3" title="3">SOS</a></code></pre></div>
 <pre><code>## [1] "http://monalisasos.eurac.edu/sos/api/v1/timeseries/"</code></pre>
 </div>
 <div id="explore-the-database" class="section level2">
@@ -124,9 +128,9 @@
 <ol style="list-style-type: decimal">
 <li>First of all we can extract the complete dataset from the Database. This is the most commonly used approach to get a broad overview available data within the database</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">mnls_all&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"all"</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">mnls_all&lt;-<span class="kw">as_tibble</span>(mnls_all)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(mnls_all)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">mnls_all&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"all"</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2">mnls_all&lt;-<span class="kw"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(mnls_all)</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(mnls_all)</a></code></pre></div>
 <pre><code>## # A tibble: 353 x 4
 ##    id    label uom   station$propert~ $$label $geometry$coord~ $$type $type
 ##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;   &lt;list&gt;           &lt;chr&gt;  &lt;chr&gt;
@@ -144,22 +148,22 @@
 <ol start="2" style="list-style-type: decimal">
 <li>We can extract only the FOIs, Procedures and Properties together with the central ID of each data entry</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Get the list of FOIs</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">mnls_foi&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"foi"</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(mnls_foi)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Get the list of FOIs</span></a>
+<a class="sourceLine" id="cb8-2" title="2">mnls_foi&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"foi"</span>)</a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(mnls_foi)</a></code></pre></div>
 <pre><code>##  chr [1:31] "LaimburgProvince" "Algund2" "Girlan1Lamm" ...</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># Get the list of properties</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">mnls_props&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"property"</span>)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(mnls_props)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Get the list of properties</span></a>
+<a class="sourceLine" id="cb10-2" title="2">mnls_props&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"property"</span>)</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(mnls_props)</a></code></pre></div>
 <pre><code>##  chr [1:76] "Air Humidity - 10 minute average" ...</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># Get the list of procedures</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">mnls_proc&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"procedure"</span>)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(mnls_proc)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Get the list of procedures</span></a>
+<a class="sourceLine" id="cb12-2" title="2">mnls_proc&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"procedure"</span>)</a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(mnls_proc)</a></code></pre></div>
 <pre><code>##  chr [1:74] "MeteoSensors_LaimburgProvince" "MeteoSensors_Algund2" ...</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co"># Get a combined list of available DOI, PRocedures and Propertoes by ID</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">mnls_comb&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"combined"</span>)</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">mnls_comb&lt;-<span class="kw">as_tibble</span>(mnls_comb)</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(mnls_comb)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># Get a combined list of available DOI, PRocedures and Propertoes by ID</span></a>
+<a class="sourceLine" id="cb14-2" title="2">mnls_comb&lt;-<span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"combined"</span>)</a>
+<a class="sourceLine" id="cb14-3" title="3">mnls_comb&lt;-<span class="kw"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(mnls_comb)</a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(mnls_comb)</a></code></pre></div>
 <pre><code>## # A tibble: 353 x 4
 ##    id    foi                 proc                       prop               
 ##    &lt;chr&gt; &lt;chr&gt;               &lt;chr&gt;                      &lt;chr&gt;              
@@ -177,9 +181,9 @@
 <ol start="3" style="list-style-type: decimal">
 <li>We can also limit ourselves to interrogate the geometry of the stations available in the database</li>
 </ol>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">mnls_geom &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"geom"</span>) </a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">mnls_geom &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(mnls_geom)</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(mnls_geom)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">mnls_geom &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getMonalisaDB.html">getMonalisaDB</a></span>(<span class="dt">url=</span>SOS,<span class="dt">subset =</span> <span class="st">"geom"</span>) </a>
+<a class="sourceLine" id="cb16-2" title="2">mnls_geom &lt;-<span class="st"> </span><span class="kw"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span>(mnls_geom)</a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(mnls_geom)</a></code></pre></div>
 <pre><code>## # A tibble: 31 x 3
 ##    FOI                            LAT       LON      
 ##    &lt;chr&gt;                          &lt;chr&gt;     &lt;chr&gt;    
@@ -199,32 +203,32 @@
 <h2 class="hasAnchor">
 <a href="#download" class="anchor"></a>Download</h2>
 <p>Now if we want to download the data we can access all of it by specifying the entries we can see with the prior functions to the <code>downloadMonalisa</code> function:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># Download</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">foi1  &lt;-<span class="st">"domef1500"</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">proc1 &lt;-<span class="st">""</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4">prop1 &lt;-<span class="st">"Normalized Difference Vegetation Index - average"</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">s &lt;-<span class="st"> "2016-01-01 00:00"</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">e &lt;-<span class="st"> "2016-12-31 00:00"</span></a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb16-8" data-line-number="8">down&lt;-<span class="kw"><a href="../reference/downloadMonalisa.html">downloadMonalisa</a></span>(<span class="dt">starturl=</span>SOS,<span class="dt">datestart=</span>s,<span class="dt">dateend=</span>e,<span class="dt">foi=</span>foi1,<span class="dt">procedure=</span>proc1,<span class="dt">property=</span>prop1)</a>
-<a class="sourceLine" id="cb16-9" data-line-number="9">down</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Download</span></a>
+<a class="sourceLine" id="cb18-2" title="2">foi1  &lt;-<span class="st">"domef1500"</span></a>
+<a class="sourceLine" id="cb18-3" title="3">proc1 &lt;-<span class="st">""</span></a>
+<a class="sourceLine" id="cb18-4" title="4">prop1 &lt;-<span class="st">"Normalized Difference Vegetation Index - average"</span></a>
+<a class="sourceLine" id="cb18-5" title="5">s &lt;-<span class="st"> "2016-01-01 00:00"</span></a>
+<a class="sourceLine" id="cb18-6" title="6">e &lt;-<span class="st"> "2016-12-31 00:00"</span></a>
+<a class="sourceLine" id="cb18-7" title="7"></a>
+<a class="sourceLine" id="cb18-8" title="8">down&lt;-<span class="kw"><a href="../reference/downloadMonalisa.html">downloadMonalisa</a></span>(<span class="dt">starturl=</span>SOS,<span class="dt">datestart=</span>s,<span class="dt">dateend=</span>e,<span class="dt">foi=</span>foi1,<span class="dt">procedure=</span>proc1,<span class="dt">property=</span>prop1)</a>
+<a class="sourceLine" id="cb18-9" title="9">down</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 5
 ##   id    foi     proc                 prop                      Data        
 ##   &lt;fct&gt; &lt;fct&gt;   &lt;fct&gt;                &lt;fct&gt;                     &lt;list&gt;      
 ## 1 1877  domef1~ SpectralReflectance~ Normalized Difference Ve~ &lt;tibble [17~</code></pre>
 <p>The data is stored in “nested tibbles”. One row contains a set of Lists. Use the <code><a href="https://tidyr.tidyverse.org/reference/unnest.html">tidyr::unnest</a></code> function to enhance the dimensionality and to visualize the complete dataset</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"tidyr"</span>)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">dat1&lt;-<span class="kw">unnest</span>(down)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"tidyr"</span>)</a>
+<a class="sourceLine" id="cb20-2" title="2">dat1&lt;-<span class="kw">unnest</span>(down)</a></code></pre></div>
 </div>
 <div id="plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plot" class="anchor"></a>Plot</h2>
 <p>For the leaflet graphic we created a simple interface visualizing</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="../reference/plotMonalisaLeaflet.html">plotMonalisaLeaflet</a></span>()</a></code></pre></div>
-<div id="htmlwidget-a5ec9a04d04da3e1b5f3" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-a5ec9a04d04da3e1b5f3">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[46.382457,46.685781,46.455895,46.501757,46.616553,46.560132,46.304704,46.541054,46.540983,46.329177,46.50162,46.354752,46.401002,46.532809,47.0376,46.803719,46.745151,46.686143,46.397216,46.548473,46.349533,47.034616,46.8053,46.807061,46.719803,46.754093,46.749472,46.459242,46.389589,46.478847,46.378497],[11.288711,11.123873,11.279533,11.280283,11.151788,11.205704,11.262795,11.228543,11.228615,11.244507,11.250478,11.275313,11.454211,11.63097,12.102023,12.272832,10.788845,10.579881,11.446483,11.606701,11.448064,12.091857,12.270516,12.272403,10.861876,10.779229,10.789663,11.245367,11.263367,11.269641,11.290324],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Station:  LaimburgProvince","Station:  Algund2","Station:  Girlan1Lamm","Station:  Gries2NeufeldGreifensteinerweg","Station:  Lana6","Station:  Nals2OberauCarli","Station:  NeumarktStiermoos","Station:  Terlan3","Station:  Terlan3a","Station:  Tramin13er","Station:  Unterrain2FuchsangerEppan","Station:  KalternEddyCov","Station:  domef1500","Station:  domef2000","Station:  nemef1500","Station:  nemef2000","Station:  vimef2000","Station:  vimes1500","Station:  domes1500","Station:  domes2000","Station:  dopas2000","Station:  nemes1500","Station:  nemes2000","Station:  nepas2000","Station:  vimef1500","Station:  vimes2000","Station:  vipas2000","Station:  Eppanberg","Station:  Kaltern","Station:  StPaulsFeld","Station:  Laimburg"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[46.304704,47.0376],"lng":[10.579881,12.272832]}},"evals":[],"jsHooks":[]}</script><p>Simple graphics with GGplots are also easy to produce. The data structure is already in the format proposed within the tidyverse</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"ggplot2"</span>)</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">ggplot</span>(dat1,<span class="kw">aes</span>(TimeStamp,Value,<span class="dt">col=</span>prop,<span class="dt">lty=</span>proc))<span class="op">+</span><span class="kw">geom_line</span>()<span class="op">+</span><span class="kw">geom_point</span>()<span class="op">+</span><span class="kw">facet_wrap</span>(.<span class="op">~</span>foi)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw"><a href="../reference/plotMonalisaLeaflet.html">plotMonalisaLeaflet</a></span>()</a></code></pre></div>
+<div id="htmlwidget-a0d67a6123645f388d26" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a0d67a6123645f388d26">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[46.382457,46.685781,46.455895,46.501757,46.616553,46.560132,46.304704,46.541054,46.540983,46.329177,46.50162,46.354752,46.401002,46.532809,47.0376,46.803719,46.745151,46.686143,46.397216,46.548473,46.349533,47.034616,46.8053,46.807061,46.719803,46.754093,46.749472,46.459242,46.389589,46.478847,46.378497],[11.288711,11.123873,11.279533,11.280283,11.151788,11.205704,11.262795,11.228543,11.228615,11.244507,11.250478,11.275313,11.454211,11.63097,12.102023,12.272832,10.788845,10.579881,11.446483,11.606701,11.448064,12.091857,12.270516,12.272403,10.861876,10.779229,10.789663,11.245367,11.263367,11.269641,11.290324],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Station:  LaimburgProvince","Station:  Algund2","Station:  Girlan1Lamm","Station:  Gries2NeufeldGreifensteinerweg","Station:  Lana6","Station:  Nals2OberauCarli","Station:  NeumarktStiermoos","Station:  Terlan3","Station:  Terlan3a","Station:  Tramin13er","Station:  Unterrain2FuchsangerEppan","Station:  KalternEddyCov","Station:  domef1500","Station:  domef2000","Station:  nemef1500","Station:  nemef2000","Station:  vimef2000","Station:  vimes1500","Station:  domes1500","Station:  domes2000","Station:  dopas2000","Station:  nemes1500","Station:  nemes2000","Station:  nepas2000","Station:  vimef1500","Station:  vimes2000","Station:  vipas2000","Station:  Eppanberg","Station:  Kaltern","Station:  StPaulsFeld","Station:  Laimburg"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[46.304704,47.0376],"lng":[10.579881,12.272832]}},"evals":[],"jsHooks":[]}</script><p>Simple graphics with GGplots are also easy to produce. The data structure is already in the format proposed within the tidyverse</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"ggplot2"</span>)</a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">ggplot</span>(dat1,<span class="kw">aes</span>(TimeStamp,Value,<span class="dt">col=</span>prop,<span class="dt">lty=</span>proc))<span class="op">+</span><span class="kw">geom_line</span>()<span class="op">+</span><span class="kw">geom_point</span>()<span class="op">+</span><span class="kw">facet_wrap</span>(.<span class="op">~</span>foi)</a></code></pre></div>
 <p><img src="Environmental_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
   </div>
