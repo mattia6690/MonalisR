@@ -11,7 +11,7 @@ getMeteoInfo(format = "table")
 output as sf-object}
 }
 \description{
-This function is a further development of both functions 
-`getMeteoStat` and `getMeteoSensor`. It unifies both information returning the complete range
-of information present in the Open Data Portal South Tyrol.
+This function returns all the metainformation of the meteorological Data from
+the OpenData Portal South Tyrol, It is a combination of both `getMeteoStat` and `getMeteoSensor`. 
+It unifies both information returning the complete range of information present in the Open Data Portal South Tyrol.
 }

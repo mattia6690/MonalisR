@@ -7,18 +7,18 @@
 buffmeteo(point, bufferW = 5000, getSHP = F, dist = F)
 }
 \arguments{
-\item{point}{SpatialPointDataFrame; Indicates the position of the Points
+\item{point}{SpatialPointDataFrame; Indicates the position of the points
 which are examined together with the meteorological stations}
 
-\item{bufferW}{numeric; width of the Buffer in meters}
+\item{bufferW}{numeric; width of the buffer in meters}
 
 \item{getSHP}{Boolean; return only the buffer(s)?}
 
-\item{dist}{Boolean; shall the distances from the Points to the stations be added to
+\item{dist}{Boolean; shall the distances from the points to the stations be added to
 the output?}
 }
 \description{
-This function add the possibility to create a Buffer around a Spatial point
+This function add the possibility to create a buffer around a spatial point
 and spatially examine it together with the meteorological stations of the province
 South Tyrol. The return can either be the nearest station or a list of the distances
 from he point to all station within the buffered area.

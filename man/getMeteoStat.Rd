@@ -2,7 +2,7 @@
 % Please edit documentation in R/ProvinceGet.R
 \name{getMeteoStat}
 \alias{getMeteoStat}
-\title{Retreive meteorological Stations}
+\title{Retrieve meteorological Stations}
 \usage{
 getMeteoStat(url = NA, format = "table")
 }

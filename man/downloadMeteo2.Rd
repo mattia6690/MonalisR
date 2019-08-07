@@ -10,7 +10,7 @@ downloadMeteo2(dburl = NULL, station_code, sensor_code, datestart,
 \arguments{
 \item{dburl}{URL; URL of the Province Database. If left empty the original API will be used}
 
-\item{station_code}{string; Station of Interest ("SCODE")}
+\item{station_code}{string; Code of the station ("SCODE")}
 
 \item{sensor_code}{string; Abbreviation of the sensor of interest (e.g. "N" for Precipitation)}
 
