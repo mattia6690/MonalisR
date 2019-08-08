@@ -2,7 +2,7 @@
 % Please edit documentation in R/ProvinceDownload.R
 \name{downloadMeteo2}
 \alias{downloadMeteo2}
-\title{Download Meteorological Data (v2)}
+\title{Bulk download Meteorological Data (v2)}
 \usage{
 downloadMeteo2(dburl = NULL, station_code, sensor_code, datestart,
   dateend)

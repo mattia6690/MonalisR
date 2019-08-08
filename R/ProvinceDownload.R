@@ -1,6 +1,6 @@
-#' @title Download Meteorological Data
+#' @title Download single Meteorological Data
 #' @description Function for downloading the meteorological data provided by the meteorological
-#' service of South Tyrol
+#' service of South Tyrol. NO multiple stations download. For that please use `downloadMeteo2`
 #' @param dburl URL; URL of the province database. If left empty the standard API will be used
 #' @param station_code string; Code of the station ("SCODE")
 #' @param sensor_code string; Abbreviation of the sensor of interest (e.g. "N" for Precipitation)
@@ -55,7 +55,7 @@ downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, date
   }
 }
 
-#' @title Download Meteorological Data (v2)
+#' @title Bulk download Meteorological Data (v2)
 #' @description Function for accessing the Meteorological Data. This function will replace the
 #' Original Function in the next version. No save to CSV is possible anymore. On the other side
 #' it will be possible to speed up the actual processing times and to make multiple requests at once

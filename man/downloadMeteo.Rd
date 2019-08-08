@@ -2,7 +2,7 @@
 % Please edit documentation in R/ProvinceDownload.R
 \name{downloadMeteo}
 \alias{downloadMeteo}
-\title{Download Meteorological Data}
+\title{Download single Meteorological Data}
 \usage{
 downloadMeteo(dburl = NULL, station_code, sensor_code, datestart,
   dateend, path = "", csv = FALSE)
@@ -24,5 +24,5 @@ downloadMeteo(dburl = NULL, station_code, sensor_code, datestart,
 }
 \description{
 Function for downloading the meteorological data provided by the meteorological
-service of South Tyrol
+service of South Tyrol. NO multiple stations download. For that please use `downloadMeteo2`
 }
