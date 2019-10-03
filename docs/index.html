@@ -5,20 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Handling openly accessibla Databasey by SOS and CKAN standarts • MonalisR</title>
+<title>Handling openly accessible Databases with SOS and CKAN standards • MonalisR</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Handling openly accessibla Databasey by SOS and CKAN standarts">
-<meta property="og:description" content="This package provides several possibilities to access    
-    and handle data from the SOS Dabase MONALISA.    
-    This database has been formed as a joint cooperation of       
-    EURAC Research's institutes of Earth Observation and    
-    Alpine Environment together with the    
-    Free University of Bolzano and Research Centre Laimburg.    
-    The Database contains several ground sampling datasets for    
-    agricultural and alpine parameters and    
-    is fully accessable with the hereby provided package.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Handling openly accessible Databases with SOS and CKAN standards">
+<meta property="og:description" content="This package offers the possibility to access databases exposing JSON Files with Sensor Observation Service (SOS) convention defined by the Open Geospatial Consortium (OGC) or by CKAN APIs. 
+    We implemented the access to two different Databases as exposed by EURAC Research and the OpenData Portal South Tytol. 
+    Both Databases offer rich environmental and meteorological Databases across the province of South Tyrol.">
 <meta property="og:image" content="/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -108,19 +102,19 @@
 <div id="an-r-package-for-handling-open-databases-for-south-tyrol" class="section level2">
 <h2 class="hasAnchor">
 <a href="#an-r-package-for-handling-open-databases-for-south-tyrol" class="anchor"></a>An R-package for handling open Databases for South Tyrol</h2>
-<p>This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The databases are all openly accessible via central APIs and structurized storages. This makes them addressable and accessible via R. For all the databases core functionalities were implemented simplifying</p>
+<p>This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The databases are all openly accessible via central APIs and structured storage. This makes them addressable and accessible via R. For all the databases core functionalities were implemented simplifying</p>
 <ul>
 <li>data access and exploration</li>
 <li>spatial and data plots of locations (or stations) of interest</li>
-<li>download and storage of the desired dataset(s)<br>
+<li>download and storage of the desired data set(s)<br>
 </li>
 </ul>
-<p>For each database the respective functions are devided according to the three tasks. Following that, th naming conventions utilize the prefixes <em>get</em>, <em>plot</em> and <em>download</em>.</p>
+<p>For each database the respective functions are divided according to the three tasks. Following that, the naming conventions utilize the prefixes <em>get</em>, <em>plot</em> and <em>download</em>.</p>
 <p>Additionally the repository contains a <em>/Demo</em> folder with exemplary codes showing the basic functionalities of the MonalisR package.</p>
 <div id="databases" class="section level3">
 <h3 class="hasAnchor">
 <a href="#databases" class="anchor"></a>Databases</h3>
-<p>This package offers the possibility to access databases exposing JSON Files with <a href="http://www.opengeospatial.org/standards/sos">Sensor Observation Service (SOS)</a> convention defined by the <a href="http://www.opengeospatial.org/">Open Geospatial Consortium (OGC)</a> or by <a href="https://ckan.org/portfolio/api/">CKAN APIs</a>. We implemented the access to two different Databases as exposed by <a href="www.eurac.edu">EURAC Research</a> and the <a href="http://daten.buergernetz.bz.it/">OpenData Portal South Tytol</a>. Both Databases offer rich environamental and meteorological Databases across the province of South Tyrol.</p>
+<p>This package offers the possibility to access databases exposing JSON Files with <a href="http://www.opengeospatial.org/standards/sos">Sensor Observation Service (SOS)</a> convention defined by the <a href="http://www.opengeospatial.org/">Open Geospatial Consortium (OGC)</a> or by <a href="https://ckan.org/portfolio/api/">CKAN APIs</a>. We implemented the access to two different Databases as exposed by <a href="www.eurac.edu">EURAC Research</a> and the <a href="http://daten.buergernetz.bz.it/">OpenData Portal South Tytol</a>. Both Databases offer rich environmental and meteorological Databases across the province of South Tyrol.</p>
 <div id="monalisa" class="section level4">
 <h4 class="hasAnchor">
 <a href="#monalisa" class="anchor"></a>MONALISA</h4>
@@ -129,7 +123,7 @@
 <div id="open-data-portal-south-tyrol---meteo-data" class="section level4">
 <h4 class="hasAnchor">
 <a href="#open-data-portal-south-tyrol---meteo-data" class="anchor"></a>Open Data Portal South Tyrol - Meteo Data</h4>
-<p>A second platform to retrieve open data for scientific applications is now openly accessible via the <a href="http://daten.buergernetz.bz.it/de/info">Open Data Portal</a> of the Autonomous Province of South Tyrol. On this platform multiple meteorological variables have been opened to the public. A central API handles the request for each single database stored. For now the package offers the possibilty to access one of these databases is addressable with this package containing meteorological data of several fixed Stations continuously operated by the Meteorological Service of South Tyrol.<br></p>
+<p>A second platform to retrieve open data for scientific applications is now openly accessible via the <a href="http://daten.buergernetz.bz.it/de/info">Open Data Portal</a> of the Autonomous Province of South Tyrol. On this platform multiple meteorological variables have been opened to the public. A central API handles the request for each single database stored. For now the package offers the possibility to access one of these databases is addressable with this package containing meteorological data of several fixed Stations continuously operated by the Meteorological Service of South Tyrol.<br></p>
 </div>
 </div>
 <div id="download-the-package" class="section level3">
