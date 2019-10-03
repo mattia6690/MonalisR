@@ -1,21 +1,14 @@
 Package: MonalisR
-Title: Handling openly accessibla Databasey by SOS and CKAN standarts
+Title: Handling openly accessible Databases with SOS and CKAN standards
 Version: 0.2
 Authors@R: c(
   person("Mattia", "Rossi", email="mattia.rossi@eurac.edu", role=c("aut", "cre")),
   person("Daniel", "Frisinghelli", role="aut"))
-Description: This package provides several possibilities to access    
-    and handle data from the SOS Dabase MONALISA.    
-    This database has been formed as a joint cooperation of       
-    EURAC Research's institutes of Earth Observation and    
-    Alpine Environment together with the    
-    Free University of Bolzano and Research Centre Laimburg.    
-    The Database contains several ground sampling datasets for    
-    agricultural and alpine parameters and    
-    is fully accessable with the hereby provided package.
+Description: This package offers the possibility to access databases exposing JSON Files with Sensor Observation Service (SOS) convention defined by the Open Geospatial Consortium (OGC) or by CKAN APIs. 
+    We implemented the access to two different Databases as exposed by EURAC Research and the OpenData Portal South Tytol. 
+    Both Databases offer rich environmental and meteorological Databases across the province of South Tyrol.
 License: GPL-3 | file LICENSE
 Imports:
-    httr,
     raster,
     jsonlite,
     purrr,
@@ -28,7 +21,6 @@ Imports:
     lubridate,
     gridExtra,
     leaflet,
-    geojsonio,
     rgdal,
     rgeos,
     sp,

@@ -5,20 +5,20 @@
 [![Lifecycle:stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 ## An R-package for handling open Databases for South Tyrol
 
-This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The databases are all openly accessible via central APIs and structurized storages. This makes them addressable and accessible via R. For all the databases core functionalities were implemented simplifying
+This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The databases are all openly accessible via central APIs and structured storage. This makes them addressable and accessible via R. For all the databases core functionalities were implemented simplifying
 
 * data access and exploration
 * spatial and data plots of locations (or stations) of interest
-* download and storage of the desired dataset(s)<br>
+* download and storage of the desired data set(s)<br>
 
-For each database the respective functions are devided according to the three tasks. Following that, th naming conventions utilize the prefixes *get*, *plot* and *download*.
+For each database the respective functions are divided according to the three tasks. Following that, the naming conventions utilize the prefixes *get*, *plot* and *download*.
 
 Additionally the repository contains a */Demo* folder with exemplary codes showing the basic functionalities of the MonalisR package.
 
 ### Databases
 
 This package offers the possibility to access databases exposing JSON Files with [Sensor Observation Service (SOS)](http://www.opengeospatial.org/standards/sos) convention defined by the [Open Geospatial Consortium (OGC)](http://www.opengeospatial.org/) or by [CKAN APIs](https://ckan.org/portfolio/api/). We implemented the access to two different Databases as exposed by [EURAC Research](www.eurac.edu) and the [OpenData Portal South Tytol](http://daten.buergernetz.bz.it/).
-Both Databases offer rich environamental and meteorological Databases across the province of South Tyrol.
+Both Databases offer rich environmental and meteorological Databases across the province of South Tyrol.
 
 #### MONALISA
   
@@ -27,7 +27,7 @@ Within this project the [MONALISA Database](http://monalisasos.eurac.edu/sos/sta
 
 #### Open Data Portal South Tyrol - Meteo Data
 
-A second platform to retrieve open data for scientific applications is now openly accessible via the [Open Data Portal](http://daten.buergernetz.bz.it/de/info) of the Autonomous Province of South Tyrol. On this platform multiple meteorological variables have been opened to the public. A central API handles the request for each single database stored. For now the package offers the possibilty to access one of these databases is addressable with this package containing meteorological data of several fixed Stations continuously operated by the Meteorological Service of South Tyrol.<br>
+A second platform to retrieve open data for scientific applications is now openly accessible via the [Open Data Portal](http://daten.buergernetz.bz.it/de/info) of the Autonomous Province of South Tyrol. On this platform multiple meteorological variables have been opened to the public. A central API handles the request for each single database stored. For now the package offers the possibility to access one of these databases is addressable with this package containing meteorological data of several fixed Stations continuously operated by the Meteorological Service of South Tyrol.<br>
 
 
 ### Download the Package

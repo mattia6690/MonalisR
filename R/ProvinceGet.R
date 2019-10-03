@@ -1,56 +1,25 @@
-#' @title Retrieve meteorological Stations
-#' @description Retreive the meteorological stations within the borders of the autonomous province of South Tyrol, Italy
-#' this script dives the possibility to download the information of these stations as
-#' a table containing all relevant information as well as a spatial in form of an "sp" object.
-#' @param url URL; URL of the Province Database. If left empty the original API will be used.
-#' @param format string; digit "table" if the output should be a tibble or "spatial" for a spatial
-#' output as sp-object
+#' @title Return Meteo South Tyrol Metainformation
+#' @description This function returns all the metainformation of the meteorological Data from
+#' the OpenData Portal South Tyrol, It is a combination of both former functions `getMeteoStat` and `getMeteoSensor`. 
+#' It unifies both information returning the complete range of information present in the Open Data Portal South Tyrol.
+#' @param format string; digit "table" if the output should be a Dataframe or "spatial" for a spatial
+#' output as sf-object
 #' @importFrom jsonlite fromJSON
-#' @importFrom geojsonio geojson_read
+#' @importFrom sf st_as_sf
 #' @export
 
-getMeteoStat<- function(url=NA,format="table"){
+getMeteoInfo<-function(format="table"){
   
-  if(is.na(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/stations"
-  if(format == "table"){
-    
-    js1<-fromJSON(url)
-    js1<-js1$features$properties
-    return(js1)
-    
-  } else if (format =="spatial") {
-    
-    js1<-geojson_read(paste0(url,".geojson"),method = "web",what = "sp")
-    return(js1)
-    
-  } 
-}
-
-#' @title List all the properties for one or multiple stations
-#' @description Returns a list af all the sensors and datasets available at one station.
-#' @param url URL; URL of the Province Database. If left empty the original API will be used.
-#' @param SCODE string; Station Code of one or multiple Stations. If this field is left
-#' empty all the possible combinations of SCODE and Sensors will be returned
-#' @param onlySensor logical; Sould only the available Sensors be returned?
-#' If false all the combination of SCODE and Sensor are returned as tibble
-#' @importFrom tibble as_tibble
-#' @importFrom httr content GET
-#' @export
-
-getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
+  stat      <-fromJSON("http://daten.buergernetz.bz.it/services/meteo/v1/stations")
+  stat.prop <-stat$features$properties
+  sens.prop <-fromJSON("http://daten.buergernetz.bz.it/services/meteo/v1/sensors")
   
-  if(is.null(url)) url<-"http://daten.buergernetz.bz.it/services/meteo/v1/sensors"
+  ret<- merge(stat.prop,sens.prop,by="SCODE")
   
-  u<-content(GET(url))
-  ui<-cbind(sapply(u, "[[", 1),sapply(u, "[[", 2))
-  ui<-as_tibble(ui)
-  colnames(ui)<-c("SCODE","Sensor")
+  if(format == "table")   ret<-ret
+  if(format == "spatial") ret<-st_as_sf(ret,coords=c("LONG","LAT"),crs=4326,na.fail = F)
   
-  if(!is.null(SCODE)) ui<-ui[which(is.element(ui$SCODE,SCODE)==T),]
-  if(onlySensor==T)   ui<-unique(ui$Sensor)
-  
-  return(ui)
-  
+  return(ret)
 }
 
 #' @title Buffer intersect with meteorological Stations
@@ -73,7 +42,7 @@ getMeteoSensor<-function(url=NULL,SCODE=NULL,onlySensor=F){
 
 buffmeteo<-function(point,bufferW=5000,getSHP=F,dist=F){
   
-  sp  <- getMeteoStat(format="spatial")
+  sp  <- getMeteoInfo(format="spatial")
   shp <- spTransform(point,CRS=CRS(projection(sp))) # Transform
   
   buff1<-gBuffer(shp,byid = T,width=bufferW) # Compute
@@ -102,28 +71,6 @@ buffmeteo<-function(point,bufferW=5000,getSHP=F,dist=F){
   return(df)
 }
 
-#' @title Return Meteo South Tyrol Metainformation
-#' @description This function returns all the metainformation of the meteorological Data from
-#' the OpenData Portal South Tyrol, It is a combination of both `getMeteoStat` and `getMeteoSensor`. 
-#' It unifies both information returning the complete range of information present in the Open Data Portal South Tyrol.
-#' @param format string; digit "table" if the output should be a Dataframe or "spatial" for a spatial
-#' output as sf-object
-#' @importFrom jsonlite fromJSON
-#' @importFrom sf st_as_sf
-#' @export
-getMeteoInfo<-function(format="table"){
-  
-  stat      <-fromJSON("http://daten.buergernetz.bz.it/services/meteo/v1/stations")
-  stat.prop <-stat$features$properties
-  sens.prop <-fromJSON("http://daten.buergernetz.bz.it/services/meteo/v1/sensors")
-  
-  ret<- merge(stat.prop,sens.prop,by="SCODE")
-  
-  if(format == "table")   ret<-ret
-  if(format == "spatial") ret<-st_as_sf(ret,coords=c("LONG","LAT"),crs=4326,na.fail = F)
-  
-  return(ret)
-}
 
 
 

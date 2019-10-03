@@ -37,7 +37,7 @@ plotMeteoLeaflet<- function(stations=NULL,addPoints=NULL,addBuff=F,widthBuff=100
     m<-m %>% addAwesomeMarkers(coords[,1], coords[,2],icon=c2)
   }
   if(addBuff==T) {
-    ref <- getMeteoStat(format="spatial")
+    ref <- getMeteoInfo(format="spatial")
     shp <- spTransform(addPoints,CRS=CRS(projection(ref))) # Transform
     
     buff1<-gBuffer(shp,byid = T,width=widthBuff)
