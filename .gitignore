@@ -1,8 +1,10 @@
 .Rproj.user
+.Rproj
 .Rhistory
 .RData
 .Ruserdata
-.Rbuildignore
 /old
 /inst
 /vignettes
+R/Test
+/Bkg

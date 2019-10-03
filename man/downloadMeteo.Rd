@@ -2,15 +2,15 @@
 % Please edit documentation in R/ProvinceDownload.R
 \name{downloadMeteo}
 \alias{downloadMeteo}
-\title{Download Meteorological Data}
+\title{Download single Meteorological Data}
 \usage{
 downloadMeteo(dburl = NULL, station_code, sensor_code, datestart,
   dateend, path = "", csv = FALSE)
 }
 \arguments{
-\item{dburl}{URL; URL of the Province Database. If left empty the original API will be used}
+\item{dburl}{URL; URL of the province database. If left empty the standard API will be used}
 
-\item{station_code}{string; Station of Interest ("SCODE")}
+\item{station_code}{string; Code of the station ("SCODE")}
 
 \item{sensor_code}{string; Abbreviation of the sensor of interest (e.g. "N" for Precipitation)}
 
@@ -23,6 +23,6 @@ downloadMeteo(dburl = NULL, station_code, sensor_code, datestart,
 \item{csv}{boolean; output as csv?}
 }
 \description{
-Function for downloading the meteorological Data provided by the meteorological
-service of South Tyrol
+Function for downloading the meteorological data provided by the meteorological
+service of South Tyrol. NO multiple stations download. For that please use `downloadMeteo2`
 }

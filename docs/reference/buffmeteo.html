@@ -32,10 +32,12 @@
 
 <meta property="og:title" content="Buffer intersect with meteorological Stations — buffmeteo" />
 
-<meta property="og:description" content="This function add the possibility to create a Buffer around a Spatial point
+<meta property="og:description" content="This function add the possibility to create a buffer around a spatial point
 and spatially examine it together with the meteorological stations of the province
 South Tyrol. The return can either be the nearest station or a list of the distances
 from he point to all station within the buffered area." />
+
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +68,7 @@ from he point to all station within the buffered area." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MonalisR</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2</span>
       </span>
     </div>
 
@@ -136,34 +138,34 @@ from he point to all station within the buffered area." />
 
     <div class="ref-description">
     
-    <p>This function add the possibility to create a Buffer around a Spatial point
+    <p>This function add the possibility to create a buffer around a spatial point
 and spatially examine it together with the meteorological stations of the province
 South Tyrol. The return can either be the nearest station or a list of the distances
 from he point to all station within the buffered area.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>buffmeteo</span>(<span class='no'>point</span>, <span class='kw'>bufferW</span> <span class='kw'>=</span> <span class='fl'>5000</span>, <span class='kw'>getBufferShp</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>dist</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+    <pre class="usage"><span class='fu'>buffmeteo</span>(<span class='no'>point</span>, <span class='kw'>bufferW</span> <span class='kw'>=</span> <span class='fl'>5000</span>, <span class='kw'>getSHP</span> <span class='kw'>=</span> <span class='no'>F</span>, <span class='kw'>dist</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>point</th>
-      <td><p>SpatialPointDataFrame; Indicates the position of the Points
+      <td><p>SpatialPointDataFrame; Indicates the position of the points
 which are examined together with the meteorological stations</p></td>
     </tr>
     <tr>
       <th>bufferW</th>
-      <td><p>numeric; width of the Buffer in meters</p></td>
+      <td><p>numeric; width of the buffer in meters</p></td>
     </tr>
     <tr>
-      <th>getBufferShp</th>
+      <th>getSHP</th>
       <td><p>Boolean; return only the buffer(s)?</p></td>
     </tr>
     <tr>
       <th>dist</th>
-      <td><p>Boolean; shall the distances from the Points to the stations be added to
+      <td><p>Boolean; shall the distances from the points to the stations be added to
 the output?</p></td>
     </tr>
     </table>

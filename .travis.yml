@@ -1,0 +1,23 @@
+language: R
+dist: trusty
+cache: packages
+
+r:
+ -  release
+ -  devel
+ -  oldrel
+
+sudo: required
+
+apt_packages:
+  - libgdal-dev
+  - libproj-dev
+  - libgeos-dev
+  - libudunits2-dev
+  - libhdf5-serial-dev
+  - libnetcdf-dev
+  - netcdf-bin
+  - libv8-dev
+  - libjq-dev
+  - libprotobuf-dev
+  - protobuf-compiler

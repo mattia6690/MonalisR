@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Download Meteorological Data — downloadMeteo • MonalisR</title>
+<title>Download single Meteorological Data — downloadMeteo • MonalisR</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,12 @@
 
 
 
-<meta property="og:title" content="Download Meteorological Data — downloadMeteo" />
+<meta property="og:title" content="Download single Meteorological Data — downloadMeteo" />
 
-<meta property="og:description" content="Function for downloading the meteorological Data provided by the meteorological
-service of South Tyrol" />
+<meta property="og:description" content="Function for downloading the meteorological data provided by the meteorological
+service of South Tyrol. NO multiple stations download. For that please use `downloadMeteo2`" />
+
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -64,7 +66,7 @@ service of South Tyrol" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MonalisR</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.1.2</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.2</span>
       </span>
     </div>
 
@@ -127,15 +129,15 @@ service of South Tyrol" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Download Meteorological Data</h1>
+    <h1>Download single Meteorological Data</h1>
     
     <div class="hidden name"><code>downloadMeteo.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Function for downloading the meteorological Data provided by the meteorological
-service of South Tyrol</p>
+    <p>Function for downloading the meteorological data provided by the meteorological
+service of South Tyrol. NO multiple stations download. For that please use `downloadMeteo2`</p>
     
     </div>
 
@@ -147,11 +149,11 @@ service of South Tyrol</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dburl</th>
-      <td><p>URL; URL of the Province Database. If left empty the original API will be used</p></td>
+      <td><p>URL; URL of the province database. If left empty the standard API will be used</p></td>
     </tr>
     <tr>
       <th>station_code</th>
-      <td><p>string; Station of Interest ("SCODE")</p></td>
+      <td><p>string; Code of the station ("SCODE")</p></td>
     </tr>
     <tr>
       <th>sensor_code</th>

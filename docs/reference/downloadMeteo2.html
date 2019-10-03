@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check MONALISA NA gaps — CheckGaps • MonalisR</title>
+<title>Bulk download Meteorological Data (v2) — downloadMeteo2 • MonalisR</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,11 @@
 
 
 
-<meta property="og:title" content="Check MONALISA NA gaps — CheckGaps" />
+<meta property="og:title" content="Bulk download Meteorological Data (v2) — downloadMeteo2" />
 
-<meta property="og:description" content="Analysis Function for the Server response of a MONALISA Request.
-This function simply returns the NA gaps as a table" />
+<meta property="og:description" content="Function for accessing the Meteorological Data. This function will replace the
+Original Function in the next version. No save to CSV is possible anymore. On the other side
+it will be possible to speed up the actual processing times and to make multiple requests at once" />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -129,26 +130,44 @@ This function simply returns the NA gaps as a table" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check MONALISA NA gaps</h1>
+    <h1>Bulk download Meteorological Data (v2)</h1>
     
-    <div class="hidden name"><code>CheckGaps.Rd</code></div>
+    <div class="hidden name"><code>downloadMeteo2.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Analysis Function for the Server response of a MONALISA Request.
-This function simply returns the NA gaps as a table</p>
+    <p>Function for accessing the Meteorological Data. This function will replace the
+Original Function in the next version. No save to CSV is possible anymore. On the other side
+it will be possible to speed up the actual processing times and to make multiple requests at once</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>CheckGaps</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>downloadMeteo2</span>(<span class='kw'>dburl</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>station_code</span>, <span class='no'>sensor_code</span>, <span class='no'>datestart</span>,
+  <span class='no'>dateend</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>A MONALISA Server Response</p></td>
+      <th>dburl</th>
+      <td><p>URL; URL of the Province Database. If left empty the original API will be used</p></td>
+    </tr>
+    <tr>
+      <th>station_code</th>
+      <td><p>string; Code of the station ("SCODE")</p></td>
+    </tr>
+    <tr>
+      <th>sensor_code</th>
+      <td><p>string; Abbreviation of the sensor of interest (e.g. "N" for Precipitation)</p></td>
+    </tr>
+    <tr>
+      <th>datestart</th>
+      <td><p>string; Starting time for the download in "Ymd" Format</p></td>
+    </tr>
+    <tr>
+      <th>dateend</th>
+      <td><p>string; End time for the download in "Ymd" Format</p></td>
     </tr>
     </table>
     
