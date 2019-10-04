@@ -4,18 +4,17 @@
 \alias{buffmeteo}
 \title{Buffer intersect with meteorological Stations}
 \usage{
-buffmeteo(point, bufferW = 5000, getSHP = F, dist = F)
+buffmeteo(point, Buffer = 5000, projectedepsg = 32632)
 }
 \arguments{
 \item{point}{SpatialPointDataFrame; Indicates the position of the points
 which are examined together with the meteorological stations}
 
-\item{bufferW}{numeric; width of the buffer in meters}
+\item{Buffer}{numeric; width of the buffer in meters}
 
-\item{getSHP}{Boolean; return only the buffer(s)?}
-
-\item{dist}{Boolean; shall the distances from the points to the stations be added to
-the output?}
+\item{projectedepsg}{numeric: EPSG code of the projected Coordinate System. 
+In order to compute the distance properly we need to provide a projected coordinate system.
+Default is 32632 for UTM 32N}
 }
 \description{
 This function add the possibility to create a buffer around a spatial point

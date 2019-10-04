@@ -2,29 +2,29 @@
 #' @description Function for spatially Plotting the desired Province Stations on a leaflet
 #' template. Besides the plotting of the desired meteorological stations other information
 #' can be added such as additional points, a buffer around certain points
-#' @param stations Points; Meteorological Data Points of the province of South Tyrol,
+#' @param stations Point sf; Meteorological Data Points of the province of South Tyrol,
 #' If this is left empty all the Stations will be plotted
-#' @param addPoints Points; Additional Points on the Leaflet Map. If left empty no Points will be added
-#' @param addBuff Boolean; add a Buffer to the additional points
-#' @param widthBuff numeric; The width of a buffer in case it is added
+#' @param addPoints Point sf; Additional Points on the Leaflet Map. If left empty no Points will be added
+#' @param Buffer numeric; The width of a buffer (in m) will be added to the leaflet.
+#' If none is provided the map won't draw a polygon
 #' @importFrom leaflet leaflet awesomeIcons addTiles addAwesomeMarkers addPolygons
 #' @importFrom magrittr "%>%"
-#' @importFrom rgeos gBuffer
-#' @importFrom sp coordinates CRS spTransform
+#' @importFrom sf st_transform st_buffer st_crs
 #' @export
 
 # Get a map with the Spatial Location of the Stations
-plotMeteoLeaflet<- function(stations=NULL,addPoints=NULL,addBuff=F,widthBuff=10000){
+plotMeteoLeaflet<- function(stations=NULL,addPoints=NULL,Buffer=NA){
   
-  if(is.null(stations)) stations<-getMeteoStat(format="spatial")
+  ref<- getMeteoInfo(format="spatial")
+  if(is.null(stations)) stations<-ref
+
   c1<-awesomeIcons(icon = 'ios-close',iconColor = 'black',library = 'ion',markerColor = "blue")
   c2<-awesomeIcons(icon = 'ios-close',iconColor = 'black',library = 'ion',markerColor = "red")
   
   m<-leaflet() %>% 
     addTiles() %>% 
     addAwesomeMarkers(
-      lng=stations$LONG %>% as.character %>% as.numeric,
-      lat=stations$LAT %>% as.character %>% as.numeric,
+      data=stations,
       icon=c1,
       popup=paste("Code:",stations$SCODE,"<br>",
                 "Name GER:",stations$NAME_D,"<br>",
@@ -33,17 +33,20 @@ plotMeteoLeaflet<- function(stations=NULL,addPoints=NULL,addBuff=F,widthBuff=100
       )
   
   if(!is.null(addPoints)) {
-    coords<-coordinates(addPoints)
-    m<-m %>% addAwesomeMarkers(coords[,1], coords[,2],icon=c2)
-  }
-  if(addBuff==T) {
-    ref <- getMeteoInfo(format="spatial")
-    shp <- spTransform(addPoints,CRS=CRS(projection(ref))) # Transform
     
-    buff1<-gBuffer(shp,byid = T,width=widthBuff)
-    buff1<-spTransform(buff1,CRS=CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+    addPoints<-st_transform(addPoints,st_crs(ref))
+    m<-m %>% addAwesomeMarkers(data=addPoints,icon=c2)
     
-    m<-m %>% addPolygons(data=buff1,fillColor = "red",weight=0)
+    if(!is.na(Buffer)) {
+      
+      if(!is.numeric(Buffer)) error("Buffer needs to be a numeric value")
+
+      pnt.t  <- st_transform(addPoints, 32632)
+      pnt.tb <- st_buffer(pnt.t,Buffer)
+      buff1  <- st_transform(pnt.tb,st_crs(ref))
+      
+      m<-m %>% addPolygons(data=buff1,fillColor = c2$markerColor, weight=0)
+    }
   }
   
   return(m)

@@ -4,18 +4,16 @@
 \alias{plotMeteoLeaflet}
 \title{Plot the Province Stations}
 \usage{
-plotMeteoLeaflet(stations = NULL, addPoints = NULL, addBuff = F,
-  widthBuff = 10000)
+plotMeteoLeaflet(stations = NULL, addPoints = NULL, Buffer = NA)
 }
 \arguments{
-\item{stations}{Points; Meteorological Data Points of the province of South Tyrol,
+\item{stations}{Point sf; Meteorological Data Points of the province of South Tyrol,
 If this is left empty all the Stations will be plotted}
 
-\item{addPoints}{Points; Additional Points on the Leaflet Map. If left empty no Points will be added}
+\item{addPoints}{Point sf; Additional Points on the Leaflet Map. If left empty no Points will be added}
 
-\item{addBuff}{Boolean; add a Buffer to the additional points}
-
-\item{widthBuff}{numeric; The width of a buffer in case it is added}
+\item{Buffer}{numeric; The width of a buffer (in m) will be added to the leaflet.
+If none is provided the map won't draw a polygon}
 }
 \description{
 Function for spatially Plotting the desired Province Stations on a leaflet
