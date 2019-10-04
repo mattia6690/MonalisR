@@ -3,17 +3,16 @@
 [![Build Status](https://travis-ci.org/mattia6690/MonalisR.svg?branch=master)](https://travis-ci.org/mattia6690/MonalisR) 
 [![CRAN](http://www.r-pkg.org/badges/version/MonalisR)](https://cran.r-project.org/package=MonalisR)
 [![Lifecycle:stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-## An R-package for handling open Databases for South Tyrol
+## Handling open Databases in South Tyrol
 
-This R-Package aims at accessing multiple open databases for the environmental parameters in the Autonomous Province of South Tyrol. The databases are all openly accessible via central APIs and structured storage. This makes them addressable and accessible via R. For all the databases core functionalities were implemented simplifying
+This R-Package is designed to interact with open environmental databases in the Autonomous Province of South Tyrol in Italy. Our mission is to use exposed APIs in order to etrieve a multitude of environmental variables. This approach guarantees a steady and reproducible access to a wide variety of data potentially interesting for diverse scientific research.For each database core functionalities were implemented aiming at simplifying:
 
 * data access and exploration
-* spatial and data plots of locations (or stations) of interest
-* download and storage of the desired data set(s)<br>
+* download and storage of the desired data set(s)
+* spatial plotting of the data <br>
 
-For each database the respective functions are divided according to the three tasks. Following that, the naming conventions utilize the prefixes *get*, *plot* and *download*.
+For each database the respective functions are divided according to these three tasks. Following that, the naming conventions utilize the prefixes *get*, *plot* and *download*.
 
-Additionally the repository contains a */Demo* folder with exemplary codes showing the basic functionalities of the MonalisR package.
 
 ### Databases
 
