@@ -15,6 +15,7 @@
 #' @importFrom lubridate as_datetime
 #' @importFrom sp coordinates CRS spTransform
 #' @importFrom stats setNames
+#' @importFrom tibble add_column
 #' @export
 
 downloadMeteo <- function(dburl=NULL, station_code, sensor_code, datestart, dateend, path = "", csv = FALSE){
@@ -81,7 +82,7 @@ downloadMeteo2<-function(dburl=NULL, station_code, sensor_code, datestart, datee
   datestart1 <- convertDate(datestart, db="Meteo")
   dateend1   <- convertDate(dateend, db="Meteo")
   
-  dat<-expand.grid(station_code,sensor_code) %>% 
+  dat<-expand.grid(station_code,sensor_code,stringsAsFactors = FALSE) %>% 
     as_tibble() %>% 
     setNames(c("SCODE","Sensor")) %>% 
     mutate(Start=format(as.Date(datestart),format="%Y%m%d")) %>% 
