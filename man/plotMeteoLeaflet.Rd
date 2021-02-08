@@ -4,8 +4,12 @@
 \alias{plotMeteoLeaflet}
 \title{Plot the Province Stations}
 \usage{
-plotMeteoLeaflet(stations = NULL, addPoints = NULL, addBuff = F,
-  widthBuff = 10000)
+plotMeteoLeaflet(
+  stations = NULL,
+  addPoints = NULL,
+  addBuff = F,
+  widthBuff = 10000
+)
 }
 \arguments{
 \item{stations}{Points; Meteorological Data Points of the province of South Tyrol,
