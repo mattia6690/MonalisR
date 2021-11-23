@@ -5,5 +5,5 @@
 ^\.travis\.yml$
 ^\_pkgdown\.yml$
 ^\.gitignore$
-^\R\Test\.R$
+^Test$
 ^Bkg$
