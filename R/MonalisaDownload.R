@@ -37,8 +37,8 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
   x<-getMonalisaDB(url=starturl,subset="combined") %>% as.data.frame()
   
   # Dates
-  datestart1 <- datestart %>% str_replace(.," ","T") %>% paste0(.,":00%2F")
-  dateend1   <- dateend   %>% str_replace(.," ","T") %>% paste0(.,":00")
+  datestart1 <- datestart %>% str_replace(.," ","T") %>% paste0(.,"%2F")
+  dateend1   <- dateend   %>% str_replace(.," ","T") %>% paste0(.,"")
   
   # FOIs
   if(is.null(foi)){
@@ -98,10 +98,10 @@ downloadMonalisa <- function(starturl=NULL, datestart, dateend, foi = NULL, proc
   
   #Filter for Inputs
   au<-x %>% 
-    filter(foi %in% foi1) %>% 
-    filter(proc %in% proc1) %>% 
-    filter(prop %in% prop1) %>% 
-    as_tibble
+    as_tibble %>% 
+    dplyr::filter(foi %in% foi1) %>% 
+    dplyr::filter(proc %in% proc1) %>% 
+    dplyr::filter(prop %in% prop1)
   
   if(nrow(au)==0) stop("The Combination of FOI, Property and Procedure is not available")
   
